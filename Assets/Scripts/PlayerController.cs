@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -11,6 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float turningSpeed = 2f;
     [SerializeField] private float gravity = 6f;
     [SerializeField] private float jumpForce = 1f;
+    [SerializeField] private float acceleration = 2f;
+    [SerializeField] private float totalAcceleration;
 
     [SerializeField] private float verticalVelocity;
 
@@ -32,6 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         InputManagement();
         Movement();
+        Test();
     }
 
     private void Movement()
@@ -42,14 +46,28 @@ public class PlayerController : MonoBehaviour
     
     private void GroundMovement()
     {
-        Vector3 move = new Vector3 (turnInput, 0, moveInput);
+        Vector3 move = new Vector3 (turnInput, 0, moveInput).normalized;
         move = transform.TransformDirection(move);
 
-        move.y = VerticalForceCalculation();
+        Vector3 jump = new Vector3 (0, VerticalForceCalculation(), 0);
 
-        move *= walkSpeed;
+        //move *= walkSpeed;
 
-        controller.Move(move * Time.deltaTime);
+        if(moveInput != 0 || turnInput != 0)
+        {
+            totalAcceleration = Mathf.Lerp(totalAcceleration, walkSpeed, acceleration * Time.deltaTime);
+
+            move *= totalAcceleration;
+        }
+        else
+        {
+            totalAcceleration = Mathf.Lerp(totalAcceleration, 0, acceleration * Time.deltaTime);
+
+            move *= totalAcceleration;
+        }
+
+        controller.Move(move*Time.deltaTime);
+        controller.Move(jump * Time.deltaTime);
     }
 
     private void Turn()
@@ -80,9 +98,62 @@ public class PlayerController : MonoBehaviour
     }
     private void InputManagement()
     {
-        moveInput = Input.GetAxis("Vertical");
-        turnInput = Input.GetAxis("Horizontal");
+        moveInput = Input.GetAxisRaw("Vertical");
+        turnInput = Input.GetAxisRaw("Horizontal");
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
+
+    }
+
+    private void Test()
+    {
+        if (Input.GetKeyDown("1"))
+        {
+            acceleration = 2f;
+            walkSpeed = 5f;
+            jumpForce = 1f;
+            gravity = 6f;
+            turningSpeed = 2f;
+        }
+        if (Input.GetKeyDown("2"))
+        {
+            acceleration = 1f;
+            walkSpeed = 5f;
+            jumpForce = 1f;
+            gravity = 6f;
+            turningSpeed = 2f;
+        }
+        if (Input.GetKeyDown("3"))
+        {
+            acceleration = 2f;
+            walkSpeed = 10f;
+            jumpForce = 1f;
+            gravity = 6f;
+            turningSpeed = 2f;
+        }
+        if (Input.GetKeyDown("4"))
+        {
+            acceleration = 2f;
+            walkSpeed = 5f;
+            jumpForce = 1.5f;
+            gravity = 6f;
+            turningSpeed = 2f;
+        }
+        if (Input.GetKeyDown("5"))
+        {
+            acceleration = 2f;
+            walkSpeed = 5f;
+            jumpForce = 1f;
+            gravity = 12f;
+            turningSpeed = 2f;
+        }
+        if (Input.GetKeyDown("6"))
+        {
+            acceleration = 2f;
+            walkSpeed = 5f;
+            jumpForce = 1f;
+            gravity = 6f;
+            turningSpeed = 4f;
+        }
     }
 }
