@@ -8,6 +8,7 @@ public class MonsterAI : MonoBehaviour
     private NavMeshAgent agent;
     private Transform player;
     private Vector3 lastKnownPlayerPosition;
+    private Vector3 lastKnownPlayerRotation;
     private int currentPatrolIndex = 0;
     [SerializeField] private Transform[] waypoints;
     public float viewDistance = 5f;
@@ -18,6 +19,8 @@ public class MonsterAI : MonoBehaviour
     //Animator animator;
     //GameObject canvas;
     public Transform head;
+    public Vector3 towardsPlayer;
+    public bool playerCrouching = true;
 
 
     private enum EnemyState
@@ -86,11 +89,16 @@ public class MonsterAI : MonoBehaviour
                 currentState = EnemyState.Attack;
             }
         }
-
-        if (agent.remainingDistance < 0.5f)
+        towardsPlayer = player.position - transform.position;
+        Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(player.position), 20f);
+        if (agent.remainingDistance < 0.5f && playerCrouching)
         {
-            target = waypoints[currentPatrolIndex].position;
-            currentState = EnemyState.Patrol;
+            LookAround();
+            //lastKnownPlayerRotation = 
+        }
+        if (agent.remainingDistance < 0.5f && !playerCrouching)
+        {
+            KillPlayer();
         }
     }
 
@@ -112,6 +120,7 @@ public class MonsterAI : MonoBehaviour
             {
                 currentState = EnemyState.Chase;
                 lastKnownPlayerPosition = player.position;
+                
             }
 
         }
@@ -120,6 +129,14 @@ public class MonsterAI : MonoBehaviour
     void SetDestination(Vector3 target)
     {
         agent.SetDestination(target);
+    }
+
+    void LookAround()
+    {
+        Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lastKnownPlayerRotation), 20f);
+        Debug.Log("Looking Around");
+        //target = waypoints[currentPatrolIndex].position;
+        //currentState = EnemyState.Patrol;
     }
 
     public void LoseSightOfPlayer()
