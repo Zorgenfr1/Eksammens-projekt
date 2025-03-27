@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity = 6f;
     [SerializeField] private float jumpForce = 1f;
     [SerializeField] private float acceleration = 2f;
+    [SerializeField] private float totalAcceleration;
 
     [SerializeField] private float verticalVelocity;
 
@@ -45,14 +46,27 @@ public class PlayerController : MonoBehaviour
     
     private void GroundMovement()
     {
-        Vector3 move = new Vector3 (turnInput, 0, moveInput);
+        Vector3 move = new Vector3 (turnInput, 0, moveInput).normalized;
         move = transform.TransformDirection(move);
 
         Vector3 jump = new Vector3 (0, VerticalForceCalculation(), 0);
 
-        move *= walkSpeed;
+        //move *= walkSpeed;
 
-        controller.Move(move * Time.deltaTime);
+        if(moveInput != 0 || turnInput != 0)
+        {
+            totalAcceleration = Mathf.Lerp(totalAcceleration, walkSpeed, acceleration * Time.deltaTime);
+
+            move *= totalAcceleration;
+        }
+        else
+        {
+            totalAcceleration = Mathf.Lerp(totalAcceleration, 0, acceleration * Time.deltaTime);
+
+            move *= totalAcceleration;
+        }
+
+        controller.Move(move*Time.deltaTime);
         controller.Move(jump * Time.deltaTime);
     }
 
@@ -84,8 +98,8 @@ public class PlayerController : MonoBehaviour
     }
     private void InputManagement()
     {
-        moveInput = Input.GetAxis("Vertical");
-        turnInput = Input.GetAxis("Horizontal");
+        moveInput = Input.GetAxisRaw("Vertical");
+        turnInput = Input.GetAxisRaw("Horizontal");
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
 
@@ -103,7 +117,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown("2"))
         {
-            acceleration = 4f;
+            acceleration = 1f;
             walkSpeed = 5f;
             jumpForce = 1f;
             gravity = 6f;
