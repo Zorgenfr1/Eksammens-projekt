@@ -17,12 +17,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float decceleration = 0.5f;
     [SerializeField] private float currentSpeed;
     private Vector3 move;
+    private Vector3 moveDirection;
 
     [SerializeField] private float verticalVelocity;
 
     [Header("Input")]
-    private float moveInput;
-    private float turnInput;
+    private float moveInputX;
+    private float moveInputZ;
     private float mouseX;
     private float mouseY;
     private float verticalRotation = 0f;
@@ -39,6 +40,9 @@ public class PlayerController : MonoBehaviour
         InputManagement();
         Movement();
         Test();
+        Debug.Log("x-værdi" + move.x);
+        Debug.Log("z-værdi" + move.z);
+        Debug.Log("moveDirection" + moveDirection.magnitude);
     }
 
     private void Movement()
@@ -49,24 +53,24 @@ public class PlayerController : MonoBehaviour
     
     private void GroundMovement()
     {
-        Vector3 moveDirection = new Vector3(turnInput, 0, moveInput).normalized;
+    moveDirection = new Vector3(moveInputX, VerticalForceCalculation(), moveInputZ).normalized;
 
-        if ((turnInput != 0 || moveInput != 0) && controller.isGrounded)
+        if ((moveInputX != 0 || moveInputZ != 0) && controller.isGrounded)
         {
-            Vector3 move = new Vector3(moveDirection.x * currentSpeed, 0, moveDirection.z * currentSpeed);
+            move = new Vector3(moveDirection.x * currentSpeed, VerticalForceCalculation(), moveDirection.z * currentSpeed);
         }
 
         move = transform.TransformDirection(move);
 
         Vector3 jump = new(0, VerticalForceCalculation(), 0);
 
-        if(moveInput != 0 || turnInput != 0)
+        if(moveInputZ != 0 || moveInputX != 0)
         {
             currentSpeed = Mathf.Lerp(currentSpeed, walkSpeed, acceleration * Time.deltaTime);
         }
         else
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, 0, decceleration * Time.deltaTime);
+            currentSpeed = Mathf.Lerp(currentSpeed, VerticalForceCalculation(), decceleration * Time.deltaTime);
         }
 
         controller.Move(move * Time.deltaTime);
@@ -101,8 +105,8 @@ public class PlayerController : MonoBehaviour
     }
     private void InputManagement()
     {
-        moveInput = Input.GetAxisRaw("Vertical");
-        turnInput = Input.GetAxisRaw("Horizontal");
+        moveInputZ = Input.GetAxisRaw("Vertical");
+        moveInputX = Input.GetAxisRaw("Horizontal");
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
 
