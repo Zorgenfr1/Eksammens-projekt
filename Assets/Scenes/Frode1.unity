@@ -265,6 +265,8 @@ MonoBehaviour:
   turningSpeed: 2
   gravity: 6
   jumpForce: 1
+  acceleration: 2
+  totalAcceleration: 0
   verticalVelocity: 0
 --- !u!23 &363546828
 MeshRenderer:
@@ -666,14 +668,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f1d401386bcd540afb4e97f050c1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 2
   arrows: 1
   arrowCapacity: 30
+  fireRate: 2
   normalLocalPosition: {x: 0.4, y: -0.45, z: 0.9}
   aimingLocalPosition: {x: 0.05, y: -0.35, z: 0.9}
   aimSmoothing: 10
+  requiredAimTime: 2
   mouseSensitivity: 1
   weaponSwayAmount: 10
+  randomizeRecoil: 1
+  randomRecoilConstraints: {x: -3, y: 3}
+  recoilPattern: {x: 0, y: 0}
 --- !u!65 &1794359337
 BoxCollider:
   m_ObjectHideFlags: 0
