@@ -1,5 +1,6 @@
 using NUnit.Framework.Internal;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,7 +14,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity = 6f;
     [SerializeField] private float jumpForce = 1f;
     [SerializeField] private float acceleration = 2f;
-    [SerializeField] private float totalAcceleration;
+    [SerializeField] private float decceleration = 0.5f;
+    [SerializeField] private float currentSpeed;
+    private Vector3 move;
+    private Vector3 jump;
 
     [SerializeField] private float verticalVelocity;
 
@@ -46,27 +50,30 @@ public class PlayerController : MonoBehaviour
     
     private void GroundMovement()
     {
-        Vector3 move = new Vector3 (turnInput, 0, moveInput).normalized;
+        Vector3 moveDirection = new Vector3(turnInput, 0, moveInput).normalized;
+        Vector3 move = new Vector3(0, 0, 0);
+
+        if (controller.isGrounded)
+        {
+            move = new Vector3(moveDirection.x * currentSpeed, 0, moveDirection.z * currentSpeed);
+        }
+
         move = transform.TransformDirection(move);
 
-        Vector3 jump = new Vector3 (0, VerticalForceCalculation(), 0);
-
+        Vector3 jump = new(0, VerticalForceCalculation(), 0);
+       
         //move *= walkSpeed;
 
         if(moveInput != 0 || turnInput != 0)
         {
-            totalAcceleration = Mathf.Lerp(totalAcceleration, walkSpeed, acceleration * Time.deltaTime);
-
-            move *= totalAcceleration;
+            currentSpeed = Mathf.Lerp(currentSpeed, walkSpeed, acceleration * Time.deltaTime);
         }
         else
         {
-            totalAcceleration = Mathf.Lerp(totalAcceleration, 0, acceleration * Time.deltaTime);
-
-            move *= totalAcceleration;
+            currentSpeed = Mathf.Lerp(currentSpeed, 0, decceleration * Time.deltaTime);
         }
 
-        controller.Move(move*Time.deltaTime);
+        controller.Move(move * Time.deltaTime);
         controller.Move(jump * Time.deltaTime);
     }
 
