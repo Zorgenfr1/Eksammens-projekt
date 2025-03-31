@@ -251,9 +251,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 509f259e6647a5743ac6be649026ceb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsParent: {fileID: 0}
-  inventoryUI: {fileID: 0}
-  inventoryKey: 0
+  itemsParent: {fileID: 913019779612436872}
+  inventoryUI: {fileID: 5502684266597755493}
+  inventoryKey: 105
   inventoryVisible: 0
 --- !u!1 &4224148887214351861
 GameObject:
