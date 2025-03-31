@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, VerticalForceCalculation(), decceleration * Time.deltaTime);
+            currentSpeed = Mathf.Lerp(currentSpeed, 0, decceleration * Time.deltaTime);
         }
 
         controller.Move(move * Time.deltaTime);
