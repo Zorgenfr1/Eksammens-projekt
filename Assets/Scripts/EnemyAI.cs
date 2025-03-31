@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,6 +22,8 @@ public class MonsterAI : MonoBehaviour
     public Transform head;
     public Vector3 towardsPlayer;
     public bool playerCrouching = true;
+    public bool playerSeen;
+    public Vector3 playerHiddenLocation;
 
 
     private enum EnemyState
@@ -89,12 +92,15 @@ public class MonsterAI : MonoBehaviour
                 currentState = EnemyState.Attack;
             }
         }
+        if (!Physics.Raycast(head.position, player.transform.position - transform.position, out hit, viewDistance) && playerSeen)
+        {
+            StartCoroutine(assumePosition());
+        }
         towardsPlayer = player.position - transform.position;
-        Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(player.position), 20f);
+        
         if (agent.remainingDistance < 0.5f && playerCrouching)
         {
             LookAround();
-            //lastKnownPlayerRotation = 
         }
         if (agent.remainingDistance < 0.5f && !playerCrouching)
         {
@@ -118,6 +124,8 @@ public class MonsterAI : MonoBehaviour
         {
             if (hit.collider.tag == "Player" && DotProduct >= Mathf.Cos(viewAngle))
             {
+                playerSeen = true;
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(player.position - transform.position), 5f);
                 currentState = EnemyState.Chase;
                 lastKnownPlayerPosition = player.position;
                 
@@ -133,15 +141,44 @@ public class MonsterAI : MonoBehaviour
 
     void LookAround()
     {
-        Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lastKnownPlayerRotation), 20f);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lastKnownPlayerRotation), 5f);
+        Debug.Log("ahh");
+        if (Quaternion.Angle(transform.rotation, Quaternion.LookRotation(lastKnownPlayerRotation)) < 1f)
+        {
+            target = playerHiddenLocation;
+            
+            if (agent.remainingDistance < 0.5f)
+            {
+                StartCoroutine(lookingAround()); ;
+            }
+        }
+    }
+
+
+    IEnumerator assumePosition()
+    {
+        Debug.Log("Starting timer"); ;
+        yield return new WaitForSeconds(1f);
+        lastKnownPlayerRotation = player.position - transform.position;
+        playerHiddenLocation = player.position;
+        Debug.Log("Timer sluttet efter 1 sekund");
+        playerSeen = false;
+        currentState = EnemyState.Chase;
+        yield break;
+    }
+
+    IEnumerator lookingAround()
+    {
         Debug.Log("Looking Around");
-        //target = waypoints[currentPatrolIndex].position;
-        //currentState = EnemyState.Patrol;
+        yield return new WaitForSeconds(2f);
+        Debug.Log("Stopped looking around");
+        currentState = EnemyState.Patrol;
+        yield break;
     }
 
     public void LoseSightOfPlayer()
     {
-        SetDestination(lastKnownPlayerPosition);
+       
 
     }
 
