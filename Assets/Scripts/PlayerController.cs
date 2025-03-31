@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float decceleration = 0.5f;
     [SerializeField] private float currentSpeed;
     private Vector3 move;
-    private Vector3 jump;
 
     [SerializeField] private float verticalVelocity;
 
@@ -51,18 +50,15 @@ public class PlayerController : MonoBehaviour
     private void GroundMovement()
     {
         Vector3 moveDirection = new Vector3(turnInput, 0, moveInput).normalized;
-        Vector3 move = new Vector3(0, 0, 0);
 
-        if (controller.isGrounded)
+        if ((turnInput != 0 || moveInput != 0) && controller.isGrounded)
         {
-            move = new Vector3(moveDirection.x * currentSpeed, 0, moveDirection.z * currentSpeed);
+            Vector3 move = new Vector3(moveDirection.x * currentSpeed, 0, moveDirection.z * currentSpeed);
         }
 
         move = transform.TransformDirection(move);
 
         Vector3 jump = new(0, VerticalForceCalculation(), 0);
-       
-        //move *= walkSpeed;
 
         if(moveInput != 0 || turnInput != 0)
         {
