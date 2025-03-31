@@ -4,23 +4,35 @@ using System.Collections;
 public class GunController : MonoBehaviour
 {
     [Header("Bow Settings")]
-    public float fireRate = 2f;
-    public int arrows = 1;
+    public int arrows = 2;
     public int arrowCapacity = 30;
+    public float fireRate = 1f;
 
     //Variabler der ændres
     bool _canShoot;
     int _arrowsBack;
+    
 
-    //Aiming
+    [Header("Aim Settings")]
     public Vector3 normalLocalPosition;
     public Vector3 aimingLocalPosition;
     public float aimSmoothing = 10f;
+    public float requiredAimTime = 2f;
+
+    //Variabler der ændres
+    float _aimTime = 0f;
 
     [Header("Mouse Settings")]
     public float mouseSensitivity = 1f;
     Vector2 _currentRotation;
     public float weaponSwayAmount = 10f;
+
+    [Header("Recoil Settings")]
+    //våben recoil
+    public bool randomizeRecoil;
+    public Vector2 randomRecoilConstraints;
+    //kun hvis ramdon recoil er slået fra, idk kommer fra videoen
+    public Vector2 recoilPattern;
 
 
     private void Start()
@@ -36,7 +48,7 @@ public class GunController : MonoBehaviour
 
         DetermineRotation();
 
-        if (Input.GetMouseButton(0) && _canShoot)
+        if (Input.GetMouseButton(0) && _canShoot && _aimTime >= requiredAimTime)
         {
             _canShoot=false;
             _arrowsBack--;
@@ -64,13 +76,39 @@ public class GunController : MonoBehaviour
         Vector3 target = normalLocalPosition;
         if (Input.GetMouseButton(1)) target = aimingLocalPosition;
 
+        if (Input.GetMouseButton(1))
+        {
+            target = aimingLocalPosition;
+            _aimTime += Time.deltaTime; // Øg tid mens sigtes
+        }
+        else
+        {
+            _aimTime = 0f; // Nulstil hvis ikke sigter
+        }
+
         Vector3 desiredPosition = Vector3.Lerp(transform.localPosition, target, Time.deltaTime * aimSmoothing);
 
         transform.localPosition = desiredPosition;
     }
 
+    void DetermineRecoil()
+    {
+        transform.localPosition -= Vector3.forward * 0.1f;
+
+        if (randomizeRecoil)
+        {
+            float xRecoil = Random.Range(-randomRecoilConstraints.x, randomRecoilConstraints.x);
+            float yRecoil = Random.Range(-randomRecoilConstraints.y, randomRecoilConstraints.y);
+
+            Vector2 recoil = new Vector2(xRecoil, yRecoil);
+
+            _currentRotation += recoil;
+        }
+    }
+
     IEnumerator Shoot()
     {
+        DetermineRecoil();
         yield return new WaitForSeconds(fireRate);
         _canShoot = true;
     }

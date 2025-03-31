@@ -23,6 +23,7 @@ public class MonsterAI : MonoBehaviour
     public Vector3 towardsPlayer;
     public bool playerCrouching = true;
     public bool playerSeen;
+    public Vector3 playerHiddenLocation;
 
 
     private enum EnemyState
@@ -144,7 +145,12 @@ public class MonsterAI : MonoBehaviour
         Debug.Log("ahh");
         if (Quaternion.Angle(transform.rotation, Quaternion.LookRotation(lastKnownPlayerRotation)) < 1f)
         {
-            StartCoroutine(lookingAround());
+            target = playerHiddenLocation;
+            
+            if (agent.remainingDistance < 0.5f)
+            {
+                StartCoroutine(lookingAround()); ;
+            }
         }
     }
 
@@ -154,6 +160,7 @@ public class MonsterAI : MonoBehaviour
         Debug.Log("Starting timer"); ;
         yield return new WaitForSeconds(1f);
         lastKnownPlayerRotation = player.position - transform.position;
+        playerHiddenLocation = player.position;
         Debug.Log("Timer sluttet efter 1 sekund");
         playerSeen = false;
         currentState = EnemyState.Chase;
