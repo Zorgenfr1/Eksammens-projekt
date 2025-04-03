@@ -549,6 +549,7 @@ MonoBehaviour:
   playerSeen: 0
   playerHiddenLocation: {x: 0, y: 0, z: 0}
   detectionAudio: {fileID: 8300000, guid: 3ccc85ceb87de5b4d8ca7da4e6c11b58, type: 3}
+  loseSightAudio: {fileID: 8300000, guid: 273df2545b269a440a9e0f88db9548f5, type: 3}
   killRange: 0
   playerLayer:
     serializedVersion: 2
@@ -1007,12 +1008,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 731866572}
   walkSpeed: 5
+  sprintSpeed: 0
+  sprintTransitSpeed: 5
   turningSpeed: 2
   gravity: 6
+  baseGravity: 9
   jumpForce: 1
-  acceleration: 2
-  decceleration: 0.5
-  currentSpeed: 0
   verticalVelocity: 0
 --- !u!143 &807752898
 CharacterController:

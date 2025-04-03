@@ -28,6 +28,8 @@ public class MonsterAI : MonoBehaviour
     public AudioClip detectionAudio;
     AudioSource audio;
     private bool hasPlayedDetectionSound = false;
+    public AudioClip loseSightAudio;
+    private bool hasPlayedLoseSightSound = false;
 
 
     private enum EnemyState
@@ -77,6 +79,7 @@ public class MonsterAI : MonoBehaviour
     }
     void Patrol()
     {
+        hasPlayedLoseSightSound = false;
         agent.speed = patrolSpeed;
         if (agent.remainingDistance < 0.5f)
         {
@@ -106,6 +109,10 @@ public class MonsterAI : MonoBehaviour
         if (agent.remainingDistance < 0.5f && playerCrouching)
         {
             LookAround();
+            if (!hasPlayedLoseSightSound)
+            {
+                PlayAudio(loseSightAudio, ref hasPlayedLoseSightSound);
+            }
         }
         if (agent.remainingDistance < 0.5f && !playerCrouching)
         {
