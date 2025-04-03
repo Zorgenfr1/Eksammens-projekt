@@ -25,6 +25,10 @@ public class MonsterAI : MonoBehaviour
     public bool playerSeen;
     public Vector3 playerHiddenLocation;
 
+    public AudioClip detectionAudio;
+    AudioSource audio;
+    private bool hasPlayedDetectionSound = false;
+
 
     private enum EnemyState
     {
@@ -43,6 +47,7 @@ public class MonsterAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         currentState = EnemyState.Patrol;
         SetDestination(waypoints[currentPatrolIndex].position);
+        audio = GetComponent<AudioSource>();
         //animator = GetComponent<Animator>();
         //canvas = GameObject.FindGameObjectWithTag("Canvas");
     }
@@ -129,10 +134,18 @@ public class MonsterAI : MonoBehaviour
                 currentState = EnemyState.Chase;
                 lastKnownPlayerPosition = player.position;
                 
+                if (!hasPlayedDetectionSound)
+                {
+                    PlayAudio(detectionAudio, ref hasPlayedDetectionSound);
+                }
             }
 
         }
-        Debug.DrawLine(head.position, player.position);
+        else
+        {
+            hasPlayedDetectionSound = false;
+        }
+            Debug.DrawLine(head.position, player.position);
     }
     void SetDestination(Vector3 target)
     {
@@ -175,6 +188,13 @@ public class MonsterAI : MonoBehaviour
         currentState = EnemyState.Patrol;
         yield break;
     }
+
+    public void PlayAudio(AudioClip clip, ref bool hasPlayed)
+    {
+        audio.PlayOneShot(clip);
+        hasPlayed = true;
+    }
+
 
     public void LoseSightOfPlayer()
     {
