@@ -11,10 +11,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement Settings")]
     [SerializeField] private float walkSpeed = 3.5f;
-    [SerializeField] private float sprintSpeed = 7f;
+    [SerializeField] private float sprintSpeed;
     [SerializeField] private float sprintTransitSpeed = 5f;
     [SerializeField] private float turningSpeed = 2f;
     [SerializeField] private float gravity = 9f;
+    [SerializeField] private float baseGravity = 9f;
     [SerializeField] private float jumpForce = 1f;
 
     private Vector3 velocity;
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
 
     private void GroundMovement()
     {
+        sprintSpeed = walkSpeed * 2;
         move = new Vector3(moveInputX, 0, moveInputZ);
         move = transform.TransformDirection(move);
 
@@ -102,11 +104,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButton("Jump"))
         {
-            gravity = 4.5f;
+            gravity = baseGravity/2;
         }
         else
         {
-            gravity = 9f;
+            gravity = baseGravity;
         }
 
         if (controller.isGrounded)
@@ -130,6 +132,58 @@ public class PlayerController : MonoBehaviour
         moveInputX = Input.GetAxis("Horizontal");
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
+    }
+
+    private void Test()
+    {
+        if (Input.GetKeyDown("1"))
+        {
+            sprintTransitSpeed = 5f;
+            walkSpeed = 3.5f;
+            jumpForce = 1f;
+            baseGravity = 9f;
+            turningSpeed = 2f;
+        }
+        if (Input.GetKeyDown("2"))
+        {
+            sprintTransitSpeed = 3f;
+            walkSpeed = 3.5f;
+            jumpForce = 1f;
+            baseGravity = 9f;
+            turningSpeed = 2f;
+        }
+        if (Input.GetKeyDown("3"))
+        {
+            sprintTransitSpeed = 5f;
+            walkSpeed = 5f;
+            jumpForce = 1f;
+            baseGravity = 9f;
+            turningSpeed = 2f;
+        }
+        if (Input.GetKeyDown("4"))
+        {
+            sprintTransitSpeed = 5f;
+            walkSpeed = 3.5f;
+            jumpForce = 1.5f;
+            baseGravity = 9f;
+            turningSpeed = 2f;
+        }
+        if (Input.GetKeyDown("5"))
+        {
+            sprintTransitSpeed = 5f;
+            walkSpeed = 3.5f;
+            jumpForce = 1f;
+            baseGravity = 15f;
+            turningSpeed = 2f;
+        }
+        if (Input.GetKeyDown("6"))
+        {
+            sprintTransitSpeed = 5f;
+            walkSpeed = 3.5f;
+            jumpForce = 1f;
+            baseGravity = 9f;
+            turningSpeed = 4f;
+        }
     }
 }
 
