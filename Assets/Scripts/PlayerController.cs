@@ -50,6 +50,16 @@ public class PlayerController : MonoBehaviour
     
     private void GroundMovement()
     {
+        Vector3 move = new Vector3(moveInputX, 0, moveInputZ);
+        move = transform.TransformDirection(move);
+
+        move.y = 0;
+
+        move *=walkSpeed;
+
+        controller.Move(move * Time.deltaTime);
+        
+        /*
         if (moveInputX != 0 || moveInputZ != 0)
         {
             move[0] = moveDirection.x * currentSpeed;
@@ -72,6 +82,7 @@ public class PlayerController : MonoBehaviour
         }
 
         controller.Move(move * Time.deltaTime);
+        */
     }
 
     private void Turn()
@@ -102,8 +113,8 @@ public class PlayerController : MonoBehaviour
     }
     private void InputManagement()
     {
-        moveInputZ = Input.GetAxisRaw("Vertical");
-        moveInputX = Input.GetAxisRaw("Horizontal");
+        moveInputZ = Input.GetAxis("Vertical");
+        moveInputX = Input.GetAxis("Horizontal");
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
 
