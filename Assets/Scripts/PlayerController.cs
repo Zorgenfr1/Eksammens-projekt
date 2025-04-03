@@ -1,4 +1,5 @@
 using NUnit.Framework.Internal;
+using Unity.Properties;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,17 +10,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private new Transform camera;
 
     [Header("Movement Settings")]
-    [SerializeField] private float walkSpeed = 5f;
+    [SerializeField] private float walkSpeed = 3.5f;
+    [SerializeField] private float sprintSpeed;
+    [SerializeField] private float sprintTransitSpeed = 5f;
     [SerializeField] private float turningSpeed = 2f;
-    [SerializeField] private float gravity = 6f;
+    [SerializeField] private float gravity = 9f;
+    [SerializeField] private float baseGravity = 9f;
     [SerializeField] private float jumpForce = 1f;
-    [SerializeField] private float acceleration = 2f;
-    [SerializeField] private float decceleration = 0.5f;
-    [SerializeField] private float currentSpeed;
+
+    private Vector3 velocity;
     private Vector3 move;
-    private Vector3 moveDirection;
 
     [SerializeField] private float verticalVelocity;
+    private float speed;
 
     [Header("Input")]
     private float moveInputX;
@@ -39,50 +42,53 @@ public class PlayerController : MonoBehaviour
     {
         InputManagement();
         Movement();
-        Test();
     }
 
     private void Movement()
     {
-        GroundMovement();
-        Turn();
-    }
-    
-    private void GroundMovement()
-    {
-        Vector3 move = new Vector3(moveInputX, 0, moveInputZ);
-        move = transform.TransformDirection(move);
-
-        move.y = 0;
-
-        move *=walkSpeed;
-
-        controller.Move(move * Time.deltaTime);
-        
-        /*
-        if (moveInputX != 0 || moveInputZ != 0)
+        if (controller.isGrounded)
         {
-            move[0] = moveDirection.x * currentSpeed;
-            move[2] = moveDirection.z * currentSpeed;
-        }
-
-        move[1] = VerticalForceCalculation();
-
-        moveDirection = new Vector3(moveInputX, 0, moveInputZ).normalized;
-
-        move = transform.TransformDirection(move);
-
-        if(moveInputZ != 0 || moveInputX != 0)
-        {
-            currentSpeed = Mathf.Lerp(currentSpeed, walkSpeed, acceleration * Time.deltaTime);
+            GroundMovement();
         }
         else
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, 0, decceleration * Time.deltaTime);
+            AirMovement();
+        }
+        Turn();
+    }
+
+    private void GroundMovement()
+    {
+        sprintSpeed = walkSpeed * 2;
+        move = new Vector3(moveInputX, 0, moveInputZ);
+        move = transform.TransformDirection(move);
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = Mathf.Lerp(speed, sprintSpeed, sprintTransitSpeed * Time.deltaTime);
+        }
+        else
+        {
+            speed = Mathf.Lerp(speed, walkSpeed, sprintTransitSpeed * Time.deltaTime);
         }
 
-        controller.Move(move * Time.deltaTime);
-        */
+        move.y = VerticalForceCalculation();
+
+        velocity = move * speed;
+
+        velocity.y = VerticalForceCalculation();
+
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void AirMovement()
+    {
+        velocity.x = Mathf.Lerp(velocity.x, move.x * speed, 0.1f);
+        velocity.z = Mathf.Lerp(velocity.z, move.z * speed, 0.1f);
+
+        velocity.y = VerticalForceCalculation();
+
+        controller.Move(velocity * Time.deltaTime);
     }
 
     private void Turn()
@@ -96,6 +102,15 @@ public class PlayerController : MonoBehaviour
 
     private float VerticalForceCalculation()
     {
+        if (Input.GetButton("Jump"))
+        {
+            gravity = baseGravity/2;
+        }
+        else
+        {
+            gravity = baseGravity;
+        }
+
         if (controller.isGrounded)
         {
             verticalVelocity = -1f;
@@ -117,58 +132,59 @@ public class PlayerController : MonoBehaviour
         moveInputX = Input.GetAxis("Horizontal");
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
-
     }
 
     private void Test()
     {
         if (Input.GetKeyDown("1"))
         {
-            acceleration = 2f;
-            walkSpeed = 5f;
+            sprintTransitSpeed = 5f;
+            walkSpeed = 3.5f;
             jumpForce = 1f;
-            gravity = 6f;
+            baseGravity = 9f;
             turningSpeed = 2f;
         }
         if (Input.GetKeyDown("2"))
         {
-            acceleration = 1f;
-            walkSpeed = 5f;
+            sprintTransitSpeed = 3f;
+            walkSpeed = 3.5f;
             jumpForce = 1f;
-            gravity = 6f;
+            baseGravity = 9f;
             turningSpeed = 2f;
         }
         if (Input.GetKeyDown("3"))
         {
-            acceleration = 2f;
-            walkSpeed = 10f;
+            sprintTransitSpeed = 5f;
+            walkSpeed = 5f;
             jumpForce = 1f;
-            gravity = 6f;
+            baseGravity = 9f;
             turningSpeed = 2f;
         }
         if (Input.GetKeyDown("4"))
         {
-            acceleration = 2f;
-            walkSpeed = 5f;
+            sprintTransitSpeed = 5f;
+            walkSpeed = 3.5f;
             jumpForce = 1.5f;
-            gravity = 6f;
+            baseGravity = 9f;
             turningSpeed = 2f;
         }
         if (Input.GetKeyDown("5"))
         {
-            acceleration = 2f;
-            walkSpeed = 5f;
+            sprintTransitSpeed = 5f;
+            walkSpeed = 3.5f;
             jumpForce = 1f;
-            gravity = 12f;
+            baseGravity = 15f;
             turningSpeed = 2f;
         }
         if (Input.GetKeyDown("6"))
         {
-            acceleration = 2f;
-            walkSpeed = 5f;
+            sprintTransitSpeed = 5f;
+            walkSpeed = 3.5f;
             jumpForce = 1f;
-            gravity = 6f;
+            baseGravity = 9f;
             turningSpeed = 4f;
         }
     }
 }
+
+    
