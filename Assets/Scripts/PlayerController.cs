@@ -40,9 +40,6 @@ public class PlayerController : MonoBehaviour
         InputManagement();
         Movement();
         Test();
-        Debug.Log("x-værdi" + move.x);
-        Debug.Log("z-værdi" + move.z);
-        Debug.Log("moveDirection" + moveDirection.magnitude);
     }
 
     private void Movement()
@@ -53,16 +50,17 @@ public class PlayerController : MonoBehaviour
     
     private void GroundMovement()
     {
-    moveDirection = new Vector3(moveInputX, VerticalForceCalculation(), moveInputZ).normalized;
-
-        if ((moveInputX != 0 || moveInputZ != 0) && controller.isGrounded)
+        if (moveInputX != 0 || moveInputZ != 0)
         {
-            move = new Vector3(moveDirection.x * currentSpeed, VerticalForceCalculation(), moveDirection.z * currentSpeed);
+            move[0] = moveDirection.x * currentSpeed;
+            move[2] = moveDirection.z * currentSpeed;
         }
 
-        move = transform.TransformDirection(move);
+        move[1] = VerticalForceCalculation();
 
-        Vector3 jump = new(0, VerticalForceCalculation(), 0);
+        moveDirection = new Vector3(moveInputX, 0, moveInputZ).normalized;
+
+        move = transform.TransformDirection(move);
 
         if(moveInputZ != 0 || moveInputX != 0)
         {
@@ -74,7 +72,6 @@ public class PlayerController : MonoBehaviour
         }
 
         controller.Move(move * Time.deltaTime);
-        controller.Move(jump * Time.deltaTime);
     }
 
     private void Turn()
