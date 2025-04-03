@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float walkSpeed = 3.5f;
     [SerializeField] private float sprintSpeed;
+    [SerializeField] private float airControl = 0.8f;
+    [SerializeField] private float airDrag = 0.98f;
     [SerializeField] private float sprintTransitSpeed = 5f;
     [SerializeField] private float turningSpeed = 2f;
     [SerializeField] private float gravity = 9f;
@@ -83,8 +85,13 @@ public class PlayerController : MonoBehaviour
 
     private void AirMovement()
     {
-        velocity.x = Mathf.Lerp(velocity.x, move.x * speed, 0.1f);
-        velocity.z = Mathf.Lerp(velocity.z, move.z * speed, 0.1f);
+        move = new Vector3(moveInputX, 0, moveInputZ);
+        move = transform.TransformDirection(move);
+
+        velocity.x *= airDrag;
+        velocity.z *= airDrag;
+
+        velocity += move * speed * airControl * Time.deltaTime;
 
         velocity.y = VerticalForceCalculation();
 
@@ -95,7 +102,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.Rotate(Vector3.up * mouseX * turningSpeed);
         verticalRotation -= mouseY * turningSpeed;
-        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f); // Prevent flipping
+        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
 
         camera.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
     }
