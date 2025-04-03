@@ -10,11 +10,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private new Transform camera;
 
     [Header("Movement Settings")]
-    [SerializeField] private float walkSpeed = 5f;
-    [SerializeField] private float sprintSpeed = 10f;
+    [SerializeField] private float walkSpeed = 3.5f;
+    [SerializeField] private float sprintSpeed = 7f;
     [SerializeField] private float sprintTransitSpeed = 5f;
     [SerializeField] private float turningSpeed = 2f;
-    [SerializeField] private float gravity = 6f;
+    [SerializeField] private float gravity = 9f;
     [SerializeField] private float jumpForce = 1f;
 
     private Vector3 velocity;
@@ -100,6 +100,15 @@ public class PlayerController : MonoBehaviour
 
     private float VerticalForceCalculation()
     {
+        if (Input.GetButton("Jump"))
+        {
+            gravity = 4.5f;
+        }
+        else
+        {
+            gravity = 9f;
+        }
+
         if (controller.isGrounded)
         {
             verticalVelocity = -1f;
