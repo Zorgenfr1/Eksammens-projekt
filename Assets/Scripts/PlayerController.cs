@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     {
         InputManagement();
         Movement();
+        Test();
     }
 
     private void Movement()
