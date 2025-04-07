@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
     private void GroundMovement()
     {
         sprintSpeed = walkSpeed * 2;
-        move = new Vector3(moveInputX, 0, moveInputZ);
+        move = new Vector3(moveInputX, 0, moveInputZ).normalized;
         move = transform.TransformDirection(move);
 
         if (Input.GetKey(KeyCode.LeftShift))
