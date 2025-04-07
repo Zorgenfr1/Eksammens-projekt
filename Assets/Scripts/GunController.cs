@@ -18,6 +18,7 @@ public class GunController : MonoBehaviour
     public Vector3 aimingLocalPosition;
     public float aimSmoothing = 10f;
     public float requiredAimTime = 2f;
+    public Transform cameraPivot;
 
     //Variabler der ændres
     float _aimTime = 0f;
@@ -44,9 +45,9 @@ public class GunController : MonoBehaviour
 
     private void Update()
     {
-        DetermineAim();
+        //DetermineAim();
 
-        DetermineRotation();
+        //DetermineRotation();
 
         if (Input.GetMouseButton(0) && _canShoot && _aimTime >= requiredAimTime)
         {
@@ -67,8 +68,7 @@ public class GunController : MonoBehaviour
 
         transform.localPosition += (Vector3)mouseAxis * weaponSwayAmount / 1000;
 
-        transform.root.localRotation = Quaternion.AngleAxis(_currentRotation.x, Vector3.up);
-        transform.parent.localRotation = Quaternion.AngleAxis(- _currentRotation.y, Vector3.right);
+        cameraPivot.localRotation = Quaternion.Euler(-_currentRotation.y, _currentRotation.x, 0);
     }
 
     void DetermineAim()
@@ -88,10 +88,10 @@ public class GunController : MonoBehaviour
 
         Vector3 desiredPosition = Vector3.Lerp(transform.localPosition, target, Time.deltaTime * aimSmoothing);
 
-        transform.localPosition = desiredPosition;
+        //transform.localPosition = desiredPosition;
     }
 
-    void DetermineRecoil()
+    /*void DetermineRecoil()
     {
         transform.localPosition -= Vector3.forward * 0.1f;
 
@@ -104,11 +104,11 @@ public class GunController : MonoBehaviour
 
             _currentRotation += recoil;
         }
-    }
+    }*/
 
     IEnumerator Shoot()
     {
-        DetermineRecoil();
+        //DetermineRecoil();
         yield return new WaitForSeconds(fireRate);
         _canShoot = true;
     }
