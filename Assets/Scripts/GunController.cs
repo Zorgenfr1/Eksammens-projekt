@@ -27,6 +27,7 @@ public class GunController : MonoBehaviour
     public float mouseSensitivity = 1f;
     Vector2 _currentRotation;
     public float weaponSwayAmount = 10f;
+    private Animator animator;
 
     [Header("Recoil Settings")]
     //våben recoil
@@ -51,8 +52,10 @@ public class GunController : MonoBehaviour
 
         if (Input.GetMouseButton(0) && _canShoot && _aimTime >= requiredAimTime)
         {
-            _canShoot=false;
+            animator.SetTrigger("Shoot");
+            _canShoot =false;
             _arrowsBack--;
+            animator.SetTrigger("Idle");
             StartCoroutine(Shoot());
         }
     }
@@ -109,6 +112,7 @@ public class GunController : MonoBehaviour
     IEnumerator Shoot()
     {
         //DetermineRecoil();
+        
         yield return new WaitForSeconds(fireRate);
         _canShoot = true;
     }
