@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 460100280}
   - component: {fileID: 460100282}
   - component: {fileID: 460100281}
+  - component: {fileID: 460100283}
   m_Layer: 0
   m_Name: Sword2
   m_TagString: Untagged
@@ -314,6 +315,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 460100279}
   m_Mesh: {fileID: -9014792341165129318, guid: ae663b63135d8f943a65db337dee39e5, type: 3}
+--- !u!61 &460100283
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460100279}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.057231616, y: -0.0014117865}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.013030995, y: 0.009867495}
+  m_EdgeRadius: 0
 --- !u!1 &722308404
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,6 +681,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 460100280}
+  - {fileID: 2751483457248969319}
   m_Father: {fileID: 5316253533427591437}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1817388830
@@ -679,6 +727,10 @@ MonoBehaviour:
   gravity: 6
   baseGravity: 9
   jumpForce: 1
+  Grounded: 0
+  floor:
+    serializedVersion: 2
+    m_Bits: 0
   verticalVelocity: 0
 --- !u!143 &1817388832
 CharacterController:
@@ -736,6 +788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bow: {fileID: 2742766329727783845}
   sword: {fileID: 460100279}
+  arrow: {fileID: 7560272156114801787}
   animator: {fileID: 1817388836}
 --- !u!114 &1817388835
 MonoBehaviour:
@@ -749,6 +802,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d39c5f225eb2bee4ea4d2327439fd5ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrows: 2
+  arrowCapacity: 30
+  fireRate: 1
 --- !u!95 &1817388836
 Animator:
   serializedVersion: 7
@@ -1150,7 +1206,6 @@ GameObject:
   - component: {fileID: 5794909657559854541}
   - component: {fileID: 2944570965847316651}
   - component: {fileID: 5552685553977947848}
-  - component: {fileID: 5794909657559854542}
   m_Layer: 0
   m_Name: Bow2
   m_TagString: Untagged
@@ -1158,6 +1213,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &2751483457248969319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7560272156114801787}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.09183113, y: -0.22993845, z: -0.032006893, w: 0.96833414}
+  m_LocalPosition: {x: 5.38, y: 2.42, z: -15.03}
+  m_LocalScale: {x: 99.99998, y: 99.99995, z: 99.99996}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1507488560}
+  m_LocalEulerAnglesHint: {x: -189.388, y: -207.214, z: 173.936}
 --- !u!33 &2944570965847316651
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1650,31 +1720,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 722308405}
   m_LocalEulerAnglesHint: {x: 24.158, y: 118.584, z: -70.505}
---- !u!114 &5794909657559854542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2742766329727783845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21f1d401386bcd540afb4e97f050c1e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arrows: 2
-  arrowCapacity: 30
-  fireRate: 1
-  normalLocalPosition: {x: 0, y: 0, z: 0}
-  aimingLocalPosition: {x: 0, y: 0, z: 0}
-  aimSmoothing: 10
-  requiredAimTime: 2
-  cameraPivot: {fileID: 1160202031}
-  mouseSensitivity: 1
-  weaponSwayAmount: 10
-  randomizeRecoil: 0
-  randomRecoilConstraints: {x: 0, y: 0}
-  recoilPattern: {x: 0, y: 0}
 --- !u!1 &5797556553562051334
 GameObject:
   m_ObjectHideFlags: 0
@@ -1867,6 +1912,14 @@ Transform:
   - {fileID: 796537218319816608}
   m_Father: {fileID: 6466000448030844078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &7183699128501800543
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7560272156114801787}
+  m_Mesh: {fileID: 701023773241715055, guid: ae663b63135d8f943a65db337dee39e5, type: 3}
 --- !u!1 &7201775868831470441
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,6 +1936,52 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!23 &7442776720173636184
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7560272156114801787}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 44128efe6dc0d494aae2d889670a5c61, type: 2}
+  - {fileID: 2100000, guid: 6053fcb87cb46a74a9516bc4de992246, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!4 &7520814514734439146
 Transform:
   m_ObjectHideFlags: 0
@@ -1910,6 +2009,24 @@ GameObject:
   - component: {fileID: 2568207339645067688}
   m_Layer: 0
   m_Name: mixamorig:LeftToeBase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &7560272156114801787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2751483457248969319}
+  - component: {fileID: 7183699128501800543}
+  - component: {fileID: 7442776720173636184}
+  m_Layer: 0
+  m_Name: Arrow1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
