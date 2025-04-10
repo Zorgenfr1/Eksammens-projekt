@@ -393,14 +393,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1750907881}
   walkSpeed: 5
-  sprintSpeed: 10
+  sprintSpeed: 7
   airControl: 1
   airDrag: 0.998
   sprintTransitSpeed: 5
   turningSpeed: 2
-  gravity: 6
+  gravity: 9
   baseGravity: 9
-  jumpForce: 1
+  jumpForce: 1.2
   Grounded: 0
   floor:
     serializedVersion: 2
