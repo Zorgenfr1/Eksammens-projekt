@@ -4,6 +4,7 @@ public class WeaponSwitcher : MonoBehaviour
 {
     public GameObject bow;   // Buen sidder i venstre hånd
     public GameObject sword; // Sværdet sidder i højre hånd
+    public GameObject arrow;
     public Animator animator;
 
     private int currentWeapon = 0; // 0 = Bue (venstre hånd), 1 = Sværd (højre hånd)
@@ -13,6 +14,7 @@ public class WeaponSwitcher : MonoBehaviour
     {
         bow.SetActive(true);
         sword.SetActive(false);
+        arrow.SetActive(false);
     }
 
     void Update()
@@ -43,5 +45,10 @@ public class WeaponSwitcher : MonoBehaviour
     public void HideSword()
     {
         sword.SetActive(false); // Skjuler sværdet
+    }
+
+    public void ShowArrow()
+    {
+        arrow.SetActive(true);  // Gør buen synlig
     }
 }
