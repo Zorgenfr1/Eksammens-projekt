@@ -2,8 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
-    public delegate void HealthChangedHandler(object source, float oldHealth, float newHealth);
-    public event HealthChangedHandler OnHealthChanged;
+
 
     public delegate void DeathHandler(object source);
     public event DeathHandler OnDeath;

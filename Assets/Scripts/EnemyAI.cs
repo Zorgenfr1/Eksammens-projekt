@@ -17,7 +17,7 @@ public class MonsterAI : MonoBehaviour
     private Vector3 target;
     public float patrolSpeed = 0.5f;
     public float chaseSpeed = 1.0f;
-    //Animator animator;
+    public Animator animator;
     //GameObject canvas;
     public Transform head;
     public Vector3 towardsPlayer;
@@ -53,7 +53,7 @@ public class MonsterAI : MonoBehaviour
         currentState = EnemyState.Patrol;
         SetDestination(waypoints[currentPatrolIndex].position);
         audio = GetComponent<AudioSource>();
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         //canvas = GameObject.FindGameObjectWithTag("Canvas");
     }
 
@@ -82,7 +82,7 @@ public class MonsterAI : MonoBehaviour
                 break;
         }
         SetDestination(target);
-        //animator.SetFloat("Speed", agent.speed);
+        animator.SetFloat("Speed", agent.speed);
     }
     void Patrol()
     {
