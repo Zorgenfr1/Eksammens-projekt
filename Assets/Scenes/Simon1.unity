@@ -532,8 +532,8 @@ MonoBehaviour:
   camera: {fileID: 1539583835}
   walkSpeed: 5
   sprintSpeed: 10
-  airControl: 0.15
-  airDrag: 0.995
+  airControl: 1
+  airDrag: 0.999
   sprintTransitSpeed: 5
   turningSpeed: 2
   gravity: 6
