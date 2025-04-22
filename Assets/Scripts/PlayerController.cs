@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     private CharacterController controller;
     [SerializeField] private new Transform camera;
+    public Animator animator;
 
     [Header("Movement Settings")]
     [SerializeField] private float walkSpeed = 3.5f;
@@ -71,13 +72,21 @@ public class PlayerController : MonoBehaviour
         move = new Vector3(moveInputX, 0, moveInputZ).normalized;
         move = transform.TransformDirection(move);
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        bool isMoving = moveInputX != 0 || moveInputZ != 0;
+
+        if (Input.GetKey(KeyCode.LeftShift) && isMoving)
         {
             speed = Mathf.Lerp(speed, sprintSpeed, sprintTransitSpeed * Time.deltaTime);
+            animator.SetTrigger("IsRunning");
         }
-        else
+        else if (isMoving)
         {
             speed = Mathf.Lerp(speed, walkSpeed, sprintTransitSpeed * Time.deltaTime);
+            animator.SetTrigger("IsWalking");
+        }
+        else if (!Input.GetButton("Jump"))
+        {
+            animator.SetTrigger("Idle");
         }
 
         move.y = VerticalForceCalculation();
@@ -108,7 +117,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.Rotate(Vector3.up * mouseX * turningSpeed);
         verticalRotation -= mouseY * turningSpeed;
-        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
+        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 60f);
 
         camera.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
     }
@@ -129,6 +138,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButton("Jump"))
             {
                 verticalVelocity = Mathf.Sqrt(jumpForce * gravity * 2);
+                animator.SetTrigger("Jump");
             }
             else
             {
@@ -144,7 +154,7 @@ public class PlayerController : MonoBehaviour
 
     private bool GroundCheck()
     {
-        Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - 1.08f, transform.position.z);
+        Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - 0.09999847f, transform.position.z);
 
         Collider[] colliders = Physics.OverlapSphere(playerPosition, 0.1f, floor);
         foreach(Collider c in colliders)
