@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class AimAnimation : MonoBehaviour
@@ -11,7 +11,7 @@ public class AimAnimation : MonoBehaviour
     public int arrowCapacity = 30;
     public float fireRate = 1f;
 
-    // Variabler der �ndres
+    // Variabler der ændres
     bool _canShoot;
     int _arrowsBack;
 
@@ -62,12 +62,9 @@ public class AimAnimation : MonoBehaviour
         if (scroll != 0)
         {
             if (scroll > 0)
-                currentWeapon++;
+                currentWeapon = (currentWeapon % weaponCount) + 1; // 1 → 2 → 3 → 1
             else
-                currentWeapon--;
-
-            if (currentWeapon > weaponCount) currentWeapon = 1;
-            if (currentWeapon < 1) currentWeapon = weaponCount;
+                currentWeapon = (currentWeapon - 2 + weaponCount) % weaponCount + 1; // 1 ← 3 ← 2 ← 1
 
             PlayWeaponScrollAnimation(currentWeapon);
         }
@@ -80,7 +77,7 @@ public class AimAnimation : MonoBehaviour
 
     IEnumerator Shoot()
     {
-        yield return new WaitForSeconds(fireRate); // Du kan �ndre det til fireRate
+        yield return new WaitForSeconds(fireRate); // Du kan ændre det til fireRate
         animator.SetTrigger("Idle");
         _canShoot = true;
     }

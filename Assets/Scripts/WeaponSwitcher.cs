@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class WeaponSwitcher : MonoBehaviour
 {
-    public GameObject bow;   // Buen sidder i venstre hånd
-    public GameObject sword; // Sværdet sidder i højre hånd
+    public GameObject bow;
+    public GameObject sword;
+    public GameObject knife;
     public GameObject arrow;
     public Animator animator;
 
@@ -14,41 +15,42 @@ public class WeaponSwitcher : MonoBehaviour
     {
         bow.SetActive(true);
         sword.SetActive(false);
+        knife.SetActive(false);
         arrow.SetActive(false);
-    }
-
-    void Update()
-    {
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-
-        if (scroll > 0 || scroll < 0) // Skifter våben ved scroll
-        {
-            currentWeapon = (currentWeapon + 1) % 2; // Skifter mellem 0 og 1
-        }
     }
 
     public void ShowBow()
     {
-        bow.SetActive(true);  // Gør buen synlig
+        bow.SetActive(true);
     }
 
     public void HideBow()
     {
-        bow.SetActive(false); // Skjuler buen
+        bow.SetActive(false);
     }
 
     public void ShowSword()
     {
-        sword.SetActive(true); // Gør sværdet synligt
+        sword.SetActive(true);
     }
 
     public void HideSword()
     {
-        sword.SetActive(false); // Skjuler sværdet
+        sword.SetActive(false);
+    }
+
+    public void ShowKnife()
+    {
+        knife.SetActive(true);
+    }
+
+    public void HideKnife()
+    {
+        knife.SetActive(false);
     }
 
     public void ShowArrow()
     {
-        arrow.SetActive(true);  // Gør buen synlig
+        arrow.SetActive(true);
     }
 }
