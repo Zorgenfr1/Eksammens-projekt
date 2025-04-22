@@ -17,7 +17,7 @@ public class MonsterAI : MonoBehaviour
     private Vector3 target;
     public float patrolSpeed = 0.5f;
     public float chaseSpeed = 1.0f;
-    //Animator animator;
+    public Animator animator;
     //GameObject canvas;
     public Transform head;
     public Vector3 towardsPlayer;
@@ -30,13 +30,16 @@ public class MonsterAI : MonoBehaviour
     private bool hasPlayedDetectionSound = false;
     public AudioClip loseSightAudio;
     private bool hasPlayedLoseSightSound = false;
+    public AudioClip investigateAudio;
+    private bool hasPlayedInvestigateSound = false;
 
 
     private enum EnemyState
     {
         Patrol,
         Chase,
-        Attack
+        Attack,
+        Investigate
     }
 
     private EnemyState currentState;
@@ -50,7 +53,7 @@ public class MonsterAI : MonoBehaviour
         currentState = EnemyState.Patrol;
         SetDestination(waypoints[currentPatrolIndex].position);
         audio = GetComponent<AudioSource>();
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         //canvas = GameObject.FindGameObjectWithTag("Canvas");
     }
 
@@ -71,15 +74,18 @@ public class MonsterAI : MonoBehaviour
             case EnemyState.Attack:
                 KillPlayer();
                 break;
+            case EnemyState.Investigate:
+                CheckForPlayer();
+                Investigate();
+                break;
             default:
                 break;
         }
         SetDestination(target);
-        //animator.SetFloat("Speed", agent.speed);
+        animator.SetFloat("Speed", agent.speed);
     }
     void Patrol()
     {
-        hasPlayedLoseSightSound = false;
         agent.speed = patrolSpeed;
         if (agent.remainingDistance < 0.5f)
         {
@@ -90,6 +96,7 @@ public class MonsterAI : MonoBehaviour
 
     void Chase()
     {
+        hasPlayedLoseSightSound = false;
         agent.speed = chaseSpeed;
         target = lastKnownPlayerPosition;
         RaycastHit hit;
@@ -109,10 +116,10 @@ public class MonsterAI : MonoBehaviour
         if (agent.remainingDistance < 0.5f && playerCrouching)
         {
             LookAround();
-            if (!hasPlayedLoseSightSound)
-            {
-                PlayAudio(loseSightAudio, ref hasPlayedLoseSightSound);
-            }
+           // if (!hasPlayedLoseSightSound)
+           // {
+            //    PlayAudio(loseSightAudio, ref hasPlayedLoseSightSound);
+            //}
         }
         if (agent.remainingDistance < 0.5f && !playerCrouching)
         {
@@ -163,6 +170,12 @@ public class MonsterAI : MonoBehaviour
     {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lastKnownPlayerRotation), 5f);
         Debug.Log("ahh");
+
+        if (!hasPlayedInvestigateSound)
+        {
+            PlayAudio(investigateAudio, ref hasPlayedInvestigateSound);
+        }
+
         if (Quaternion.Angle(transform.rotation, Quaternion.LookRotation(lastKnownPlayerRotation)) < 1f)
         {
             target = playerHiddenLocation;
@@ -192,8 +205,9 @@ public class MonsterAI : MonoBehaviour
         Debug.Log("Looking Around");
         yield return new WaitForSeconds(2f);
         Debug.Log("Stopped looking around");
-        currentState = EnemyState.Patrol;
+        currentState = EnemyState.Investigate;
         yield break;
+
     }
 
     public void PlayAudio(AudioClip clip, ref bool hasPlayed)
@@ -203,9 +217,16 @@ public class MonsterAI : MonoBehaviour
     }
 
 
-    public void LoseSightOfPlayer()
+    void Investigate()
     {
-       
+        hasPlayedInvestigateSound = true;
+        target = playerHiddenLocation;
+        agent.speed = patrolSpeed;
+        if (agent.remainingDistance < 0.5f)
+        {
+            PlayAudio(loseSightAudio, ref hasPlayedLoseSightSound);
+            currentState = EnemyState.Patrol;
+        }
 
     }
 

@@ -393,14 +393,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1750907881}
   walkSpeed: 5
-  sprintSpeed: 10
+  sprintSpeed: 7
   airControl: 1
   airDrag: 0.998
   sprintTransitSpeed: 5
   turningSpeed: 2
-  gravity: 6
+  gravity: 9
   baseGravity: 9
-  jumpForce: 1
+  jumpForce: 1.2
+  Grounded: 0
+  floor:
+    serializedVersion: 2
+    m_Bits: 64
   verticalVelocity: 0
 --- !u!143 &79900524
 CharacterController:
@@ -439,7 +443,7 @@ GameObject:
   - component: {fileID: 282958773}
   - component: {fileID: 282958772}
   - component: {fileID: 282958771}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -657,7 +661,7 @@ GameObject:
   - component: {fileID: 473831714}
   - component: {fileID: 473831713}
   - component: {fileID: 473831712}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -875,7 +879,7 @@ GameObject:
   - component: {fileID: 630120068}
   - component: {fileID: 630120067}
   - component: {fileID: 630120066}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1781,7 +1785,7 @@ GameObject:
   - component: {fileID: 1413328879}
   - component: {fileID: 1413328878}
   - component: {fileID: 1413328877}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2102,7 +2106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1603406147}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Boxes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2142,7 +2146,7 @@ GameObject:
   - component: {fileID: 1623329087}
   - component: {fileID: 1623329086}
   - component: {fileID: 1623329085}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2748,7 +2752,7 @@ GameObject:
   - component: {fileID: 2017098843}
   - component: {fileID: 2017098842}
   - component: {fileID: 2017098841}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2764,8 +2768,8 @@ Transform:
   m_GameObject: {fileID: 2017098839}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.3, y: 3, z: 9.46}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -7.3, y: 3.01, z: 9.46}
+  m_LocalScale: {x: 2, y: 1.98, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1603406147}

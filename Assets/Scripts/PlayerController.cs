@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using NUnit.Framework.Internal;
 using Unity.Properties;
 using UnityEngine;
@@ -19,9 +20,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity = 9f;
     [SerializeField] private float baseGravity = 9f;
     [SerializeField] private float jumpForce = 1f;
+    [SerializeField] private bool Grounded = false;
 
     private Vector3 velocity;
     private Vector3 move;
+
+    [SerializeField] private LayerMask floor;
 
     [SerializeField] private float verticalVelocity;
     private float speed;
@@ -45,6 +49,7 @@ public class PlayerController : MonoBehaviour
         InputManagement();
         Movement();
         Test();
+        GroundCheck();
     }
 
     private void Movement()
@@ -63,7 +68,7 @@ public class PlayerController : MonoBehaviour
     private void GroundMovement()
     {
         sprintSpeed = walkSpeed * 2;
-        move = new Vector3(moveInputX, 0, moveInputZ);
+        move = new Vector3(moveInputX, 0, moveInputZ).normalized;
         move = transform.TransformDirection(move);
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -119,13 +124,15 @@ public class PlayerController : MonoBehaviour
             gravity = baseGravity;
         }
 
-        if (controller.isGrounded)
+        if (Grounded == true)
         {
-            verticalVelocity = -1f;
-
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButton("Jump"))
             {
                 verticalVelocity = Mathf.Sqrt(jumpForce * gravity * 2);
+            }
+            else
+            {
+                verticalVelocity = -1f;
             }
         }
         else
@@ -134,6 +141,26 @@ public class PlayerController : MonoBehaviour
         }
         return verticalVelocity;
     }
+
+    private bool GroundCheck()
+    {
+        Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - 1.08f, transform.position.z);
+
+        Collider[] colliders = Physics.OverlapSphere(playerPosition, 0.1f, floor);
+        foreach(Collider c in colliders)
+        {
+            if (colliders.Length > 0)
+            {
+                Grounded = true;
+            }
+        }
+        if(colliders.Length == 0)
+        {
+            Grounded = false;
+        }
+        return Grounded;
+    }
+
     private void InputManagement()
     {
         moveInputZ = Input.GetAxis("Vertical");

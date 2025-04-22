@@ -1,14 +1,26 @@
 using UnityEngine;
+using System.Collections;
 
 public class AimAnimation : MonoBehaviour
 {
     private Animator animator;
     private bool isAiming = false;
 
+    [Header("Bow Settings")]
+    public int arrows = 2;
+    public int arrowCapacity = 30;
+    public float fireRate = 1f;
+
+    //Variabler der ændres
+    bool _canShoot;
+    int _arrowsBack;
+
     void Start()
     {
        
         animator = GetComponent<Animator>();
+        _arrowsBack = arrowCapacity;
+        _canShoot = true;
     }
 
     void Update()
@@ -16,19 +28,22 @@ public class AimAnimation : MonoBehaviour
        
         if (Input.GetMouseButton(1)) 
         {
-            if (!isAiming)
-            {
-                animator.SetTrigger("Aim");
-                isAiming = true;
-            }
+           animator.SetBool("IsAiming", true);
+           isAiming = true;
         }
-        else
+        if (Input.GetMouseButtonUp(1))
         {
-            if (isAiming)
-            {
-                animator.SetTrigger("Idle");
-                isAiming = false;
-            }
+            animator.SetBool("IsAiming", false);
+            isAiming = false;
+        }
+        
+
+        if (Input.GetMouseButtonDown(0) && _canShoot && _arrowsBack > 0)
+        {
+            animator.SetTrigger("Shoot");
+            _canShoot = false;
+            _arrowsBack--;
+            StartCoroutine(Shoot());
         }
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
@@ -41,5 +56,14 @@ public class AimAnimation : MonoBehaviour
         {
             animator.SetTrigger("ScrollDown");
         }
+
+
+    }
+
+    IEnumerator Shoot()
+    {
+        yield return new WaitForSeconds(1f);
+        animator.SetTrigger("Idle");
+        _canShoot = true;
     }
 }
