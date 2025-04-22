@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float airControl = 0.8f;
     [SerializeField] private float airDrag = 0.98f;
     [SerializeField] private float sprintTransitSpeed = 5f;
-    [SerializeField] private float turningSpeed = 2f;
+    [SerializeField] private float turningSpeed = 2f * Options.sensitivity;
     [SerializeField] private float gravity = 9f;
     [SerializeField] private float baseGravity = 9f;
     [SerializeField] private float jumpForce = 1f;
