@@ -1,8 +1,12 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Climbing : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("References")]
+    public Transform orientation;
+    public Rigidbody rb;
     void Start()
     {
         
