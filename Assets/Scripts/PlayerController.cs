@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float baseGravity = 9f;
     [SerializeField] private float jumpForce = 1f;
     [SerializeField] private bool Grounded = false;
+    [SerializeField] public int stamina = 25;
+    private float staminaTimer = 0.5f;
+    private float staminaTimer2 = 0f;
 
     private Vector3 velocity;
     private Vector3 move;
@@ -74,19 +77,41 @@ public class PlayerController : MonoBehaviour
 
         bool isMoving = moveInputX != 0 || moveInputZ != 0;
 
-        if (Input.GetKey(KeyCode.LeftShift) && isMoving)
+        if (Input.GetKey(KeyCode.LeftShift) && isMoving && stamina > 0)
         {
             speed = Mathf.Lerp(speed, sprintSpeed, sprintTransitSpeed * Time.deltaTime);
-            animator.SetTrigger("IsRunning");
+            //animator.SetTrigger("IsRunning");
+            staminaTimer += Time.deltaTime;
+            
+            if(staminaTimer >= 0.5f)
+            {
+                stamina -= 1;
+                staminaTimer = 0;
+            }
         }
         else if (isMoving)
         {
             speed = Mathf.Lerp(speed, walkSpeed, sprintTransitSpeed * Time.deltaTime);
-            animator.SetTrigger("IsWalking");
+            //animator.SetTrigger("IsWalking");
         }
         else if (!Input.GetButton("Jump"))
         {
-            animator.SetTrigger("Idle");
+            //animator.SetTrigger("Idle");
+            staminaTimer += Time.deltaTime;
+            if (staminaTimer >= 2f)
+            {
+                staminaTimer2 += Time.deltaTime;
+                if (staminaTimer2 >= 0.2 && stamina < 25)
+                {
+                    stamina += 1;
+                    staminaTimer2 = 0;
+                }
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            staminaTimer = 0.5f;
         }
 
         move.y = VerticalForceCalculation();
@@ -139,6 +164,7 @@ public class PlayerController : MonoBehaviour
             {
                 verticalVelocity = Mathf.Sqrt(jumpForce * gravity * 2);
                 animator.SetTrigger("Jump");
+                stamina -= 5;
             }
             else
             {
@@ -154,7 +180,7 @@ public class PlayerController : MonoBehaviour
 
     private bool GroundCheck()
     {
-        Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - 0.09999847f, transform.position.z);
+        Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - 1.08f, transform.position.z);
 
         Collider[] colliders = Physics.OverlapSphere(playerPosition, 0.1f, floor);
         foreach(Collider c in colliders)
@@ -178,6 +204,7 @@ public class PlayerController : MonoBehaviour
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
     }
+
 
     private void Test()
     {

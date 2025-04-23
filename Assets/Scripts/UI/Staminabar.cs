@@ -21,7 +21,7 @@ public class Staminabar : MonoBehaviour
 
     public void SetValue(int newValue)
     {
-        var targetWidth = newValue * _maxRightMask / 100; //_stamina.Stamina;
+        var targetWidth = newValue * _maxRightMask / _stamina.stamina;
         var newRightMask = _maxRightMask + _intialRightMask - targetWidth;
         var padding = _mask.padding;
         padding.z = newRightMask;
