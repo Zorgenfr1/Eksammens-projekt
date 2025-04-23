@@ -5,7 +5,8 @@ public class WolvenAI : MonoBehaviour
 {
     public Transform player;
     public NavMeshAgent agent;
-    public float attackRange = 2f;
+    public Animator wolfAni;
+    public float attackRange = 10f;
     public float damage = 1000f;
 
     private bool shouldChase = false;
@@ -26,14 +27,25 @@ public class WolvenAI : MonoBehaviour
 
     void AttackPlayer()
     {
-        // Her skal du evt. kalde spillerens "TakeDamage" funktion
         Debug.Log("Ulven angriber spilleren!");
-        // Du kan f.eks. deaktivere jagten efter angreb:
-        shouldChase = false;
+        StopChase();
+        wolfAni.SetTrigger("Attack");
+    }
+
+    public void StartHowl()
+    {
+        wolfAni.SetTrigger("OutsideZone");
     }
 
     public void StartChase()
     {
         shouldChase = true;
+        agent.isStopped = false;
+    }
+
+    public void StopChase()
+    {
+        shouldChase = false;
+        agent.isStopped = true;
     }
 }

@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Healthbar : MonoBehaviour
+public class Staminabar : MonoBehaviour
 {
-    //[SerializeField] private Health _health;
+    [SerializeField] private PlayerController _stamina;
 
     [SerializeField] private RectTransform _barRect;
 
@@ -21,7 +21,7 @@ public class Healthbar : MonoBehaviour
 
     public void SetValue(int newValue)
     {
-        var targetWidth = newValue * _maxRightMask / 100; //_health.MaxHp;
+        var targetWidth = newValue * _maxRightMask / 100; //_stamina.Stamina;
         var newRightMask = _maxRightMask + _intialRightMask - targetWidth;
         var padding = _mask.padding;
         padding.z = newRightMask;
