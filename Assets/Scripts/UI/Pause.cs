@@ -11,10 +11,10 @@ public class Pause : MonoBehaviour
 
     public void PauseGame()
     {
-        pauseMenu.SetActive(true);
-        UI.SetActive(false);
         isPaused = true;
         Time.timeScale = 0f;
+        UI.SetActive(false);
+        pauseMenu.SetActive(true);
     }
 
     public void ResumeGame()
