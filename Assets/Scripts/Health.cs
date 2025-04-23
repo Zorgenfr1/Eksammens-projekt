@@ -23,6 +23,7 @@ public class Health : MonoBehaviour
         float oldHealth = currentHealth;
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        //healthBar.UpdateHealthBar(currentHealth, maxHealth);
 
     }
 

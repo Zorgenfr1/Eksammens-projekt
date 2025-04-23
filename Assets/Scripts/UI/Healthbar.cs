@@ -21,7 +21,7 @@ public class Healthbar : MonoBehaviour
 
     public void SetValue(int newValue)
     {
-        var targetWidth = newValue * _maxRightMask / _health.MaxHp;
+        var targetWidth = newValue * _maxRightMask; // _health.MaxHp;
         var newRightMask = _maxRightMask + _intialRightMask - targetWidth;
         var padding = _mask.padding;
         padding.z = newRightMask;
