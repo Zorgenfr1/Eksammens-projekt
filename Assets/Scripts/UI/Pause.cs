@@ -44,6 +44,7 @@ public class Pause : MonoBehaviour
         {
             ResumeGame();
         }
+
     }
     public void Options()
     {
@@ -57,5 +58,6 @@ public class Pause : MonoBehaviour
         optionsMenu.SetActive(false);
         pauseMenu.SetActive(true);
         isOptions=false;
+
     }
 }
