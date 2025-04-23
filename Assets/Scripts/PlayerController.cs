@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     [SerializeField] private new Transform camera;
     public Animator animator;
-    public InventoryUI inventoryUI;
 
     [Header("Movement Settings")]
     [SerializeField] private float walkSpeed = 3.5f;
@@ -22,11 +21,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity = 9f;
     [SerializeField] private float baseGravity = 9f;
     [SerializeField] private float jumpForce = 1f;
-    [SerializeField] private bool grounded = false;
-    [SerializeField] private float crouchSpeed = 2f;
-    [SerializeField] private float crouchYScale;
-    [SerializeField] private float crouchStartYScale;
-    public bool crouched = false;
+    [SerializeField] private bool Grounded = false;
+    [SerializeField] public int stamina = 25;
+    private float staminaTimer = 0.5f;
+    private float staminaTimer2 = 0f;
 
     private Vector3 velocity;
     private Vector3 move;
@@ -42,38 +40,20 @@ public class PlayerController : MonoBehaviour
     private float mouseX;
     private float mouseY;
     private float verticalRotation = 0f;
-    [SerializeField] private KeyCode crouchKey = KeyCode.LeftControl;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
-
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        crouchStartYScale = transform.localScale.y;
-        crouchYScale = crouchStartYScale / 2;
     }
 
     private void Update()
     {
-        if (!inventoryUI.inventoryVisible)
-        {
-            InputManagement();
-            Movement();
-            Test();
-            GroundCheck();
-        }
-        if (!inventoryUI.inventoryVisible)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
+        InputManagement();
+        Movement();
+        Test();
+        GroundCheck();
     }
 
     private void Movement()
@@ -97,31 +77,41 @@ public class PlayerController : MonoBehaviour
 
         bool isMoving = moveInputX != 0 || moveInputZ != 0;
 
-        if (Input.GetKey(KeyCode.LeftShift) && isMoving)
+        if (Input.GetKey(KeyCode.LeftShift) && isMoving && stamina > 0)
         {
             speed = Mathf.Lerp(speed, sprintSpeed, sprintTransitSpeed * Time.deltaTime);
-            animator.SetTrigger("IsRunning");
+            //animator.SetTrigger("IsRunning");
+            staminaTimer += Time.deltaTime;
+            
+            if(staminaTimer >= 0.5f)
+            {
+                stamina -= 1;
+                staminaTimer = 0;
+            }
         }
-        else if (isMoving && !crouched)
+        else if (isMoving)
         {
             speed = Mathf.Lerp(speed, walkSpeed, sprintTransitSpeed * Time.deltaTime);
-            animator.SetTrigger("IsWalking");
+            //animator.SetTrigger("IsWalking");
         }
         else if (!Input.GetButton("Jump"))
         {
-            animator.SetTrigger("Idle");
+            //animator.SetTrigger("Idle");
+            staminaTimer += Time.deltaTime;
+            if (staminaTimer >= 2f)
+            {
+                staminaTimer2 += Time.deltaTime;
+                if (staminaTimer2 >= 0.2 && stamina < 25)
+                {
+                    stamina += 1;
+                    staminaTimer2 = 0;
+                }
+            }
         }
 
-        if (Input.GetKey(crouchKey))
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-            speed = Mathf.Lerp(speed, crouchSpeed, sprintTransitSpeed * Time.deltaTime);
-            crouched = true;
-        }
-        else
-        {
-            transform.localScale = new Vector3(transform.localScale.x, crouchStartYScale, transform.localScale.z);
-            crouched = false;
+            staminaTimer = 0.5f;
         }
 
         move.y = VerticalForceCalculation();
@@ -168,12 +158,13 @@ public class PlayerController : MonoBehaviour
             gravity = baseGravity;
         }
 
-        if (grounded == true)
+        if (Grounded == true)
         {
             if (Input.GetButton("Jump"))
             {
                 verticalVelocity = Mathf.Sqrt(jumpForce * gravity * 2);
                 animator.SetTrigger("Jump");
+                stamina -= 5;
             }
             else
             {
@@ -187,30 +178,23 @@ public class PlayerController : MonoBehaviour
         return verticalVelocity;
     }
 
-    public Vector3 GetCurrentFlatVelocity()
-    {
-        Vector3 flatVelocity = velocity;
-        flatVelocity.y = 0f;
-        return flatVelocity;
-    }
-
     private bool GroundCheck()
     {
-        Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - 0.09999847f, transform.position.z);
+        Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - 1.08f, transform.position.z);
 
         Collider[] colliders = Physics.OverlapSphere(playerPosition, 0.1f, floor);
         foreach(Collider c in colliders)
         {
             if (colliders.Length > 0)
             {
-                grounded = true;
+                Grounded = true;
             }
         }
         if(colliders.Length == 0)
         {
-            grounded = false;
+            Grounded = false;
         }
-        return grounded;
+        return Grounded;
     }
 
     private void InputManagement()
@@ -220,6 +204,7 @@ public class PlayerController : MonoBehaviour
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
     }
+
 
     private void Test()
     {

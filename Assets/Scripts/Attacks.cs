@@ -7,5 +7,6 @@ public class Attacks : ScriptableObject
     public float damage;
     //public VisualEffect effect;
     public AnimatorOverrideController AOC;
+    public AudioClip hitSound;
 }
 
