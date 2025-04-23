@@ -2009,8 +2009,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -240, y: 65}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -240, y: 80}
+  m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1333993675
 MonoBehaviour:
@@ -2269,7 +2269,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 120237244}
   m_HandleRect: {fileID: 882892068}
   m_Direction: 0
-  m_MinValue: 0.01
+  m_MinValue: 0
   m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 3.78
@@ -2307,8 +2307,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 131472645}
   optionsMenu: {fileID: 431477723}
-  paused: 0
-  options: 0
+  isPaused: 0
+  isOptions: 0
 --- !u!4 &1498260414
 Transform:
   m_ObjectHideFlags: 0
@@ -2358,8 +2358,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -240, y: -35}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -240, y: -20}
+  m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1524329256
 MonoBehaviour:
