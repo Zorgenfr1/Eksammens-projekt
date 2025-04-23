@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     [SerializeField] private new Transform camera;
     public Animator animator;
+    public InventoryUI inventoryUI;
 
     [Header("Movement Settings")]
     [SerializeField] private float walkSpeed = 3.5f;
@@ -21,7 +22,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity = 9f;
     [SerializeField] private float baseGravity = 9f;
     [SerializeField] private float jumpForce = 1f;
-    [SerializeField] private bool Grounded = false;
+    [SerializeField] private bool grounded = false;
+    [SerializeField] private float crouchSpeed = 2f;
+    [SerializeField] private float crouchYScale;
+    [SerializeField] private float crouchStartYScale;
+    public bool crouched = false;
 
     private Vector3 velocity;
     private Vector3 move;
@@ -37,20 +42,38 @@ public class PlayerController : MonoBehaviour
     private float mouseX;
     private float mouseY;
     private float verticalRotation = 0f;
+    [SerializeField] private KeyCode crouchKey = KeyCode.LeftControl;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        crouchStartYScale = transform.localScale.y;
+        crouchYScale = crouchStartYScale / 2;
     }
 
     private void Update()
     {
-        InputManagement();
-        Movement();
-        Test();
-        GroundCheck();
+        if (!inventoryUI.inventoryVisible)
+        {
+            InputManagement();
+            Movement();
+            Test();
+            GroundCheck();
+        }
+        if (!inventoryUI.inventoryVisible)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 
     private void Movement()
@@ -79,7 +102,7 @@ public class PlayerController : MonoBehaviour
             speed = Mathf.Lerp(speed, sprintSpeed, sprintTransitSpeed * Time.deltaTime);
             animator.SetTrigger("IsRunning");
         }
-        else if (isMoving)
+        else if (isMoving && !crouched)
         {
             speed = Mathf.Lerp(speed, walkSpeed, sprintTransitSpeed * Time.deltaTime);
             animator.SetTrigger("IsWalking");
@@ -87,6 +110,18 @@ public class PlayerController : MonoBehaviour
         else if (!Input.GetButton("Jump"))
         {
             animator.SetTrigger("Idle");
+        }
+
+        if (Input.GetKey(crouchKey))
+        {
+            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
+            speed = Mathf.Lerp(speed, crouchSpeed, sprintTransitSpeed * Time.deltaTime);
+            crouched = true;
+        }
+        else
+        {
+            transform.localScale = new Vector3(transform.localScale.x, crouchStartYScale, transform.localScale.z);
+            crouched = false;
         }
 
         move.y = VerticalForceCalculation();
@@ -133,7 +168,7 @@ public class PlayerController : MonoBehaviour
             gravity = baseGravity;
         }
 
-        if (Grounded == true)
+        if (grounded == true)
         {
             if (Input.GetButton("Jump"))
             {
@@ -152,6 +187,13 @@ public class PlayerController : MonoBehaviour
         return verticalVelocity;
     }
 
+    public Vector3 GetCurrentFlatVelocity()
+    {
+        Vector3 flatVelocity = velocity;
+        flatVelocity.y = 0f;
+        return flatVelocity;
+    }
+
     private bool GroundCheck()
     {
         Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - 0.09999847f, transform.position.z);
@@ -161,14 +203,14 @@ public class PlayerController : MonoBehaviour
         {
             if (colliders.Length > 0)
             {
-                Grounded = true;
+                grounded = true;
             }
         }
         if(colliders.Length == 0)
         {
-            Grounded = false;
+            grounded = false;
         }
-        return Grounded;
+        return grounded;
     }
 
     private void InputManagement()
