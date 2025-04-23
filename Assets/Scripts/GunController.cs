@@ -11,6 +11,10 @@ public class GunController : MonoBehaviour
     //Variabler der ændres
     bool _canShoot;
     int _arrowsBack;
+
+    [Header("Bullet Settings")]
+    public GameObject arrowPrefab;
+    public Transform shootingPoint;
     
 
     [Header("Aim Settings")]
@@ -52,7 +56,9 @@ public class GunController : MonoBehaviour
 
         if (Input.GetMouseButton(0) && _canShoot && _aimTime >= requiredAimTime)
         {
+            Debug.Log("kumulala Sawesta");
             animator.SetTrigger("Shoot");
+            Debug.Log("kumulala");
             _canShoot =false;
             _arrowsBack--;
             animator.SetTrigger("Idle");
@@ -112,7 +118,9 @@ public class GunController : MonoBehaviour
     IEnumerator Shoot()
     {
         //DetermineRecoil();
-        
+        GameObject arrow = Instantiate(arrowPrefab, shootingPoint.position, Quaternion.identity);
+        arrow.GetComponent<Rigidbody>().AddForce(transform.forward * 100f);
+        Debug.Log("Shoot fired");
         yield return new WaitForSeconds(fireRate);
         _canShoot = true;
     }
