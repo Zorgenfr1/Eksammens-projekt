@@ -82,7 +82,7 @@ public class MonsterAI : MonoBehaviour
                 break;
         }
         SetDestination(target);
-        animator.SetFloat("Speed", agent.speed);
+        animator.SetFloat("Speed", agent.speed, 0.5f, Time.deltaTime);
     }
     void Patrol()
     {
@@ -169,7 +169,7 @@ public class MonsterAI : MonoBehaviour
     void LookAround()
     {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lastKnownPlayerRotation), 5f);
-        Debug.Log("ahh");
+
 
         if (!hasPlayedInvestigateSound)
         {
@@ -179,6 +179,8 @@ public class MonsterAI : MonoBehaviour
         if (Quaternion.Angle(transform.rotation, Quaternion.LookRotation(lastKnownPlayerRotation)) < 1f)
         {
             target = playerHiddenLocation;
+
+            agent.speed = patrolSpeed;
             
             if (agent.remainingDistance < 0.5f)
             {
@@ -190,11 +192,9 @@ public class MonsterAI : MonoBehaviour
 
     IEnumerator assumePosition()
     {
-        Debug.Log("Starting timer"); ;
         yield return new WaitForSeconds(1f);
         lastKnownPlayerRotation = player.position - transform.position;
         playerHiddenLocation = player.position;
-        Debug.Log("Timer sluttet efter 1 sekund");
         playerSeen = false;
         currentState = EnemyState.Chase;
         yield break;
@@ -202,9 +202,7 @@ public class MonsterAI : MonoBehaviour
 
     IEnumerator lookingAround()
     {
-        Debug.Log("Looking Around");
         yield return new WaitForSeconds(2f);
-        Debug.Log("Stopped looking around");
         currentState = EnemyState.Investigate;
         yield break;
 
