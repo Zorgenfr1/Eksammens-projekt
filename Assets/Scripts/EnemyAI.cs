@@ -38,6 +38,8 @@ public class MonsterAI : MonoBehaviour
     public Attacks lightAttack;
     public Attacks heavyAttack;
 
+    public bool drawSword = false;
+
 
     private enum EnemyState
     {
@@ -176,6 +178,12 @@ public class MonsterAI : MonoBehaviour
             {
                 playerSeen = true;
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(player.position - transform.position), 5f);
+                if (!drawSword)
+                {
+                    animator.SetTrigger("Equipping");
+                    drawSword = true;
+                }
+
                 currentState = EnemyState.Chase;
                 lastKnownPlayerPosition = player.position;
                 
