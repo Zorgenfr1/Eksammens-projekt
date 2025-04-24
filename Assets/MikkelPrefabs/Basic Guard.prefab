@@ -3732,6 +3732,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7585408131905391742}
+  - component: {fileID: 68445534621235167}
+  - component: {fileID: 1418945298194092749}
+  - component: {fileID: 1093696467904112785}
+  - component: {fileID: 1041899252531998048}
   m_Layer: 0
   m_Name: Basic Guard
   m_TagString: Untagged
@@ -3755,6 +3759,105 @@ Transform:
   - {fileID: 5546208241988502943}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &68445534621235167
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631855633232659015}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &1418945298194092749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631855633232659015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8318d517414e2d54dab25857561be965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  viewDistance: 5
+  viewAngle: 55
+  patrolSpeed: 2
+  chaseSpeed: 3
+  animator: {fileID: 969180510980954366}
+  head: {fileID: 1794374719947251743}
+  towardsPlayer: {x: 0, y: 0, z: 0}
+  playerCrouching: 1
+  playerSeen: 0
+  playerHiddenLocation: {x: 0, y: 0, z: 0}
+  detectionAudio: {fileID: 8300000, guid: 3ccc85ceb87de5b4d8ca7da4e6c11b58, type: 3}
+  loseSightAudio: {fileID: 8300000, guid: 273df2545b269a440a9e0f88db9548f5, type: 3}
+  investigateAudio: {fileID: 8300000, guid: 26c50370a231b7640b784d745da07581, type: 3}
+  killRange: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &1093696467904112785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631855633232659015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8f0f8379e1cfea4db1dfa9dc566308c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  takingD: 0
+  healthBar: {fileID: 0}
+  currentHealth: 0
+  testHealAmount: 10
+  testDamageAmount: -10
+  Died:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!95 &1041899252531998048
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631855633232659015}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 551e84864161d664d986e02db15a9e30, type: 2}
+  m_Controller: {fileID: 9100000, guid: 562ef1ce68aaf9b43adf2b66080888b0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1656515075778607962
 GameObject:
   m_ObjectHideFlags: 0
