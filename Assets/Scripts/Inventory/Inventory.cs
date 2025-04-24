@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using static Item;
+using UnityEngine.Rendering.Universal;
 
 public class Inventory : MonoBehaviour
 {
@@ -28,17 +30,43 @@ public class Inventory : MonoBehaviour
 
     public List<Item> items = new List<Item> ();
 
+    public Item invetoryItem;
+
+
+
     public bool Add (Item item)
     {
         if (!item.isDefaultItem)
         {
-            if(items.Count >= space)
+            if (items.Count >= space)
             {
                 Debug.Log("Not enough room.");
                 return false;
             }
 
-            items.Add (item);
+            if (item.isStackable)
+            {
+                bool itemAlreadyInInventory = false;
+                foreach (Item invetoryItem in items)
+                {
+                    if (invetoryItem.name == item.name)
+                    {
+                        invetoryItem.amount += 1;
+                        itemAlreadyInInventory |= true;
+                        Debug.Log(item.amount);
+                    }
+                }
+                if (!itemAlreadyInInventory)
+                {
+                    items.Add(item);
+                    invetoryItem.amount = 1;
+                }
+            }
+            else
+            {
+                items.Add(item);
+                invetoryItem.amount = 1;
+            }
 
             if (onItemChangedCallback != null)
             {
