@@ -32,6 +32,7 @@ public class MonsterAI : MonoBehaviour
     private bool hasPlayedLoseSightSound = false;
     public AudioClip investigateAudio;
     private bool hasPlayedInvestigateSound = false;
+    private bool hasPlayedSoundEffect = false;
 
     [Header("Attacks")]
     public Attacks lightAttack;
@@ -152,9 +153,14 @@ public class MonsterAI : MonoBehaviour
 
     void Attack()
     {
+        animator.SetTrigger("Attacking");
         animator.runtimeAnimatorController = lightAttack.AOC;
         animator.Play("CombatLayer.Combat", 0, 0);
         Debug.Log("Attacking");
+        /*if (hasPlayedSoundEffect == false)
+        {
+            PlayAudio(lightAttack.hitSound, ref hasPlayedSoundEffect);
+        }*/
     }
 
     void CheckForPlayer()
@@ -237,6 +243,14 @@ public class MonsterAI : MonoBehaviour
     {
         audio.PlayOneShot(clip);
         hasPlayed = true;
+        StartCoroutine(resetSoundEffectAudio());
+    }
+
+    IEnumerator resetSoundEffectAudio()
+    {
+        yield return new WaitForSeconds(1);
+        hasPlayedSoundEffect = false;
+        yield break;
     }
 
 

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   AOC: {fileID: 22100000, guid: 8e1bab3f1444a9d4dbf1732129fe1765, type: 2}
-  hitSound: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 4b2452a2bfa15d74f8bd643155ad845f, type: 3}
