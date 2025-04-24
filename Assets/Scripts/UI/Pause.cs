@@ -3,11 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
+    [SerializeField] private DeathScreen deathScreen;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject UI;
     public bool isPaused = false;
     public bool isOptions = false;
+    public bool isDead = false;
 
     public void PauseGame()
     {
@@ -32,7 +34,7 @@ public class Pause : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.Escape) && isPaused == false)
+        if (Input.GetKeyUp(KeyCode.Escape) && isPaused == false && isDead == false)
         {
             PauseGame();
         }
@@ -40,11 +42,10 @@ public class Pause : MonoBehaviour
         {
             Resume();
         }
-        else if (Input.GetKeyUp(KeyCode.Escape) && isOptions == false && isPaused == true)
+        else if (Input.GetKeyUp(KeyCode.Escape) && isOptions == false && isPaused == true && isDead == false)
         {
             ResumeGame();
         }
-
     }
     public void Options()
     {
@@ -58,6 +59,11 @@ public class Pause : MonoBehaviour
         optionsMenu.SetActive(false);
         pauseMenu.SetActive(true);
         isOptions=false;
+    }
 
+    public void PlayerDeath()
+    {
+        isPaused = true;
+        isDead = true;
     }
 }

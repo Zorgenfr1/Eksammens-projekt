@@ -364,6 +364,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &397790087 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7577381886295968593, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+  m_PrefabInstance: {fileID: 5515654993114250409}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &397790088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397790087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04839104d3b4d47498717353f28b7adb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UI: {fileID: 864145825}
+  Deathscreen: {fileID: 5515654993114250410}
 --- !u!1 &838738958
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,22 +584,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5515654993114250410}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 397790088}
+        m_TargetAssemblyTypeName: DeathScreen, Assembly-CSharp
+        m_MethodName: PlayerDeath
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 864145825}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1498260413}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: PlayerDeath
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -928,6 +947,34 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1493977683}
+    - target: {fileID: 4091089791536156823, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091089791536156823, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091089791536156823, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 397790088}
+    - target: {fileID: 4091089791536156823, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091089791536156823, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091089791536156823, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DeathScreen, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091089791536156823, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7986159484218077798, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
       propertyPath: _stamina
       value: 
@@ -940,6 +987,58 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8714946850361287819, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714946850361287819, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714946850361287819, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714946850361287819, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 397790088}
+    - target: {fileID: 8714946850361287819, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1498260413}
+    - target: {fileID: 8714946850361287819, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714946850361287819, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714946850361287819, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Respawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714946850361287819, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayerRespawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714946850361287819, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DeathScreen, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714946850361287819, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Pause, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714946850361287819, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714946850361287819, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 9198423235490712264, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
       propertyPath: m_Name
       value: Menus & Screens
@@ -947,7 +1046,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7577381886295968593, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 397790088}
   m_SourcePrefab: {fileID: 100100000, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
 --- !u!1 &5515654993114250410 stripped
 GameObject:
