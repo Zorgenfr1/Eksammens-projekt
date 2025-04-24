@@ -3811,7 +3811,10 @@ MonoBehaviour:
   detectionAudio: {fileID: 8300000, guid: 3ccc85ceb87de5b4d8ca7da4e6c11b58, type: 3}
   loseSightAudio: {fileID: 8300000, guid: 273df2545b269a440a9e0f88db9548f5, type: 3}
   investigateAudio: {fileID: 8300000, guid: 26c50370a231b7640b784d745da07581, type: 3}
+  lightAttack: {fileID: 0}
+  heavyAttack: {fileID: 0}
   killRange: 0
+  attackRange: 0
   playerLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -12369,6 +12372,92 @@ Transform:
   - {fileID: 183487114934343169}
   m_Father: {fileID: 1496688396530399807}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7858355394137026104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5624128534953721329}
+  - component: {fileID: 6339294715078424605}
+  - component: {fileID: 8881042823294178695}
+  m_Layer: 0
+  m_Name: EquippedLongsword
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5624128534953721329
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858355394137026104}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.6933612, y: 0.3303761, z: -0.47424176, w: 0.43034476}
+  m_LocalPosition: {x: 0.10573627, y: -0.086551495, z: -0.0014157668}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2099076261180095233}
+  m_LocalEulerAnglesHint: {x: 18.523, y: 19.684, z: -33.239}
+--- !u!33 &6339294715078424605
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858355394137026104}
+  m_Mesh: {fileID: 4300000, guid: 1ddfda38dc4acdd45ba20ac667ccf9b9, type: 3}
+--- !u!23 &8881042823294178695
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858355394137026104}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 8e285e9ddab6ab64b91ed9fedb175340, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7883103370891593463
 GameObject:
   m_ObjectHideFlags: 0
@@ -13501,7 +13590,8 @@ Transform:
   m_LocalPosition: {x: 0.49450693, y: 1.0321201, z: 0.08438816}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5624128534953721329}
   m_Father: {fileID: 1072329727688598085}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6471964964778594746
