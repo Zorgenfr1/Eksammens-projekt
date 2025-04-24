@@ -27,6 +27,7 @@ public class InventoryUI : MonoBehaviour
         if (Input.GetKeyDown(inventoryKey))
         {
             inventoryUI.SetActive(!inventoryUI.activeSelf);
+            inventoryVisible = !inventoryVisible;
         }
     }
     void UpdateUI()
