@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 1f;
     [SerializeField] private bool Grounded = false;
     [SerializeField] public int stamina = 25;
+    [SerializeField] private Pause _pause;
     private float staminaTimer = 0.5f;
     private float staminaTimer2 = 0f;
 
@@ -140,11 +141,22 @@ public class PlayerController : MonoBehaviour
 
     private void Turn()
     {
-        transform.Rotate(Vector3.up * mouseX * turningSpeed);
-        verticalRotation -= mouseY * turningSpeed;
-        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 60f);
+        if (_pause.isPaused == false)
+        {
+            transform.Rotate(Vector3.up * mouseX * turningSpeed);
+            verticalRotation -= mouseY * turningSpeed;
+            verticalRotation = Mathf.Clamp(verticalRotation, -90f, 60f);
 
-        camera.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+            camera.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
     }
 
     private float VerticalForceCalculation()
