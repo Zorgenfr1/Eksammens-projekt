@@ -33,17 +33,22 @@ public class MonsterAI : MonoBehaviour
     public AudioClip investigateAudio;
     private bool hasPlayedInvestigateSound = false;
 
+    [Header("Attacks")]
+    public Attacks lightAttack;
+    public Attacks heavyAttack;
+
 
     private enum EnemyState
     {
         Patrol,
         Chase,
-        Attack,
+        Combat,
         Investigate
     }
 
     private EnemyState currentState;
     [SerializeField] private float killRange;
+    [SerializeField] private float attackRange;
     [SerializeField] private LayerMask playerLayer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -71,8 +76,9 @@ public class MonsterAI : MonoBehaviour
                 CheckForPlayer();
                 Chase();
                 break;
-            case EnemyState.Attack:
-                KillPlayer();
+            case EnemyState.Combat:
+                CheckForPlayer();
+                Combat();
                 break;
             case EnemyState.Investigate:
                 CheckForPlayer();
@@ -104,7 +110,7 @@ public class MonsterAI : MonoBehaviour
         {
             if (hit.collider.tag == "Player" && Vector3.Distance(transform.position, player.position) < killRange)
             {
-                currentState = EnemyState.Attack;
+                currentState = EnemyState.Combat;
             }
         }
         if (!Physics.Raycast(head.position, player.transform.position - transform.position, out hit, viewDistance) && playerSeen)
@@ -121,15 +127,34 @@ public class MonsterAI : MonoBehaviour
             //    PlayAudio(loseSightAudio, ref hasPlayedLoseSightSound);
             //}
         }
-        if (agent.remainingDistance < 0.5f && !playerCrouching)
+       /* if (agent.remainingDistance < 0.5f && !playerCrouching)
         {
-            KillPlayer();
-        }
+            Attack();
+        } */
     }
 
-    void KillPlayer()
+    void Combat()
     {
-        Debug.Log("Attacking Player");
+        target = lastKnownPlayerPosition;
+        agent.speed = chaseSpeed;
+        Debug.Log("Combat state");
+        RaycastHit hit;
+        if (!Physics.Raycast(head.position, player.transform.position - transform.position, out hit, viewDistance) && playerSeen)
+        {
+            StartCoroutine(assumePosition());
+        }
+        if (Vector3.Distance(transform.position, player.position) < attackRange)
+        {
+            Attack();
+        }
+
+    }
+
+    void Attack()
+    {
+        animator.runtimeAnimatorController = lightAttack.AOC;
+        animator.Play("CombatLayer.Combat", 0, 0);
+        Debug.Log("Attacking");
     }
 
     void CheckForPlayer()
