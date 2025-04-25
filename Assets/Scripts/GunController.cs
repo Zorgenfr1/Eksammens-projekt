@@ -31,7 +31,7 @@ public class GunController : MonoBehaviour
     public float mouseSensitivity = 1f;
     Vector2 _currentRotation;
     public float weaponSwayAmount = 10f;
-    private Animator animator;
+    //public Animator animator;
 
     [Header("Recoil Settings")]
     //våben recoil
@@ -45,28 +45,29 @@ public class GunController : MonoBehaviour
     {
         _arrowsBack = arrowCapacity;
         _canShoot = true;
+        Debug.Log("Started Bow");
 
     }
 
     private void Update()
     {
-        //DetermineAim();
+        DetermineAim();
 
         //DetermineRotation();
 
         if (Input.GetMouseButton(0) && _canShoot && _aimTime >= requiredAimTime)
         {
             Debug.Log("kumulala Sawesta");
-            animator.SetTrigger("Shoot");
-            Debug.Log("kumulala");
+            //animator.SetTrigger("Shoot");
             _canShoot =false;
             _arrowsBack--;
-            animator.SetTrigger("Idle");
+            //animator.SetTrigger("Idle");
             StartCoroutine(Shoot());
+            Debug.Log("Tung Tung Tung");
         }
     }
 
-    void DetermineRotation()
+    /*void DetermineRotation()
     {
         Vector2 mouseAxis = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
@@ -78,7 +79,7 @@ public class GunController : MonoBehaviour
         transform.localPosition += (Vector3)mouseAxis * weaponSwayAmount / 1000;
 
         cameraPivot.localRotation = Quaternion.Euler(-_currentRotation.y, _currentRotation.x, 0);
-    }
+    }*/
 
     void DetermineAim()
     {
@@ -118,8 +119,9 @@ public class GunController : MonoBehaviour
     IEnumerator Shoot()
     {
         //DetermineRecoil();
-        GameObject arrow = Instantiate(arrowPrefab, shootingPoint.position, Quaternion.identity);
-        arrow.GetComponent<Rigidbody>().AddForce(transform.forward * 100f);
+        GameObject arrow = Instantiate(arrowPrefab, shootingPoint.position, shootingPoint.rotation * Quaternion.Euler(0, 90, 0));
+        arrow.GetComponent<Rigidbody>().AddForce(shootingPoint.forward * 30f, ForceMode.Impulse);
+        Debug.DrawRay(shootingPoint.position, shootingPoint.forward * 5, Color.red, 7f);
         Debug.Log("Shoot fired");
         yield return new WaitForSeconds(fireRate);
         _canShoot = true;

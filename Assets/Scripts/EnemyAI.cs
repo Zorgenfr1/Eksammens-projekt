@@ -39,6 +39,7 @@ public class MonsterAI : MonoBehaviour
     public Attacks heavyAttack;
 
     public bool drawSword = false;
+    public bool sheatheSword = false;
 
 
     private enum EnemyState
@@ -95,10 +96,6 @@ public class MonsterAI : MonoBehaviour
     }
     void Patrol()
     {
-        if (drawSword)
-        {
-            animator.SetTrigger("Unequipping");
-        }
         agent.speed = patrolSpeed;
         if (agent.remainingDistance < 0.5f)
         {
@@ -273,8 +270,14 @@ public class MonsterAI : MonoBehaviour
         hasPlayedInvestigateSound = true;
         target = playerHiddenLocation;
         agent.speed = patrolSpeed;
+        Debug.Log("Investigating");
         if (agent.remainingDistance < 0.5f)
         {
+            if (drawSword && !sheatheSword)
+            {
+                animator.SetTrigger("Unequipping");
+                drawSword = false;
+            }
             PlayAudio(loseSightAudio, ref hasPlayedLoseSightSound);
             currentState = EnemyState.Patrol;
         }
