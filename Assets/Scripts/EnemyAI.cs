@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,6 +9,7 @@ public class MonsterAI : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Transform player;
+    private Transform playerView;
     private Vector3 lastKnownPlayerPosition;
     private Vector3 lastKnownPlayerRotation;
     private int currentPatrolIndex = 0;
@@ -53,12 +55,14 @@ public class MonsterAI : MonoBehaviour
     private EnemyState currentState;
     [SerializeField] private float killRange;
     [SerializeField] private float attackRange;
-    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private LayerMask PlayerLayer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerView = GameObject.FindGameObjectWithTag("Player").transform;
+        //Debug.Log("found " + playerView.name);
         currentState = EnemyState.Patrol;
         SetDestination(waypoints[currentPatrolIndex].position);
         audio = GetComponent<AudioSource>();
@@ -110,14 +114,14 @@ public class MonsterAI : MonoBehaviour
         agent.speed = chaseSpeed;
         target = lastKnownPlayerPosition;
         RaycastHit hit;
-        if (Physics.Raycast(head.position, player.transform.position - transform.position, out hit, viewDistance))
+        if (Physics.Raycast(head.position, player.transform.position - transform.position, out hit, viewDistance, PlayerLayer))
         {
             if (hit.collider.tag == "Player" && Vector3.Distance(transform.position, player.position) < killRange)
             {
                 currentState = EnemyState.Combat;
             }
         }
-        if (!Physics.Raycast(head.position, player.transform.position - transform.position, out hit, viewDistance) && playerSeen)
+        if (!Physics.Raycast(head.position, player.transform.position - transform.position, out hit, viewDistance, PlayerLayer) && playerSeen)
         {
             StartCoroutine(assumePosition());
         }
@@ -144,7 +148,7 @@ public class MonsterAI : MonoBehaviour
         agent.speed = chaseSpeed;
         Debug.Log("Combat state");
         RaycastHit hit;
-        if (!Physics.Raycast(head.position, player.transform.position - transform.position, out hit, viewDistance) && playerSeen)
+        if (!Physics.Raycast(head.position, player.transform.position - transform.position, out hit, viewDistance, PlayerLayer) && playerSeen)
         {
             StartCoroutine(assumePosition());
         }
@@ -172,12 +176,13 @@ public class MonsterAI : MonoBehaviour
         RaycastHit hit;
         float DotProduct;
         Vector3 vectorToPlayer;
-        vectorToPlayer = (player.position - transform.position);
+        vectorToPlayer = (player.position - transform.position)+ Vector3.up;
         DotProduct = Vector3.Dot(vectorToPlayer.normalized, transform.forward);
-        if (Physics.Raycast(head.position, player.transform.position - transform.position, out hit, viewDistance))
+        if (Physics.Raycast(head.position, player.transform.position - transform.position, out hit, viewDistance, PlayerLayer))
         {
-            if (hit.collider.tag == "Player" && DotProduct >= Mathf.Cos(viewAngle))
+            if (hit.collider.tag == "Player" && DotProduct >= Mathf.Cos(viewAngle * Mathf.Deg2Rad))
             {
+                Debug.Log("Seeing Player");
                 playerSeen = true;
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(player.position - transform.position), 5f);
                 if (!drawSword)
@@ -200,7 +205,7 @@ public class MonsterAI : MonoBehaviour
         {
             hasPlayedDetectionSound = false;
         }
-            Debug.DrawLine(head.position, player.position);
+        Debug.DrawLine(head.position, player.position);
     }
     void SetDestination(Vector3 target)
     {

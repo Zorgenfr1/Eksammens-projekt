@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && isMoving && stamina > 0)
         {
             speed = Mathf.Lerp(speed, sprintSpeed, sprintTransitSpeed * Time.deltaTime);
-            //animator.SetTrigger("IsRunning");
+            animator.SetTrigger("IsRunning");
             staminaTimer += Time.deltaTime;
             
             if(staminaTimer >= 0.5f)
@@ -93,11 +93,11 @@ public class PlayerController : MonoBehaviour
         else if (isMoving)
         {
             speed = Mathf.Lerp(speed, walkSpeed, sprintTransitSpeed * Time.deltaTime);
-            //animator.SetTrigger("IsWalking");
+            animator.SetTrigger("IsWalking");
         }
         else if (!Input.GetButton("Jump"))
         {
-            //animator.SetTrigger("Idle");
+            animator.SetTrigger("Idle");
             staminaTimer += Time.deltaTime;
             if (staminaTimer >= 2f)
             {
@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
 
     private bool GroundCheck()
     {
-        Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - 1.08f, transform.position.z);
+        Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - 0.22f, transform.position.z);
 
         Collider[] colliders = Physics.OverlapSphere(playerPosition, 0.1f, floor);
         foreach(Collider c in colliders)

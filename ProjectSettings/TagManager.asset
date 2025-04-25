@@ -6,15 +6,16 @@ TagManager:
   tags:
   - InventoryUI
   - PauseManager
+  - PlayerView
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PlayerLayer
   - Water
   - UI
   - Floor
-  - 
+  - Obstacle
   - 
   - 
   - 

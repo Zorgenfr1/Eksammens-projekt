@@ -30,8 +30,6 @@ public class Inventory : MonoBehaviour
 
     public List<Item> items = new List<Item> ();
 
-    public Item invetoryItem;
-
 
 
     public bool Add (Item item)
@@ -44,7 +42,9 @@ public class Inventory : MonoBehaviour
                 return false;
             }
 
-            if (item.isStackable)
+            items.Add (item);
+
+            /* if (item.isStackable)
             {
                 bool itemAlreadyInInventory = false;
                 foreach (Item invetoryItem in items)
@@ -59,14 +59,14 @@ public class Inventory : MonoBehaviour
                 if (!itemAlreadyInInventory)
                 {
                     items.Add(item);
-                    invetoryItem.amount = 1;
+                    item.amount = 1;
                 }
             }
             else
             {
                 items.Add(item);
-                invetoryItem.amount = 1;
-            }
+                item.amount = 1;
+            } */
 
             if (onItemChangedCallback != null)
             {
