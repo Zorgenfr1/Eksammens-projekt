@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
 
     private bool GroundCheck()
     {
-        Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - 1.08f, transform.position.z);
+        Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - 0.22f, transform.position.z);
 
         Collider[] colliders = Physics.OverlapSphere(playerPosition, 0.1f, floor);
         foreach(Collider c in colliders)
