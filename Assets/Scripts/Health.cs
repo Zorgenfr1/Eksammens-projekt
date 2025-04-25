@@ -18,6 +18,7 @@ public class Health : MonoBehaviour
     [SerializeField] float testDamageAmount = -10f;
     public bool isInvincible = false;
     public float iFrameTime;
+    public bool isLiving = true;
 
     public float CurrentHealth => currentHealth;
 
@@ -67,9 +68,10 @@ public class Health : MonoBehaviour
             ChangeHealth(testDamageAmount);
         }
 
-        if (currentHealth == 0)
+        if (currentHealth == 0 && isLiving)
         {
             Died?.Invoke();
+            isLiving = false;
         }
     }
 
