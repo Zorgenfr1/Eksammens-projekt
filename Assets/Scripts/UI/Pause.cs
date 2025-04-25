@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
-    [SerializeField] private DeathScreen deathScreen;
+    [SerializeField] private GameObject deathScreen;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject UI;
