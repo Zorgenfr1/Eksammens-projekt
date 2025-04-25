@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c557066a45cf224eb7ed48a66f47756, type: 3}
-  m_Name: Sword
+  m_Name: Coin
   m_EditorClassIdentifier: 
-  name: Sword
-  icon: {fileID: 21300000, guid: 69db363a4c8f9d344988e48621a864d8, type: 3}
+  name: Coin
+  icon: {fileID: 21300000, guid: 7c938567ed698564798869d28568f170, type: 3}
   isDefaultItem: 0
-  isStackable: 1
-  amount: 3
-  equipSlot: 1
+  isStackable: 0
+  amount: 0
+  equipSlot: 0

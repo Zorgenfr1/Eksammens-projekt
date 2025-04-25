@@ -6,7 +6,6 @@ public class Throwing : MonoBehaviour
     public Transform cam;
     public Transform attackPoint;
     public GameObject objectToThrow;
-    public PlayerController playerController;
 
     [Header("Settings")]
     public int totalThrows;
