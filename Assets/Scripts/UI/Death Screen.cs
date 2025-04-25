@@ -14,7 +14,7 @@ public class DeathScreen : MonoBehaviour
 
     public void Respawn()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadSceneAsync(1);
     }
 
     public void MainMenu()

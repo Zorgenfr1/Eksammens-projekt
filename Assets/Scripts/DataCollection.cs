@@ -34,7 +34,9 @@ public class DataCollection : MonoBehaviour
     public void Died()
     {
         deaths++;
-        deathsText.text = deaths.ToString();
+        deathsText.text = "Deaths "+deaths.ToString();
+        timeToWallsText.text = "Time to wall "+timeToInsideOuterWalls.ToString("0,0");
+        timeToCastleText.text = "Time to castle "+timeToCastle.ToString("0,0");
     }
 
     public void Restart()
