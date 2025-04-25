@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool Grounded = false;
     [SerializeField] public int stamina = 25;
     [SerializeField] private Pause _pause;
+    [SerializeField] private float height;
     private float staminaTimer = 0.5f;
     private float staminaTimer2 = 0f;
 
@@ -195,7 +196,7 @@ public class PlayerController : MonoBehaviour
 
     private bool GroundCheck()
     {
-        Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - 0.22f, transform.position.z);
+        Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - height, transform.position.z);
 
         Collider[] colliders = Physics.OverlapSphere(playerPosition, 0.1f, floor);
         foreach(Collider c in colliders)
