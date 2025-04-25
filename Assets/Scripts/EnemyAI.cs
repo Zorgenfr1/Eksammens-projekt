@@ -95,6 +95,10 @@ public class MonsterAI : MonoBehaviour
     }
     void Patrol()
     {
+        if (drawSword)
+        {
+            animator.SetTrigger("Unequipping");
+        }
         agent.speed = patrolSpeed;
         if (agent.remainingDistance < 0.5f)
         {
@@ -138,6 +142,7 @@ public class MonsterAI : MonoBehaviour
 
     void Combat()
     {
+        animator.SetBool("IsInCombat", true);
         target = lastKnownPlayerPosition;
         agent.speed = chaseSpeed;
         Debug.Log("Combat state");
@@ -224,6 +229,7 @@ public class MonsterAI : MonoBehaviour
             if (agent.remainingDistance < 0.5f)
             {
                 StartCoroutine(lookingAround()); ;
+                Debug.Log("Coroutine looking around");
             }
         }
     }
