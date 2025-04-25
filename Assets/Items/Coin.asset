@@ -15,6 +15,6 @@ MonoBehaviour:
   name: Coin
   icon: {fileID: 21300000, guid: 7c938567ed698564798869d28568f170, type: 3}
   isDefaultItem: 0
-  isStackable: 0
+  isStackable: 1
   amount: 0
   equipSlot: 0

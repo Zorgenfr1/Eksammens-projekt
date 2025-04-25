@@ -30,7 +30,7 @@ public class Inventory : MonoBehaviour
 
     public List<Item> items = new List<Item> ();
 
-    public Item invetoryItem;
+    public Item item;
 
 
 
@@ -59,13 +59,13 @@ public class Inventory : MonoBehaviour
                 if (!itemAlreadyInInventory)
                 {
                     items.Add(item);
-                    invetoryItem.amount = 1;
+                    item.amount = 1;
                 }
             }
             else
             {
                 items.Add(item);
-                invetoryItem.amount = 1;
+                item.amount = 1;
             }
 
             if (onItemChangedCallback != null)

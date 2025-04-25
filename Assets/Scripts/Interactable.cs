@@ -32,7 +32,6 @@ public class Interactable : MonoBehaviour
         {
             hasInteracted = false;
         }
-    
     }
 
     private void OnDrawGizmosSelected()
