@@ -62,9 +62,9 @@ public class AimAnimation : MonoBehaviour
         if (scroll != 0)
         {
             if (scroll > 0)
-                currentWeapon = (currentWeapon % weaponCount) + 1; // 1 → 2 → 3 → 1
+                currentWeapon = (currentWeapon % weaponCount) + 1;
             else
-                currentWeapon = (currentWeapon - 2 + weaponCount) % weaponCount + 1; // 1 ← 3 ← 2 ← 1
+                currentWeapon = (currentWeapon - 2 + weaponCount) % weaponCount + 1;
 
             Debug.Log("Weapon scrolled to: " + currentWeapon);
 
@@ -72,14 +72,14 @@ public class AimAnimation : MonoBehaviour
         }
 
         // Quick key selection (optional)
-        /*if (Input.GetKeyDown(KeyCode.Alpha1)) { currentWeapon = 1; PlayWeaponScrollAnimation(1); }
+        if (Input.GetKeyDown(KeyCode.Alpha1)) { currentWeapon = 1; PlayWeaponScrollAnimation(1); }
         if (Input.GetKeyDown(KeyCode.Alpha2)) { currentWeapon = 2; PlayWeaponScrollAnimation(2); _canAttack = true; }
-        if (Input.GetKeyDown(KeyCode.Alpha3)) { currentWeapon = 3; PlayWeaponScrollAnimation(3); _canAttack = true; }*/
+        if (Input.GetKeyDown(KeyCode.Alpha3)) { currentWeapon = 3; PlayWeaponScrollAnimation(3); _canAttack = true; }
     }
 
     IEnumerator Shoot()
     {
-        yield return new WaitForSeconds(fireRate); // Du kan ændre det til fireRate
+        yield return new WaitForSeconds(fireRate);
         animator.SetTrigger("Idle");
         _canShoot = true;
     }
