@@ -35,8 +35,23 @@ public class DataCollection : MonoBehaviour
     {
         deaths++;
         deathsText.text = "Deaths "+deaths.ToString();
-        timeToWallsText.text = "Time to wall "+timeToInsideOuterWalls.ToString("0,0");
-        timeToCastleText.text = "Time to castle "+timeToCastle.ToString("0,0");
+        if(outerWall.insideTheOuterWall == true)
+        {
+            timeToWallsText.text = "Time to wall " + timeToInsideOuterWalls.ToString("0.0");
+        }
+        else
+        {
+            timeToWallsText.text = "N/A";
+        }
+
+        if(innerWall.insideCastle == true)
+        {
+            timeToCastleText.text = "Time to castle " + timeToCastle.ToString("0.0");
+        }
+        else
+        {
+            timeToCastleText.text = "N/A";
+        }
     }
 
     public void Restart()
