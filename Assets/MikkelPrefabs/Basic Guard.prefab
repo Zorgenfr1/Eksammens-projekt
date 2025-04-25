@@ -3736,6 +3736,8 @@ GameObject:
   - component: {fileID: 1418945298194092749}
   - component: {fileID: 1093696467904112785}
   - component: {fileID: 1041899252531998048}
+  - component: {fileID: 8350586074806710950}
+  - component: {fileID: 2215596359891107914}
   m_Layer: 0
   m_Name: Basic Guard
   m_TagString: Untagged
@@ -3811,10 +3813,11 @@ MonoBehaviour:
   detectionAudio: {fileID: 8300000, guid: 3ccc85ceb87de5b4d8ca7da4e6c11b58, type: 3}
   loseSightAudio: {fileID: 8300000, guid: 273df2545b269a440a9e0f88db9548f5, type: 3}
   investigateAudio: {fileID: 8300000, guid: 26c50370a231b7640b784d745da07581, type: 3}
-  lightAttack: {fileID: 0}
+  lightAttack: {fileID: 11400000, guid: 8a6d10ca09f22424db4d8eb4dfcfd8ff, type: 2}
   heavyAttack: {fileID: 0}
-  killRange: 0
-  attackRange: 0
+  drawSword: 0
+  killRange: 5
+  attackRange: 2
   playerLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -3861,6 +3864,121 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!82 &8350586074806710950
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631855633232659015}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &2215596359891107914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631855633232659015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a16fa034adcd327488677b8ee635cf43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio: {fileID: 8350586074806710950}
+  lightAttack: {fileID: 11400000, guid: 8a6d10ca09f22424db4d8eb4dfcfd8ff, type: 2}
+  equipSword: {fileID: 7858355394137026104}
+  unEquipSword: {fileID: 8401965972416958740}
+  equipShield: {fileID: 0}
+  unEquipShield: {fileID: 0}
 --- !u!1 &1656515075778607962
 GameObject:
   m_ObjectHideFlags: 0
@@ -12398,13 +12516,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7858355394137026104}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.6933612, y: 0.3303761, z: -0.47424176, w: 0.43034476}
-  m_LocalPosition: {x: 0.10573627, y: -0.086551495, z: -0.0014157668}
+  m_LocalRotation: {x: -0.7923271, y: 0.20800908, z: -0.2790569, w: 0.5010761}
+  m_LocalPosition: {x: 0.09099985, y: -0.06799998, z: -0.008000024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2099076261180095233}
-  m_LocalEulerAnglesHint: {x: 18.523, y: 19.684, z: -33.239}
+  m_LocalEulerAnglesHint: {x: -42.683, y: 117.734, z: -124.022}
 --- !u!33 &6339294715078424605
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -13453,7 +13571,7 @@ GameObject:
   - component: {fileID: 6919151402558169903}
   - component: {fileID: 8097470270255588864}
   m_Layer: 0
-  m_Name: Longsword
+  m_Name: SheathedLongsword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13468,7 +13586,7 @@ Transform:
   m_GameObject: {fileID: 8401965972416958740}
   serializedVersion: 2
   m_LocalRotation: {x: 0.20124294, y: -0.11448699, z: 0.93874866, w: 0.2552352}
-  m_LocalPosition: {x: -0.0194, y: -0.3693, z: -0.3158}
+  m_LocalPosition: {x: 0.053, y: -0.293, z: -0.261}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
