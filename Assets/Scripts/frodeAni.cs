@@ -62,9 +62,11 @@ public class AimAnimation : MonoBehaviour
         if (scroll != 0)
         {
             if (scroll > 0)
-                currentWeapon = (currentWeapon % weaponCount) + 1; // 1 → 2 → 3 → 1
+                currentWeapon = (currentWeapon % weaponCount) + 1;
             else
-                currentWeapon = (currentWeapon - 2 + weaponCount) % weaponCount + 1; // 1 ← 3 ← 2 ← 1
+                currentWeapon = (currentWeapon - 2 + weaponCount) % weaponCount + 1;
+
+            Debug.Log("Weapon scrolled to: " + currentWeapon);
 
             PlayWeaponScrollAnimation(currentWeapon);
         }
@@ -77,7 +79,7 @@ public class AimAnimation : MonoBehaviour
 
     IEnumerator Shoot()
     {
-        yield return new WaitForSeconds(fireRate); // Du kan ændre det til fireRate
+        yield return new WaitForSeconds(fireRate);
         animator.SetTrigger("Idle");
         _canShoot = true;
     }
@@ -88,12 +90,15 @@ public class AimAnimation : MonoBehaviour
         {
             case 1:
                 animator.SetTrigger("Scroll 1");
+                Debug.Log("Tralaleo tralala");
                 break;
             case 2:
                 animator.SetTrigger("Scroll 2");
+                Debug.Log("Brr Brr Brudubim");
                 break;
             case 3:
                 animator.SetTrigger("Scroll 3");
+                Debug.Log("Tim Cheese");
                 break;
             default:
                 animator.SetTrigger("Scroll 1"); 

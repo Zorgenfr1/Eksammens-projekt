@@ -170,17 +170,20 @@ public class PlayerController : MonoBehaviour
             gravity = baseGravity;
         }
 
-        if (Grounded == true)
+        if (Grounded == true && stamina > 0)
         {
             if (Input.GetButton("Jump"))
             {
                 verticalVelocity = Mathf.Sqrt(jumpForce * gravity * 2);
                 animator.SetTrigger("Jump");
-                stamina -= 5;
             }
             else
             {
                 verticalVelocity = -1f;
+            }
+            if (Input.GetButtonDown("Jump"))
+            {
+                stamina -= 5;
             }
         }
         else

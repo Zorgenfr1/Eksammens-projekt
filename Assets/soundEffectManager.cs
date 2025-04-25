@@ -7,6 +7,9 @@ public class soundEffectManager : MonoBehaviour
 
     public GameObject equipSword;
     public GameObject unEquipSword;
+
+    public GameObject equipShield;
+    public GameObject unEquipShield;
     void PlaySoundEffect()
     {
         audio.PlayOneShot(lightAttack.hitSound);
