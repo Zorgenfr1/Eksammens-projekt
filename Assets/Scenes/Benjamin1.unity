@@ -398,6 +398,7 @@ GameObject:
   - component: {fileID: 838738959}
   - component: {fileID: 838738964}
   - component: {fileID: 838738965}
+  - component: {fileID: 838738966}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -418,7 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 290550518}
-  animator: {fileID: 0}
+  animator: {fileID: 838738966}
   walkSpeed: 3.5
   sprintSpeed: 0
   airControl: 0.8
@@ -569,6 +570,9 @@ MonoBehaviour:
   currentHealth: 0
   testHealAmount: 10
   testDamageAmount: -10
+  isInvincible: 0
+  iFrameTime: 0
+  isLiving: 1
   Died:
     m_PersistentCalls:
       m_Calls:
@@ -608,6 +612,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!95 &838738966
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838738958}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &864145825 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5255349668182811809, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
@@ -743,6 +769,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da9abb32be146941b222d2871bcea9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToInsideOuterWalls: 0
+  timeToCastle: 0
+  outerWall: {fileID: 0}
+  innerWall: {fileID: 0}
+  deathsText: {fileID: 0}
+  timeToWallsText: {fileID: 0}
+  timeToCastleText: {fileID: 0}
 --- !u!4 &1687118611
 Transform:
   m_ObjectHideFlags: 0
