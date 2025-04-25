@@ -66,13 +66,15 @@ public class AimAnimation : MonoBehaviour
             else
                 currentWeapon = (currentWeapon - 2 + weaponCount) % weaponCount + 1; // 1 ← 3 ← 2 ← 1
 
+            Debug.Log("Weapon scrolled to: " + currentWeapon);
+
             PlayWeaponScrollAnimation(currentWeapon);
         }
 
         // Quick key selection (optional)
-        if (Input.GetKeyDown(KeyCode.Alpha1)) { currentWeapon = 1; PlayWeaponScrollAnimation(1); }
+        /*if (Input.GetKeyDown(KeyCode.Alpha1)) { currentWeapon = 1; PlayWeaponScrollAnimation(1); }
         if (Input.GetKeyDown(KeyCode.Alpha2)) { currentWeapon = 2; PlayWeaponScrollAnimation(2); _canAttack = true; }
-        if (Input.GetKeyDown(KeyCode.Alpha3)) { currentWeapon = 3; PlayWeaponScrollAnimation(3); _canAttack = true; }
+        if (Input.GetKeyDown(KeyCode.Alpha3)) { currentWeapon = 3; PlayWeaponScrollAnimation(3); _canAttack = true; }*/
     }
 
     IEnumerator Shoot()
@@ -88,12 +90,15 @@ public class AimAnimation : MonoBehaviour
         {
             case 1:
                 animator.SetTrigger("Scroll 1");
+                Debug.Log("Tralaleo tralala");
                 break;
             case 2:
                 animator.SetTrigger("Scroll 2");
+                Debug.Log("Brr Brr Brudubim");
                 break;
             case 3:
                 animator.SetTrigger("Scroll 3");
+                Debug.Log("Tim Cheese");
                 break;
             default:
                 animator.SetTrigger("Scroll 1"); 
