@@ -2,7 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-public class Health : MonoBehaviour
+
+public class EnemyHealth : MonoBehaviour
 {
 
 
@@ -29,13 +30,13 @@ public class Health : MonoBehaviour
         {
             return;
         }
-       
+
         float oldHealth = currentHealth;
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         Debug.Log("Changed health by" + amount);
         StartCoroutine(Invincibility());
-        
+
 
     }
 
