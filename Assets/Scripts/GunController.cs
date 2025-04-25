@@ -53,33 +53,15 @@ public class GunController : MonoBehaviour
     {
         DetermineAim();
 
-        //DetermineRotation();
-
         if (Input.GetMouseButton(0) && _canShoot && _aimTime >= requiredAimTime)
         {
             Debug.Log("kumulala Sawesta");
-            //animator.SetTrigger("Shoot");
             _canShoot =false;
             _arrowsBack--;
-            //animator.SetTrigger("Idle");
             StartCoroutine(Shoot());
             Debug.Log("Tung Tung Tung");
         }
     }
-
-    /*void DetermineRotation()
-    {
-        Vector2 mouseAxis = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-
-        mouseAxis *= mouseSensitivity;
-        _currentRotation += mouseAxis;
-
-        _currentRotation.y = Mathf.Clamp(_currentRotation.y, -90, 90);
-
-        transform.localPosition += (Vector3)mouseAxis * weaponSwayAmount / 1000;
-
-        cameraPivot.localRotation = Quaternion.Euler(-_currentRotation.y, _currentRotation.x, 0);
-    }*/
 
     void DetermineAim()
     {
@@ -89,36 +71,18 @@ public class GunController : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             target = aimingLocalPosition;
-            _aimTime += Time.deltaTime; // Øg tid mens sigtes
+            _aimTime += Time.deltaTime;
         }
         else
         {
-            _aimTime = 0f; // Nulstil hvis ikke sigter
+            _aimTime = 0f;
         }
 
         Vector3 desiredPosition = Vector3.Lerp(transform.localPosition, target, Time.deltaTime * aimSmoothing);
-
-        //transform.localPosition = desiredPosition;
     }
-
-    /*void DetermineRecoil()
-    {
-        transform.localPosition -= Vector3.forward * 0.1f;
-
-        if (randomizeRecoil)
-        {
-            float xRecoil = Random.Range(-randomRecoilConstraints.x, randomRecoilConstraints.x);
-            float yRecoil = Random.Range(-randomRecoilConstraints.y, randomRecoilConstraints.y);
-
-            Vector2 recoil = new Vector2(xRecoil, yRecoil);
-
-            _currentRotation += recoil;
-        }
-    }*/
 
     IEnumerator Shoot()
     {
-        //DetermineRecoil();
         GameObject arrow = Instantiate(arrowPrefab, shootingPoint.position, shootingPoint.rotation * Quaternion.Euler(0, 90, 0));
         arrow.GetComponent<Rigidbody>().AddForce(shootingPoint.forward * 30f, ForceMode.Impulse);
         Debug.DrawRay(shootingPoint.position, shootingPoint.forward * 5, Color.red, 7f);
