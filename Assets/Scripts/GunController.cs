@@ -70,7 +70,7 @@ public class GunController : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
-            target = aimingLocalPosition;
+            //target = aimingLocalPosition;
             _aimTime += Time.deltaTime; 
         }
         else
