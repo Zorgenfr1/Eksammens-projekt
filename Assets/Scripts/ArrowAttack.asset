@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74aafa593dfcaec4cb3fd0effc58e0f7, type: 3}
   m_Name: ArrowAttack
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 20
   AOC: {fileID: 0}
   hitSound: {fileID: 0}

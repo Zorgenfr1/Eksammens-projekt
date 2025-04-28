@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity = 9f;
     [SerializeField] private float baseGravity = 9f;
     [SerializeField] private float jumpForce = 1f;
-    [SerializeField] private bool Grounded = false;
+    [SerializeField] public bool Grounded = false;
     [SerializeField] public int stamina = 25;
     [SerializeField] private Pause _pause;
     [SerializeField] private float height;
@@ -38,8 +38,6 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 velocity;
     private Vector3 move;
-
-    [SerializeField] private LayerMask floor;
 
     [SerializeField] private float verticalVelocity;
     private float speed;
@@ -256,7 +254,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - height, transform.position.z);
 
-        Collider[] colliders = Physics.OverlapSphere(playerPosition, 0.1f, floor);
+        Collider[] colliders = Physics.OverlapSphere(playerPosition, 0.1f);
         foreach(Collider c in colliders)
         {
             if (colliders.Length > 0)

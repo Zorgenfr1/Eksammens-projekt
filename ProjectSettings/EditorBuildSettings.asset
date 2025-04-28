@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 0c88e3f67b5bc9f428d53073af08f8ba
   - enabled: 1
+    path: Assets/Scenes/WhiteBoxingEnviroment.unity
+    guid: 632576700d52196478c52ede1de7dabd
+  - enabled: 0
     path: Assets/Scenes/Benjamin Whitbox.unity
     guid: 8ff175d73a01f59488c24a22563b1a46
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Options Menu.unity
     guid: c0dc58673af7ea94cb6825180e605be9
   m_configObjects:
