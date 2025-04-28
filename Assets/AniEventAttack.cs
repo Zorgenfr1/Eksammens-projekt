@@ -3,6 +3,7 @@ using UnityEngine;
 public class AniEventAttack : MonoBehaviour
 {
     public GameObject swordHitCollider;
+    public GameObject DaggerHitCollider;
 
     void ActivateSwordCollider()
     {
@@ -12,5 +13,14 @@ public class AniEventAttack : MonoBehaviour
     void DeActivateSwordCollider()
     {
         swordHitCollider.SetActive(false);
+    }
+    void ActivateDaggerCollider()
+    {
+        DaggerHitCollider.SetActive(true);
+    }
+
+    void DeActivateDaggerCollider()
+    {
+        DaggerHitCollider.SetActive(false);
     }
 }

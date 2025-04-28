@@ -66,7 +66,6 @@ public class AimAnimation : MonoBehaviour
             else
                 currentWeapon = (currentWeapon - 2 + weaponCount) % weaponCount + 1;
 
-            Debug.Log("Weapon scrolled to: " + currentWeapon);
 
             PlayWeaponScrollAnimation(currentWeapon);
         }
@@ -90,15 +89,12 @@ public class AimAnimation : MonoBehaviour
         {
             case 1:
                 animator.SetTrigger("Scroll 1");
-                Debug.Log("Tralaleo tralala");
                 break;
             case 2:
                 animator.SetTrigger("Scroll 2");
-                Debug.Log("Brr Brr Brudubim");
                 break;
             case 3:
                 animator.SetTrigger("Scroll 3");
-                Debug.Log("Tim Cheese");
                 break;
             default:
                 animator.SetTrigger("Scroll 1"); 
