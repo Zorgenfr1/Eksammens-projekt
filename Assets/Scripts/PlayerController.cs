@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool changeCameraCrouch = false;
     [SerializeField] Vector3 startCameraPosition;
     [SerializeField] float cameraOffsetTime = 1f;
+    private LayerMask layerMask;
     Vector3 cameraTargetPosition;
     public float transitionState = 0f;
     private float staminaTimer = 0.5f;
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        layerMask = LayerMask.GetMask("Climbable") | LayerMask.GetMask("Default");
     }
 
     private void Update()
@@ -254,7 +256,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - height, transform.position.z);
 
-        Collider[] colliders = Physics.OverlapSphere(playerPosition, 0.1f);
+        Collider[] colliders = Physics.OverlapSphere(playerPosition, 0.1f, layerMask);
         foreach(Collider c in colliders)
         {
             if (colliders.Length > 0)
