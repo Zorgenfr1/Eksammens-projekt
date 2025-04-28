@@ -5,7 +5,7 @@ public class SimpleClimbing : MonoBehaviour
     [Header("References")]
     public Transform orientation;
     public Rigidbody rb;
-    private PlayerController player;
+    [SerializeField] private PlayerController player;
     public LayerMask WhatIsWall;
 
     [Header("Climbing")]

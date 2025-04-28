@@ -958,7 +958,7 @@ GameObject:
   - component: {fileID: 181230151}
   - component: {fileID: 181230153}
   - component: {fileID: 181230152}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Inside The Castle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -992,7 +992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d732bb2cddbbf645958451db54b94f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 945394060}
   insideCastle: 0
   escapedCastle: 0
 --- !u!65 &181230153
@@ -4820,6 +4820,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3938125424060224689, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
+      propertyPath: near clip plane
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 4370001936762670871, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23.3
@@ -4944,9 +4948,25 @@ PrefabInstance:
       propertyPath: height
       value: 0.23
       objectReference: {fileID: 0}
+    - target: {fileID: 7691688594781507313, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
+      propertyPath: gravity
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691688594781507313, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
+      propertyPath: stamina
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691688594781507313, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
+      propertyPath: baseGravity
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 9104139601396068396, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
       propertyPath: m_Name
       value: Player (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9104139601396068396, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5016,7 +5036,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -5035,13 +5055,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orientation: {fileID: 945394057}
   rb: {fileID: 945394058}
+  player: {fileID: 945394055}
   WhatIsWall:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   climbSpeed: 2
   maxClimbTime: 40
-  detectionLength: 0.1
-  sphereCastRadius: 0.1
+  detectionLength: 1
+  sphereCastRadius: 1
   maxWallLookAngle: 10
 --- !u!114 &945394060
 MonoBehaviour:
@@ -5185,7 +5206,7 @@ MonoBehaviour:
   UI: {fileID: 1031801194}
   Deathscreen: {fileID: 370843697}
   winTitle: {fileID: 1031801196}
-  escape: {fileID: 0}
+  escape: {fileID: 1809245176}
 --- !u!1 &998726237
 GameObject:
   m_ObjectHideFlags: 0
@@ -5709,6 +5730,14 @@ PrefabInstance:
     - target: {fileID: 8724166096848443502, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
       propertyPath: m_fontSizeBase
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8898377250313294219, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8898377250313294219, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 8910088347430883323, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
       propertyPath: m_fontSize
@@ -8858,7 +8887,7 @@ GameObject:
   - component: {fileID: 1523718070}
   - component: {fileID: 1523718069}
   - component: {fileID: 1523718071}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: OuterWalls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9870,7 +9899,7 @@ GameObject:
   - component: {fileID: 1809245178}
   - component: {fileID: 1809245176}
   - component: {fileID: 1809245177}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Escape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
