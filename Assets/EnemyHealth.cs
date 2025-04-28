@@ -61,14 +61,6 @@ public class EnemyHealth : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            ChangeHealth(testHealAmount);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            ChangeHealth(testDamageAmount);
-        }
 
         if (currentHealth == 0 && isLiving)
         {
