@@ -7,9 +7,9 @@ public class SwordHitPlayer : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-
-            Health enemy = other.GetComponent<Health>();
+            EnemyHealth enemy = other.GetComponent<EnemyHealth>();
             enemy.ChangeHealth(-lightAttack.damage);
         }
     }
 }
+    

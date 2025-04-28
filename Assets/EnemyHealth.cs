@@ -18,7 +18,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] float testHealAmount = 10f;
     [SerializeField] float testDamageAmount = -10f;
     public bool isInvincible = false;
-    public float iFrameTime;
+    public float iFrameTime = 1f;
     public bool isLiving = true;
 
     public float CurrentHealth => currentHealth;
