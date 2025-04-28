@@ -25,6 +25,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public int stamina = 25;
     [SerializeField] private Pause _pause;
     [SerializeField] private float height;
+    [SerializeField] private bool crouched = false;
+    [SerializeField] private bool isMoving;
+    [SerializeField] Vector3 cameraCrouchedOffset = new Vector3(0, -0.2f, 0.2f);
+    [SerializeField] bool changeCameraCrouch = false;
+    [SerializeField] Vector3 startCameraPosition;
+    [SerializeField] float cameraOffsetTime = 1f;
+    Vector3 cameraTargetPosition;
+    public float transitionState = 0f;
     private float staminaTimer = 0.5f;
     private float staminaTimer2 = 0f;
 
@@ -77,9 +85,9 @@ public class PlayerController : MonoBehaviour
         move = new Vector3(moveInputX, 0, moveInputZ).normalized;
         move = transform.TransformDirection(move);
 
-        bool isMoving = moveInputX != 0 || moveInputZ != 0;
+        isMoving = moveInputX != 0 || moveInputZ != 0;
 
-        if (Input.GetKey(KeyCode.LeftShift) && isMoving && stamina > 0)
+        if (Input.GetKey(KeyCode.LeftShift) && isMoving && stamina > 0 && !crouched)
         {
             speed = Mathf.Lerp(speed, sprintSpeed, sprintTransitSpeed * Time.deltaTime);
             animator.SetTrigger("IsRunning");
@@ -91,19 +99,34 @@ public class PlayerController : MonoBehaviour
                 staminaTimer = 0;
             }
         }
-        else if (isMoving)
+        else if (isMoving && !crouched)
         {
             speed = Mathf.Lerp(speed, walkSpeed, sprintTransitSpeed * Time.deltaTime);
             animator.SetTrigger("IsWalking");
+            animator.SetBool("Crouched", false);
+            animator.SetBool("Moving", true);
         }
-        else if (!Input.GetButton("Jump"))
+        else if(isMoving && crouched)
+        {
+            speed = Mathf.Lerp(speed, walkSpeed / 2, sprintTransitSpeed * Time.deltaTime);
+            animator.SetBool("Crouched", true);
+            animator.SetBool("Moving", true);
+        }
+        else if (crouched)
+        {
+            animator.SetBool("Crouched", true);
+            animator.SetBool("Moving", false);
+        }
+        else
         {
             animator.SetTrigger("Idle");
+            animator.SetBool("Crouched", false);
+            animator.SetBool("Moving", false);
             staminaTimer += Time.deltaTime;
             if (staminaTimer >= 2f)
             {
                 staminaTimer2 += Time.deltaTime;
-                if (staminaTimer2 >= 0.2 && stamina < 25)
+                if (staminaTimer2 >= 0.2 && stamina < 50)
                 {
                     stamina += 1;
                     staminaTimer2 = 0;
@@ -115,6 +138,41 @@ public class PlayerController : MonoBehaviour
         {
             staminaTimer = 0.5f;
         }
+
+        /*if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            crouched = !crouched;
+            transitionState = 0f;
+            if (crouched)
+            {
+                cameraTargetPosition = camera.position + cameraCrouchedOffset;
+            }
+            else
+            {
+                cameraTargetPosition = camera.position - cameraCrouchedOffset;
+            }
+        }
+        if (crouched)
+        {
+            float goonTime = Time.deltaTime * cameraOffsetTime + transitionState;
+            if (goonTime > 1f)
+            {
+                goonTime = 1f;
+            }
+            camera.position = Vector3.Lerp(camera.position, cameraTargetPosition, goonTime);
+            Debug.Log("Crouching");
+        }
+        if (!crouched)
+        {
+            float goonTime = Time.deltaTime * cameraOffsetTime + transitionState;
+            if (goonTime > 1f)
+            {
+                goonTime = 1f;
+            }
+            camera.position = Vector3.Lerp(camera.position, cameraTargetPosition, goonTime);
+        }*/
+
+        //robin goon ahh spil
 
         move.y = VerticalForceCalculation();
 
