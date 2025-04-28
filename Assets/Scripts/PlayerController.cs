@@ -15,14 +15,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float walkSpeed = 3.5f;
     [SerializeField] private float sprintSpeed;
     [SerializeField] private float airControl = 0.8f;
-    [SerializeField] private float airDrag = 0.98f;
+    [SerializeField] private float airDrag = 0.998f;
     [SerializeField] private float sprintTransitSpeed = 5f;
     [SerializeField] private float turningSpeed = 2f * Options.sensitivity;
     [SerializeField] private float gravity = 9f;
     [SerializeField] private float baseGravity = 9f;
     [SerializeField] private float jumpForce = 1f;
     [SerializeField] public bool Grounded = false;
-    [SerializeField] public int stamina = 25;
+    [SerializeField] public int stamina = 50;
     [SerializeField] private Pause _pause;
     [SerializeField] private float height;
     [SerializeField] private bool crouched = false;
@@ -31,11 +31,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool changeCameraCrouch = false;
     [SerializeField] Vector3 startCameraPosition;
     [SerializeField] float cameraOffsetTime = 1f;
+    [SerializeField] private LayerMask climbable;
     private LayerMask layerMask;
+    private RaycastHit frontWallHit;
+    private bool wallFront;
+    private float wallLookAngle;
     Vector3 cameraTargetPosition;
     public float transitionState = 0f;
     private float staminaTimer = 0.5f;
     private float staminaTimer2 = 0f;
+    [SerializeField]private bool isClimbing;
 
     private Vector3 velocity;
     private Vector3 move;
@@ -244,8 +249,14 @@ public class PlayerController : MonoBehaviour
             {
                 stamina -= 5;
             }
+
         }
-        else
+        if (wallFront == true && wallLookAngle < 30 && Input.GetKey(KeyCode.W))
+        {
+            verticalVelocity = 2f;
+            isClimbing = true;
+        }
+        else if(isClimbing == false)
         {
             verticalVelocity -= gravity * Time.deltaTime;
         }
@@ -269,6 +280,12 @@ public class PlayerController : MonoBehaviour
             Grounded = false;
         }
         return Grounded;
+    }
+
+    private void WallCheck()
+    {
+        wallFront = Physics.SphereCast(transform.position, 0.25f, camera.forward, out frontWallHit, 0.75f, climbable);
+        wallLookAngle = Vector3.Angle(camera.forward, -frontWallHit.normal);
     }
 
     private void InputManagement()
