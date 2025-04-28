@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity = 9f;
     [SerializeField] private float baseGravity = 9f;
     [SerializeField] private float jumpForce = 1f;
-    [SerializeField] private bool Grounded = false;
+    [SerializeField] public bool Grounded = false;
     [SerializeField] public int stamina = 25;
     [SerializeField] private Pause _pause;
     [SerializeField] private float height;
