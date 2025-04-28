@@ -64,7 +64,11 @@ public class MonsterAI : MonoBehaviour
         playerView = GameObject.FindGameObjectWithTag("Player").transform;
         //Debug.Log("found " + playerView.name);
         currentState = EnemyState.Patrol;
-        SetDestination(waypoints[currentPatrolIndex].position);
+        if (waypoints.Length > 0)
+        {
+
+            SetDestination(waypoints[currentPatrolIndex].position);
+        }
         audio = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         //canvas = GameObject.FindGameObjectWithTag("Canvas");
@@ -101,10 +105,14 @@ public class MonsterAI : MonoBehaviour
     void Patrol()
     {
         agent.speed = patrolSpeed;
-        if (agent.remainingDistance < 0.5f)
+        if (waypoints.Length > 0)
         {
-            target = waypoints[currentPatrolIndex].position;
-            currentPatrolIndex = (currentPatrolIndex + 1) % waypoints.Length;
+
+            if (agent.remainingDistance < 0.5f)
+            {
+                target = waypoints[currentPatrolIndex].position;
+                currentPatrolIndex = (currentPatrolIndex + 1) % waypoints.Length;
+            }
         }
     }
 
