@@ -242,7 +242,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: viewDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: waypoints.Array.size
@@ -402,7 +402,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: viewDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: waypoints.Array.size
@@ -1878,7 +1878,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: viewDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: waypoints.Array.size
@@ -2527,7 +2527,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: viewDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: waypoints.Array.size
@@ -4374,7 +4374,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: viewDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: waypoints.Array.size
@@ -4593,7 +4593,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: viewDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: waypoints.Array.size
@@ -4882,7 +4882,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: viewDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: waypoints.Array.size
@@ -5346,7 +5346,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: viewDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: waypoints.Array.size
@@ -5866,7 +5866,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: viewDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: waypoints.Array.size
@@ -6661,7 +6661,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: viewDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: waypoints.Array.size
@@ -7811,7 +7811,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: viewDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: waypoints.Array.size
@@ -11722,7 +11722,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: viewDistance
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1418945298194092749, guid: ed05625f930a02843a1ef55b56d4de1d, type: 3}
       propertyPath: waypoints.Array.size
