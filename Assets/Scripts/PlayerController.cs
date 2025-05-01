@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
             AirMovement();
         }
         Turn();
+        WallCheck();
     }
 
     private void GroundMovement()
@@ -256,7 +257,7 @@ public class PlayerController : MonoBehaviour
             verticalVelocity = 2f;
             isClimbing = true;
         }
-        else if(isClimbing == false)
+        else
         {
             verticalVelocity -= gravity * Time.deltaTime;
         }
