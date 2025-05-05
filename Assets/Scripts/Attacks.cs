@@ -1,3 +1,6 @@
+using Unity.VisualScripting;
+using UnityEditor;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -8,5 +11,6 @@ public class Attacks : ScriptableObject
     //public VisualEffect effect;
     public AnimatorOverrideController AOC;
     public AudioClip hitSound;
+    public GameObject bloodEffect;
 }
 
