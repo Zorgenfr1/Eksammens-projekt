@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        if (wallFront == true && wallLookAngle < 30 && Input.GetKey(KeyCode.W))
+        if (wallFront == true && wallLookAngle < 45 && Input.GetKey(KeyCode.C))
         {
             verticalVelocity = 2f;
             isClimbing = true;
