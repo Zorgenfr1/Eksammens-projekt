@@ -11,7 +11,7 @@ public class Pause : MonoBehaviour
     public bool isOptions = false;
     public bool isDead = false;
 
-    public void PauseGame()
+    public void PauseMyGame()
     {
         isPaused = true;
         Time.timeScale = 0f;
@@ -33,18 +33,22 @@ public class Pause : MonoBehaviour
     }
 
     private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Escape) && isPaused == false && isDead == false)
+    {        
+        if (isDead == false)
         {
-            PauseGame();
-        }
-        else if(Input.GetKeyUp(KeyCode.Escape) && isOptions == true)
-        {
-            Resume();
-        }
-        else if (Input.GetKeyUp(KeyCode.Escape) && isOptions == false && isPaused == true && isDead == false)
-        {
-            ResumeGame();
+            if (Input.GetKeyUp(KeyCode.Escape) && isPaused == false)
+            {                
+                PauseMyGame();
+                
+            }
+            else if(Input.GetKeyUp(KeyCode.Escape) && isOptions == true)
+            {
+                Resume();
+            }
+            else if (Input.GetKeyUp(KeyCode.Escape) && isOptions == false && isPaused == true)
+            {
+                ResumeGame();
+            }
         }
     }
     public void Options()
@@ -65,5 +69,6 @@ public class Pause : MonoBehaviour
     {
         isPaused = true;
         isDead = true;
+        Time.timeScale = 0f;
     }
 }

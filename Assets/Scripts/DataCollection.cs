@@ -4,14 +4,19 @@ using UnityEngine;
 public class DataCollection : MonoBehaviour
 {
     public static int deaths = 0;
-    public static float timeBeforePlay = 0;
-    public float timeToInsideOuterWalls = 0;
-    public float timeToCastle = 0;
+    private static float timeBeforePlay = 0;
+    private float timeToInsideOuterWalls = 0;
+    private float timeToCastle = 0;
+    private float timeOutOfCastle = 0;
+    private float timeToEscape = 0;
     [SerializeField] private OuterWall outerWall;
     [SerializeField] private Castle innerWall;
+    [SerializeField] private Escape escape;
     public TextMeshProUGUI deathsText;
     public TextMeshProUGUI timeToWallsText;
     public TextMeshProUGUI timeToCastleText;
+    public TextMeshProUGUI timeOutOfCastleText;
+    public TextMeshProUGUI timeToEscapeText;
 
     public void Update()
     {
@@ -28,6 +33,16 @@ public class DataCollection : MonoBehaviour
         if(innerWall.insideCastle == false)
         {
             timeToCastle += Time.deltaTime;
+        }
+
+        if(innerWall.escapedCastle == false)
+        {
+            timeOutOfCastle += Time.deltaTime;
+        }
+
+        if(escape.escaped == false)
+        {
+            timeToEscape += Time.deltaTime;
         }
     }
 
@@ -51,6 +66,24 @@ public class DataCollection : MonoBehaviour
         else
         {
             timeToCastleText.text = "N/A";
+        }
+
+        if (innerWall.escapedCastle == true)
+        {
+            timeOutOfCastleText.text = "Time out of castle " + timeOutOfCastle.ToString("0,0");
+        }
+        else
+        {
+            timeOutOfCastleText.text = "N/A";
+        }
+
+        if(escape.escaped == true)
+        {
+            timeToEscapeText.text = "Time to escape" + timeToEscape.ToString("0,0");
+        }
+        else
+        {
+            timeToEscapeText.text = "N/A";
         }
     }
 

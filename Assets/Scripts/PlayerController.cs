@@ -15,22 +15,35 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float walkSpeed = 3.5f;
     [SerializeField] private float sprintSpeed;
     [SerializeField] private float airControl = 0.8f;
-    [SerializeField] private float airDrag = 0.98f;
+    [SerializeField] private float airDrag = 0.998f;
     [SerializeField] private float sprintTransitSpeed = 5f;
     [SerializeField] private float turningSpeed = 2f * Options.sensitivity;
     [SerializeField] private float gravity = 9f;
     [SerializeField] private float baseGravity = 9f;
     [SerializeField] private float jumpForce = 1f;
-    [SerializeField] private bool Grounded = false;
-    [SerializeField] public int stamina = 25;
+    [SerializeField] public bool Grounded = false;
+    [SerializeField] public int stamina = 50;
     [SerializeField] private Pause _pause;
+    [SerializeField] private float height;
+    [SerializeField] private bool crouched = false;
+    [SerializeField] private bool isMoving;
+    [SerializeField] Vector3 cameraCrouchedOffset = new Vector3(0, -0.2f, 0.2f);
+    [SerializeField] bool changeCameraCrouch = false;
+    [SerializeField] Vector3 startCameraPosition;
+    [SerializeField] float cameraOffsetTime = 1f;
+    [SerializeField] private LayerMask climbable;
+    private LayerMask layerMask;
+    private RaycastHit frontWallHit;
+    private bool wallFront;
+    private float wallLookAngle;
+    Vector3 cameraTargetPosition;
+    public float transitionState = 0f;
     private float staminaTimer = 0.5f;
     private float staminaTimer2 = 0f;
+    [SerializeField]private bool isClimbing;
 
     private Vector3 velocity;
     private Vector3 move;
-
-    [SerializeField] private LayerMask floor;
 
     [SerializeField] private float verticalVelocity;
     private float speed;
@@ -47,6 +60,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        layerMask = LayerMask.GetMask("Climbable") | LayerMask.GetMask("Default");
     }
 
     private void Update()
@@ -68,6 +82,7 @@ public class PlayerController : MonoBehaviour
             AirMovement();
         }
         Turn();
+        WallCheck();
     }
 
     private void GroundMovement()
@@ -76,9 +91,9 @@ public class PlayerController : MonoBehaviour
         move = new Vector3(moveInputX, 0, moveInputZ).normalized;
         move = transform.TransformDirection(move);
 
-        bool isMoving = moveInputX != 0 || moveInputZ != 0;
+        isMoving = moveInputX != 0 || moveInputZ != 0;
 
-        if (Input.GetKey(KeyCode.LeftShift) && isMoving && stamina > 0)
+        if (Input.GetKey(KeyCode.LeftShift) && isMoving && stamina > 0 && !crouched)
         {
             speed = Mathf.Lerp(speed, sprintSpeed, sprintTransitSpeed * Time.deltaTime);
             animator.SetTrigger("IsRunning");
@@ -90,21 +105,36 @@ public class PlayerController : MonoBehaviour
                 staminaTimer = 0;
             }
         }
-        else if (isMoving)
+        else if (isMoving && !crouched)
         {
             speed = Mathf.Lerp(speed, walkSpeed, sprintTransitSpeed * Time.deltaTime);
             animator.SetTrigger("IsWalking");
+            animator.SetBool("Crouched", false);
+            animator.SetBool("Moving", true);
         }
-        else if (!Input.GetButton("Jump"))
+        else if(isMoving && crouched)
+        {
+            speed = Mathf.Lerp(speed, walkSpeed / 2, sprintTransitSpeed * Time.deltaTime);
+            animator.SetBool("Crouched", true);
+            animator.SetBool("Moving", true);
+        }
+        else if (crouched)
+        {
+            animator.SetBool("Crouched", true);
+            animator.SetBool("Moving", false);
+        }
+        else
         {
             animator.SetTrigger("Idle");
+            animator.SetBool("Crouched", false);
+            animator.SetBool("Moving", false);
             staminaTimer += Time.deltaTime;
             if (staminaTimer >= 2f)
             {
                 staminaTimer2 += Time.deltaTime;
-                if (staminaTimer2 >= 0.2 && stamina < 25)
+                if (staminaTimer2 >= 0.1 && stamina < 50)
                 {
-                    stamina += 1;
+                    stamina += 2;
                     staminaTimer2 = 0;
                 }
             }
@@ -114,6 +144,41 @@ public class PlayerController : MonoBehaviour
         {
             staminaTimer = 0.5f;
         }
+
+        /*if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            crouched = !crouched;
+            transitionState = 0f;
+            if (crouched)
+            {
+                cameraTargetPosition = camera.position + cameraCrouchedOffset;
+            }
+            else
+            {
+                cameraTargetPosition = camera.position - cameraCrouchedOffset;
+            }
+        }
+        if (crouched)
+        {
+            float goonTime = Time.deltaTime * cameraOffsetTime + transitionState;
+            if (goonTime > 1f)
+            {
+                goonTime = 1f;
+            }
+            camera.position = Vector3.Lerp(camera.position, cameraTargetPosition, goonTime);
+            Debug.Log("Crouching");
+        }
+        if (!crouched)
+        {
+            float goonTime = Time.deltaTime * cameraOffsetTime + transitionState;
+            if (goonTime > 1f)
+            {
+                goonTime = 1f;
+            }
+            camera.position = Vector3.Lerp(camera.position, cameraTargetPosition, goonTime);
+        }*/
+
+        //robin goon ahh spil
 
         move.y = VerticalForceCalculation();
 
@@ -185,6 +250,12 @@ public class PlayerController : MonoBehaviour
             {
                 stamina -= 5;
             }
+
+        }
+        if (wallFront == true && wallLookAngle < 45 && Input.GetKey(KeyCode.C))
+        {
+            verticalVelocity = 2f;
+            isClimbing = true;
         }
         else
         {
@@ -195,9 +266,9 @@ public class PlayerController : MonoBehaviour
 
     private bool GroundCheck()
     {
-        Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - 0.22f, transform.position.z);
+        Vector3 playerPosition = new Vector3 (transform.position.x, transform.position.y - height, transform.position.z);
 
-        Collider[] colliders = Physics.OverlapSphere(playerPosition, 0.1f, floor);
+        Collider[] colliders = Physics.OverlapSphere(playerPosition, 0.1f, layerMask);
         foreach(Collider c in colliders)
         {
             if (colliders.Length > 0)
@@ -210,6 +281,12 @@ public class PlayerController : MonoBehaviour
             Grounded = false;
         }
         return Grounded;
+    }
+
+    private void WallCheck()
+    {
+        wallFront = Physics.SphereCast(transform.position, 0.25f, camera.forward, out frontWallHit, 0.75f, climbable);
+        wallLookAngle = Vector3.Angle(camera.forward, -frontWallHit.normal);
     }
 
     private void InputManagement()
