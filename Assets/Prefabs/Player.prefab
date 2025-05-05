@@ -1110,6 +1110,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3544337521005360762}
+  - {fileID: 4024192288899000394}
   m_Father: {fileID: 305718185508789786}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5513279965923733242
@@ -2208,8 +2209,8 @@ MonoBehaviour:
   bow: {fileID: 1094164304265268704}
   sword: {fileID: 7254259089069770291}
   knife: {fileID: 6617844428998878265}
-  arrow: {fileID: 0}
   animator: {fileID: 711512796385717070}
+  crosshair: {fileID: 0}
 --- !u!1 &6322541161667353720
 GameObject:
   m_ObjectHideFlags: 0
@@ -2394,9 +2395,17 @@ MonoBehaviour:
   stamina: 25
   _pause: {fileID: 0}
   height: 0
-  floor:
+  crouched: 0
+  isMoving: 0
+  cameraCrouchedOffset: {x: 0, y: -5, z: 5}
+  changeCameraCrouch: 0
+  startCameraPosition: {x: 0, y: 0, z: 0}
+  cameraOffsetTime: 1.5
+  climbable:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
+  transitionState: 0
+  isClimbing: 0
   verticalVelocity: 0
 --- !u!114 &9102265765014700212
 MonoBehaviour:
@@ -2533,12 +2542,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6617844428998878265}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.4071846, y: -0.7656947, z: -0.38090545, w: -0.32066098}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.12000001, y: 0.120000035, z: 0.119999975}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 305718185508789786}
+  m_Father: {fileID: 5268658601932587243}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6749270828812037301
 GameObject:
@@ -2918,7 +2927,6 @@ Transform:
   m_Children:
   - {fileID: 424613383650330935}
   - {fileID: 5268658601932587243}
-  - {fileID: 4024192288899000394}
   m_Father: {fileID: 929613033772906202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7572700037409088039

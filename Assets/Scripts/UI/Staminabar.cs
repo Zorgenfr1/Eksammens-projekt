@@ -5,12 +5,7 @@ public class Staminabar : MonoBehaviour
 {
     [SerializeField] private PlayerController _stamina;
     [SerializeField] private Slider staminaBar;
-    private float maxStamina;
-
-    private void Start()
-    {
-        maxStamina = _stamina.stamina;
-    }
+    private float maxStamina = 50;
 
     private void Update()
     {
