@@ -6,11 +6,13 @@ public class SneakAttack : MonoBehaviour
 
     private void Update()
     {
-        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1.5f))
+        if(Physics.Raycast(transform.position, transform.forward, out hit, 3f))
         {
-            if (hit.transform.gameObject.CompareTag("Enemy") && Input.GetKeyDown(KeyCode.E))
+            if (hit.transform.gameObject.CompareTag("Enemy") && /*hit.transform.forward == transform.forward &&*/ Input.GetKeyDown(KeyCode.E))
             {
-                Destroy(gameObject);
+                Debug.Log("Enemy Sneak Attacked");
+                Health enemy = hit.transform.GetComponent<Health>();
+                enemy.ChangeHealth(100);
             }
         }
     }
