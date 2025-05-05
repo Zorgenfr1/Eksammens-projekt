@@ -3,6 +3,7 @@ using UnityEngine;
 public class SneakAttack : MonoBehaviour
 {
     private RaycastHit hit;
+    public Animator arms;
 
     private void Update()
     {
@@ -14,8 +15,9 @@ public class SneakAttack : MonoBehaviour
                 Vector3 toPlayer = (transform.position - hit.transform.position).normalized;
                 float angle = Vector3.Angle(enemyForward, toPlayer);
 
-                if (angle > 90f)
+                if (angle > 70f)
                 {
+                    arms.SetTrigger("Stab");
                     EnemyHealth enemy = hit.transform.GetComponent<EnemyHealth>();
                     enemy.ChangeHealth(-100);
                 }
