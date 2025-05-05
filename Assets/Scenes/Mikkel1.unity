@@ -2106,6 +2106,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1512149869881337414, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
   m_PrefabInstance: {fileID: 7310165022103628514}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2092071477 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 267207414222646598, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
+  m_PrefabInstance: {fileID: 1508849393}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4649906011514259610 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7691688594781507313, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
@@ -2181,6 +2186,10 @@ PrefabInstance:
       propertyPath: _pause
       value: 
       objectReference: {fileID: 393342687}
+    - target: {fileID: 7724906410049856531, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
+      propertyPath: crosshair
+      value: 
+      objectReference: {fileID: 2092071477}
     - target: {fileID: 9104139601396068396, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
       propertyPath: m_Name
       value: Player (1)

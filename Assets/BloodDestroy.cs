@@ -10,7 +10,7 @@ public class BloodDestroy : MonoBehaviour
 
     void Destroy()
     {
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 0.3f);
     }
 
 }

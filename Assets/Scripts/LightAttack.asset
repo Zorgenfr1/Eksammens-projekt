@@ -15,4 +15,4 @@ MonoBehaviour:
   damage: 20
   AOC: {fileID: 22100000, guid: bff912c7d25d69749bd518c7ce122ddb, type: 2}
   hitSound: {fileID: 8300000, guid: 26c50370a231b7640b784d745da07581, type: 3}
-  bloodEffect: {fileID: 4704537440025009493, guid: e07c344c5a8767a439e6baad01bf7201, type: 3}
+  bloodEffect: {fileID: 7967523112306130414, guid: d3515cd54f2cf4e499d65883b0796f04, type: 3}

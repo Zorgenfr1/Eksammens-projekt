@@ -16,6 +16,7 @@ public class SwordHitPlayer : MonoBehaviour
             {
                 Debug.Log("Raycast hit");
                 spawnPosition = hit.point;
+                spawnPosition.y += -0.2f;
             }
             EnemyHealth enemy = other.GetComponent<EnemyHealth>();
             enemy.ChangeHealth(-lightAttack.damage);
