@@ -322,7 +322,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -2208,7 +2208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bow: {fileID: 1094164304265268704}
   sword: {fileID: 7254259089069770291}
-  knife: {fileID: 6617844428998878265}
+  knife: {fileID: 2608251591652190102}
   animator: {fileID: 711512796385717070}
   crosshair: {fileID: 0}
 --- !u!1 &6322541161667353720
@@ -2382,6 +2382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 7340693205191746409}
   animator: {fileID: 6384985815424315235}
+  arms: {fileID: 711512796385717070}
   walkSpeed: 5
   sprintSpeed: 10
   airControl: 1
@@ -2392,20 +2393,19 @@ MonoBehaviour:
   baseGravity: 9
   jumpForce: 1
   Grounded: 0
-  stamina: 25
+  stamina: 50
   _pause: {fileID: 0}
   height: 0
   crouched: 0
   isMoving: 0
-  cameraCrouchedOffset: {x: 0, y: -5, z: 5}
+  cameraCrouchedOffset: {x: 0, y: -2, z: 1}
   changeCameraCrouch: 0
   startCameraPosition: {x: 0, y: 0, z: 0}
-  cameraOffsetTime: 1.5
+  cameraOffsetTime: 7
   climbable:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   transitionState: 0
-  isClimbing: 0
   verticalVelocity: 0
 --- !u!114 &9102265765014700212
 MonoBehaviour:
