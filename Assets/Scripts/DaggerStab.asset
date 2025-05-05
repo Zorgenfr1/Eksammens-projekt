@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   AOC: {fileID: 0}
-  hitSound: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 4b2452a2bfa15d74f8bd643155ad845f, type: 3}
+  bloodEffect: {fileID: 4704537440025009493, guid: e07c344c5a8767a439e6baad01bf7201, type: 3}

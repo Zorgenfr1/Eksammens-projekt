@@ -2101,6 +2101,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2048936044 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1512149869881337414, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
+  m_PrefabInstance: {fileID: 7310165022103628514}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4649906011514259610 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7691688594781507313, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
@@ -2160,10 +2165,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5413308610481907752, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 2048936044}
     - target: {fileID: 5870824150024876403, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 757619686}
+    - target: {fileID: 7357813721898967560, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 2048936044}
     - target: {fileID: 7691688594781507313, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
       propertyPath: _pause
       value: 
