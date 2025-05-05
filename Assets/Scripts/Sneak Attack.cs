@@ -3,15 +3,26 @@ using UnityEngine;
 public class SneakAttack : MonoBehaviour
 {
     private RaycastHit hit;
+    public Animator arms;
 
     private void Update()
     {
-        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1.5f))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 3f))
         {
-            if (hit.transform.gameObject.CompareTag("Enemy") && Input.GetKeyDown(KeyCode.E))
+            if (hit.transform.CompareTag("Enemy") && Input.GetKeyDown(KeyCode.E))
             {
-                Destroy(gameObject);
+                Vector3 enemyForward = hit.transform.forward;
+                Vector3 toPlayer = (transform.position - hit.transform.position).normalized;
+                float angle = Vector3.Angle(enemyForward, toPlayer);
+
+                if (angle > 70f)
+                {
+                    arms.SetTrigger("Stab");
+                    EnemyHealth enemy = hit.transform.GetComponent<EnemyHealth>();
+                    enemy.ChangeHealth(-100);
+                }
             }
         }
     }
 }
+

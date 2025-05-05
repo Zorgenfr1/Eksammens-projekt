@@ -5,12 +5,13 @@ public class WeaponSwitcher : MonoBehaviour
     public GameObject bow;
     public GameObject sword;
     public GameObject knife;
-    public GameObject arrow;
     public Animator animator;
+    public GameObject crosshair;
 
     private void Start()
     {
         bow.SetActive(true);
+        crosshair.SetActive(true);
         sword.SetActive(false);
         knife.SetActive(false);
     }
@@ -18,11 +19,13 @@ public class WeaponSwitcher : MonoBehaviour
     public void ShowBow()
     {
         bow.SetActive(true);
+        crosshair.SetActive(true);
     }
 
     public void HideBow()
     {
         bow.SetActive(false);
+        crosshair.SetActive(false);
     }
 
     public void ShowSword()

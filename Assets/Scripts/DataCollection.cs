@@ -79,7 +79,7 @@ public class DataCollection : MonoBehaviour
 
         if(escape.escaped == true)
         {
-            timeToEscapeText.text = "Time to escape" + timeToEscape.ToString("0,0");
+            timeToEscapeText.text = "Time to escape " + timeToEscape.ToString("0,0");
         }
         else
         {

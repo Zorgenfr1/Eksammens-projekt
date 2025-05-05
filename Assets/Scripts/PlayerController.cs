@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     [SerializeField] private new Transform camera;
     public Animator animator;
+    public Animator arms;
 
     [Header("Movement Settings")]
     [SerializeField] private float walkSpeed = 3.5f;
@@ -27,10 +28,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float height;
     [SerializeField] private bool crouched = false;
     [SerializeField] private bool isMoving;
-    [SerializeField] Vector3 cameraCrouchedOffset = new Vector3(0, -0.2f, 0.2f);
+    [SerializeField] Vector3 cameraCrouchedOffset = new Vector3(0, -5f, 5f);
     [SerializeField] bool changeCameraCrouch = false;
     [SerializeField] Vector3 startCameraPosition;
-    [SerializeField] float cameraOffsetTime = 1f;
+    [SerializeField] float cameraOffsetTime = 1.5f;
     [SerializeField] private LayerMask climbable;
     private LayerMask layerMask;
     private RaycastHit frontWallHit;
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour
     public float transitionState = 0f;
     private float staminaTimer = 0.5f;
     private float staminaTimer2 = 0f;
-    [SerializeField]private bool isClimbing;
+    bool isClimbing = false;
 
     private Vector3 velocity;
     private Vector3 move;
@@ -61,13 +62,13 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         layerMask = LayerMask.GetMask("Climbable") | LayerMask.GetMask("Default");
+        cameraTargetPosition = camera.localPosition;
     }
 
     private void Update()
     {
         InputManagement();
         Movement();
-        Test();
         GroundCheck();
     }
 
@@ -101,7 +102,7 @@ public class PlayerController : MonoBehaviour
             
             if(staminaTimer >= 0.5f)
             {
-                stamina -= 1;
+                stamina -= 2;
                 staminaTimer = 0;
             }
         }
@@ -111,33 +112,27 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("IsWalking");
             animator.SetBool("Crouched", false);
             animator.SetBool("Moving", true);
+            GainStamina();
         }
         else if(isMoving && crouched)
         {
             speed = Mathf.Lerp(speed, walkSpeed / 2, sprintTransitSpeed * Time.deltaTime);
             animator.SetBool("Crouched", true);
             animator.SetBool("Moving", true);
+            GainStamina();
         }
         else if (crouched)
         {
             animator.SetBool("Crouched", true);
             animator.SetBool("Moving", false);
+            GainStamina();
         }
         else
         {
             animator.SetTrigger("Idle");
             animator.SetBool("Crouched", false);
             animator.SetBool("Moving", false);
-            staminaTimer += Time.deltaTime;
-            if (staminaTimer >= 2f)
-            {
-                staminaTimer2 += Time.deltaTime;
-                if (staminaTimer2 >= 0.1 && stamina < 50)
-                {
-                    stamina += 2;
-                    staminaTimer2 = 0;
-                }
-            }
+            GainStamina();
         }
 
         if (Input.GetKeyUp(KeyCode.LeftShift))
@@ -145,17 +140,17 @@ public class PlayerController : MonoBehaviour
             staminaTimer = 0.5f;
         }
 
-        /*if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             crouched = !crouched;
             transitionState = 0f;
             if (crouched)
             {
-                cameraTargetPosition = camera.position + cameraCrouchedOffset;
+                cameraTargetPosition = camera.localPosition + cameraCrouchedOffset;
             }
             else
             {
-                cameraTargetPosition = camera.position - cameraCrouchedOffset;
+                cameraTargetPosition = camera.localPosition - cameraCrouchedOffset;
             }
         }
         if (crouched)
@@ -165,8 +160,7 @@ public class PlayerController : MonoBehaviour
             {
                 goonTime = 1f;
             }
-            camera.position = Vector3.Lerp(camera.position, cameraTargetPosition, goonTime);
-            Debug.Log("Crouching");
+            camera.localPosition = Vector3.Lerp(camera.localPosition, cameraTargetPosition, goonTime);
         }
         if (!crouched)
         {
@@ -175,8 +169,8 @@ public class PlayerController : MonoBehaviour
             {
                 goonTime = 1f;
             }
-            camera.position = Vector3.Lerp(camera.position, cameraTargetPosition, goonTime);
-        }*/
+            camera.localPosition = Vector3.Lerp(camera.localPosition, cameraTargetPosition, goonTime);
+        }
 
         //robin goon ahh spil
 
@@ -187,6 +181,20 @@ public class PlayerController : MonoBehaviour
         velocity.y = VerticalForceCalculation();
 
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    public void GainStamina()
+    {
+        staminaTimer += Time.deltaTime;
+        if (staminaTimer >= 1f)
+        {
+            staminaTimer2 += Time.deltaTime;
+            if (staminaTimer2 >= 0.1 && stamina < 50)
+            {
+                stamina += 1;
+                staminaTimer2 = 0;
+            }
+        }
     }
 
     private void AirMovement()
@@ -255,11 +263,22 @@ public class PlayerController : MonoBehaviour
         if (wallFront == true && wallLookAngle < 45 && Input.GetKey(KeyCode.C))
         {
             verticalVelocity = 2f;
-            isClimbing = true;
+            if (!isClimbing)
+            {
+                arms.SetBool("climbing", true);
+                isClimbing = true;
+            }
         }
         else
         {
             verticalVelocity -= gravity * Time.deltaTime;
+            if (isClimbing)
+            {
+                arms.SetBool("climbing", false);
+                arms.SetTrigger("Scroll 1");
+                isClimbing = false;
+            }
+            
         }
         return verticalVelocity;
     }
@@ -298,7 +317,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void Test()
+    /*private void Test()
     {
         if (Input.GetKeyDown("1"))
         {
@@ -348,7 +367,7 @@ public class PlayerController : MonoBehaviour
             baseGravity = 9f;
             turningSpeed = 4f;
         }
-    }
+    }*/
 }
 
     
