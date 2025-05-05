@@ -11,8 +11,8 @@ public class SneakAttack : MonoBehaviour
             if (hit.transform.gameObject.CompareTag("Enemy") && /*hit.transform.forward == transform.forward &&*/ Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Enemy Sneak Attacked");
-                Health enemy = hit.transform.GetComponent<Health>();
-                enemy.ChangeHealth(100);
+                EnemyHealth enemy = hit.transform.gameObject.GetComponent<EnemyHealth>();
+                enemy.ChangeHealth(-100);
             }
         }
     }
