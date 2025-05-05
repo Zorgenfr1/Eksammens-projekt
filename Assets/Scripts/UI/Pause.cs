@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
@@ -7,6 +8,7 @@ public class Pause : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject UI;
+    [SerializeField] private Escape escape;
     public bool isPaused = false;
     public bool isOptions = false;
     public bool isDead = false;
@@ -49,6 +51,11 @@ public class Pause : MonoBehaviour
             {
                 ResumeGame();
             }
+        }
+
+        if(escape.escaped == true)
+        {
+            PlayerDeath();
         }
     }
     public void Options()
