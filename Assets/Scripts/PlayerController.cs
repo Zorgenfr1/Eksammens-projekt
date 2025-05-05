@@ -132,9 +132,9 @@ public class PlayerController : MonoBehaviour
             if (staminaTimer >= 2f)
             {
                 staminaTimer2 += Time.deltaTime;
-                if (staminaTimer2 >= 0.2 && stamina < 50)
+                if (staminaTimer2 >= 0.1 && stamina < 50)
                 {
-                    stamina += 1;
+                    stamina += 2;
                     staminaTimer2 = 0;
                 }
             }
