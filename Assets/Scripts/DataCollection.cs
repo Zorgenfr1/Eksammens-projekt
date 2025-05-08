@@ -4,7 +4,6 @@ using UnityEngine;
 public class DataCollection : MonoBehaviour
 {
     public static int deaths = 0;
-    private static float timeBeforePlay = 0;
     private float timeToInsideOuterWalls = 0;
     private float timeToCastle = 0;
     private float timeOutOfCastle = 0;
@@ -90,6 +89,5 @@ public class DataCollection : MonoBehaviour
     public void Restart()
     {
         deaths = 0;
-        timeBeforePlay = 0;
     }
 }

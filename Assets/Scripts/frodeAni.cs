@@ -4,7 +4,6 @@ using System.Collections;
 public class AimAnimation : MonoBehaviour
 {
     private Animator animator;
-    private bool isAiming = false;
 
     [Header("Bow Settings")]
     public int arrows = 2;
@@ -34,12 +33,10 @@ public class AimAnimation : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             animator.SetBool("IsAiming", true);
-            isAiming = true;
         }
         if (Input.GetMouseButtonUp(1))
         {
             animator.SetBool("IsAiming", false);
-            isAiming = false;
         }
 
         // Shooting
