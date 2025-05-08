@@ -4,10 +4,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
-public class MonsterAI : MonoBehaviour
+public class EnemyAI : MonoBehaviour
 
 {
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
     private Transform player;
     private Transform playerView;
     private Vector3 lastKnownPlayerPosition;
