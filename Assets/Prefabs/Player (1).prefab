@@ -380,13 +380,13 @@ Transform:
   m_GameObject: {fileID: 1512149869881337414}
   serializedVersion: 2
   m_LocalRotation: {x: 0.033832103, y: 0.015978824, z: -0.025250863, w: 0.99898076}
-  m_LocalPosition: {x: 0.19800091, y: 5.525095, z: 1.1131096}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.30000004, y: 0.3, z: 0.30000007}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8335185943756280394}
   - {fileID: 6961469816374053848}
-  m_Father: {fileID: 4370001936762670871}
+  m_Father: {fileID: 7029634723685509716}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &3938125424060224689
 Camera:
@@ -618,6 +618,38 @@ Transform:
   - {fileID: 5423304979441913607}
   m_Father: {fileID: 7442930093105219302}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1940147965661197606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7029634723685509716}
+  m_Layer: 0
+  m_Name: CamHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7029634723685509716
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940147965661197606}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.19800185, y: 5.525096, z: 1.1131285}
+  m_LocalScale: {x: 3.333333, y: 3.333333, z: 3.333333}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4097087070647642723}
+  m_Father: {fileID: 4370001936762670871}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1951382988101847565
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,8 +866,11 @@ MonoBehaviour:
   bow: {fileID: 3656500072512002691}
   sword: {fileID: 2613798001990727523}
   knife: {fileID: 5900071515006068468}
-  arrow: {fileID: 0}
   animator: {fileID: 4466122809091181047}
+  crosshair: {fileID: 0}
+  attack1Sound: {fileID: 0}
+  attack2Sound: {fileID: 0}
+  daggerSound: {fileID: 0}
 --- !u!114 &6633516447657786830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1436,6 +1471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightAttack: {fileID: 11400000, guid: 2403b6a3de5ecd542bddad54275c8b83, type: 2}
+  mainCamera: {fileID: 0}
 --- !u!1 &3606374223645044515
 GameObject:
   m_ObjectHideFlags: 0
@@ -3072,6 +3108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightAttack: {fileID: 11400000, guid: 83ce41103df290b4c8a285403d1ac01a, type: 2}
+  mainCamera: {fileID: 0}
 --- !u!54 &8091082661343712017
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3554,6 +3591,7 @@ GameObject:
   - component: {fileID: 7691688594781507313}
   - component: {fileID: 5870824150024876403}
   - component: {fileID: 4130439932110652262}
+  - component: {fileID: 2892243524841727602}
   m_Layer: 3
   m_Name: Player (1)
   m_TagString: Player
@@ -3575,8 +3613,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5039418497479894980}
-  - {fileID: 4097087070647642723}
   - {fileID: 4503629032930630717}
+  - {fileID: 7029634723685509716}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &707850755387788676
@@ -3618,6 +3656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 4097087070647642723}
   animator: {fileID: 6122206461363201923}
+  arms: {fileID: 0}
   walkSpeed: 5
   sprintSpeed: 10
   airControl: 1
@@ -3631,6 +3670,16 @@ MonoBehaviour:
   stamina: 25
   _pause: {fileID: 0}
   height: 0
+  crouched: 0
+  isMoving: 0
+  cameraCrouchedOffset: {x: 0, y: -5, z: 5}
+  changeCameraCrouch: 0
+  startCameraPosition: {x: 0, y: 0, z: 0}
+  cameraOffsetTime: 1.5
+  climbable:
+    serializedVersion: 2
+    m_Bits: 0
+  transitionState: 0
   verticalVelocity: 0
 --- !u!114 &5870824150024876403
 MonoBehaviour:
@@ -3648,6 +3697,7 @@ MonoBehaviour:
   takingD: 0
   healthBar: {fileID: 0}
   currentHealth: 0
+  damageIndication: {fileID: 0}
   testHealAmount: 10
   testDamageAmount: -10
   isInvincible: 0
@@ -3679,6 +3729,24 @@ CapsuleCollider:
   m_Height: 6.911919
   m_Direction: 1
   m_Center: {x: 0, y: 2.955959, z: 0}
+--- !u!114 &2892243524841727602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9104139601396068396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19edde32607d27439f5ea65eba0b754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableHeadBob: 1
+  amplitude: 0.015
+  frequency: 10
+  movementThreshold: 0.1
+  cameraTransform: {fileID: 4097087070647642723}
+  cameraHolder: {fileID: 7029634723685509716}
 --- !u!1 &9112628948470427641
 GameObject:
   m_ObjectHideFlags: 0
