@@ -3796,6 +3796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8318d517414e2d54dab25857561be965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -3803,6 +3804,7 @@ MonoBehaviour:
   - {fileID: 0}
   viewDistance: 8
   viewAngle: 55
+  target: {x: 0, y: 0, z: 0}
   patrolSpeed: 2
   chaseSpeed: 3
   animator: {fileID: 969180510980954366}
@@ -3976,8 +3978,7 @@ MonoBehaviour:
   takingD: 0
   healthBar: {fileID: 0}
   currentHealth: 0
-  testHealAmount: 10
-  testDamageAmount: -10
+  guardAni: {fileID: 1041899252531998048}
   isInvincible: 0
   iFrameTime: 0
   isLiving: 1

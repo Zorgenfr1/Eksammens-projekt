@@ -15,6 +15,8 @@ public class EnemyHealth : MonoBehaviour
     public Slider healthBar;
     [SerializeField] float currentHealth;
 
+    public Animator guardAni;
+
     public bool isInvincible = false;
     public float iFrameTime = 1f;
     public bool isLiving = true;
@@ -32,6 +34,7 @@ public class EnemyHealth : MonoBehaviour
         float oldHealth = currentHealth;
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        guardAni.SetTrigger("CombatLayer.Gooner");
         Debug.Log("Changed health by" + amount);
         StartCoroutine(Invincibility());
 
