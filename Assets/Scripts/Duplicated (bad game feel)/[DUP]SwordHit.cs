@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class SwordHitPlayer : MonoBehaviour
+public class DUPswordHit : MonoBehaviour
 {
     public Attacks lightAttack;
     public GameObject mainCamera;
@@ -24,11 +24,10 @@ public class SwordHitPlayer : MonoBehaviour
             }
             EnemyHealth enemy = other.GetComponent<EnemyHealth>();
             enemy.ChangeHealth(-lightAttack.damage);
-            swordAudio.PlayOneShot(lightAttack.hitSound);
-            Instantiate(lightAttack.bloodEffect, spawnPosition, Quaternion.identity, other.transform);
+            //swordAudio.PlayOneShot(lightAttack.hitSound);
+            //Instantiate(lightAttack.bloodEffect, spawnPosition, Quaternion.identity, other.transform);
 
         }
     }
 
 }
-    
