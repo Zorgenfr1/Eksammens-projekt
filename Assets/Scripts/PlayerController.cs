@@ -290,7 +290,7 @@ public class PlayerController : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(playerPosition, 0.1f, layerMask);
         foreach(Collider c in colliders)
         {
-            if (colliders.Length > 0)
+            if (colliders.Length > 0 || controller.isGrounded)
             {
                 Grounded = true;
             }
