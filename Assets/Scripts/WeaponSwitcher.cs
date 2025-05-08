@@ -9,6 +9,7 @@ public class WeaponSwitcher : MonoBehaviour
     public GameObject crosshair;
     public AudioClip attack1Sound;
     public AudioClip attack2Sound;
+    public AudioClip daggerSound;
     private AudioSource playerAudio;
 
     private void Start()
@@ -60,5 +61,10 @@ public class WeaponSwitcher : MonoBehaviour
     public void AttackSound2()
     {
         playerAudio.PlayOneShot(attack2Sound);
+    }
+
+    public void DaggerSound()
+    {
+        playerAudio.PlayOneShot(daggerSound);
     }
 }
