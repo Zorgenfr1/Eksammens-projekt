@@ -28,7 +28,7 @@ public class DeathScreen : MonoBehaviour
     public void Respawn()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void MainMenu()

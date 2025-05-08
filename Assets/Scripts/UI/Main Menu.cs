@@ -11,6 +11,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadSceneAsync(1);
     }
 
+    public void PlayA()
+    {
+        SceneManager.LoadSceneAsync(2);
+    }
+
     public void Options()
     {
         optionsMenu.SetActive(true);
