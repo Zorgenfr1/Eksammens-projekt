@@ -9,13 +9,11 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        currentScene = 0;
         SceneManager.LoadSceneAsync(1);
     }
 
     public void PlayA()
     {
-        currentScene = 1;
         SceneManager.LoadSceneAsync(2);
     }
 

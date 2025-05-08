@@ -172,8 +172,6 @@ public class PlayerController : MonoBehaviour
             camera.localPosition = Vector3.Lerp(camera.localPosition, cameraTargetPosition, goonTime);
         }
 
-        //robin goon ahh spil
-
         move.y = VerticalForceCalculation();
 
         velocity = move * speed;
