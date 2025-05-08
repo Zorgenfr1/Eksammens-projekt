@@ -20,7 +20,7 @@ public class Health : MonoBehaviour
     public bool isInvincible = false;
     public float iFrameTime;
     public bool isLiving = true;
-    private float timeSinceDamage;
+    private float timeSinceDamage = 1;
 
     public float CurrentHealth => currentHealth;
 
