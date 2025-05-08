@@ -15,7 +15,7 @@ public class ArrowLogic : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            Debug.LogError("Arrow hit");
+            //Debug.LogError("Arrow hit");
             EnemyHealth enemy = other.GetComponent<EnemyHealth>();
             enemy.ChangeHealth(-arrowAttack.damage);
         }
