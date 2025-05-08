@@ -38,7 +38,7 @@ public class Health : MonoBehaviour
         Debug.Log("Changed health by" + amount);
         StartCoroutine(Invincibility());
 
-        timeSinceDamage = 0;
+        timeSinceDamage = 0.20f;
     }
 
     IEnumerator Invincibility()
@@ -58,6 +58,7 @@ public class Health : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        damageIndication.SetActive(false);
     }
 
     private void Update()
@@ -71,7 +72,7 @@ public class Health : MonoBehaviour
 
         timeSinceDamage += Time.deltaTime;
 
-        if(timeSinceDamage >= 0.07f)
+        if(timeSinceDamage <= 0.15f)
         {
             damageIndication.SetActive(true);
         }

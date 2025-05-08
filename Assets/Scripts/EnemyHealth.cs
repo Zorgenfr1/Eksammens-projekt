@@ -15,8 +15,6 @@ public class EnemyHealth : MonoBehaviour
     public Slider healthBar;
     [SerializeField] float currentHealth;
 
-    [SerializeField] float testHealAmount = 10f;
-    [SerializeField] float testDamageAmount = -10f;
     public bool isInvincible = false;
     public float iFrameTime = 1f;
     public bool isLiving = true;
