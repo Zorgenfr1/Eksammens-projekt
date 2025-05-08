@@ -1592,7 +1592,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 707850755387788676, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
       propertyPath: m_StepOffset
-      value: 2.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3938125424060224689, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
       propertyPath: near clip plane
@@ -1878,6 +1878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1385dd20e69ad9f4cb3e0a1506e9e040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arms: {fileID: 0}
 --- !u!1 &963158945 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8643885668191115786, guid: b4f2e91c79551f6449b4c838364fc040, type: 3}
