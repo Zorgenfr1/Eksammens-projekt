@@ -13,12 +13,14 @@ public class Health : MonoBehaviour
     public bool takingD = false;
     public Slider healthBar;
     [SerializeField] float currentHealth;
+    [SerializeField] private GameObject damageIndication;
 
     [SerializeField] float testHealAmount = 10f;
     [SerializeField] float testDamageAmount = -10f;
     public bool isInvincible = false;
     public float iFrameTime;
     public bool isLiving = true;
+    private float timeSinceDamage;
 
     public float CurrentHealth => currentHealth;
 
@@ -35,8 +37,8 @@ public class Health : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         Debug.Log("Changed health by" + amount);
         StartCoroutine(Invincibility());
-        
 
+        timeSinceDamage = 0;
     }
 
     IEnumerator Invincibility()
@@ -65,6 +67,17 @@ public class Health : MonoBehaviour
         {
             Died?.Invoke();
             isLiving = false;
+        }
+
+        timeSinceDamage += Time.deltaTime;
+
+        if(timeSinceDamage >= 0.07f)
+        {
+            damageIndication.SetActive(true);
+        }
+        else
+        {
+            damageIndication.SetActive(false);
         }
     }
 
