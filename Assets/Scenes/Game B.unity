@@ -2566,6 +2566,7 @@ GameObject:
   - component: {fileID: 724328032}
   - component: {fileID: 724328031}
   - component: {fileID: 724328034}
+  - component: {fileID: 724328035}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -2679,6 +2680,38 @@ MonoBehaviour:
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 13a37c9236e4a6042b53c3e3b96bf623, type: 2}
+  m_BuildHeightMesh: 0
+--- !u!114 &724328035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724328030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_AgentTypeID: -1372625422
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
 --- !u!1 &726949996 stripped
 GameObject:
@@ -4541,7 +4574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8714946850361287819, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayerDeath
+      value: Respawn
       objectReference: {fileID: 0}
     - target: {fileID: 8714946850361287819, guid: 08c6cad29a0047847899c15cb0e51086, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -5258,7 +5291,7 @@ GameObject:
   - component: {fileID: 1213717512}
   - component: {fileID: 1213717511}
   - component: {fileID: 1213717510}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tresure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
