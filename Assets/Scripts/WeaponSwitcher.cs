@@ -7,9 +7,13 @@ public class WeaponSwitcher : MonoBehaviour
     public GameObject knife;
     public Animator animator;
     public GameObject crosshair;
+    public AudioClip attack1Sound;
+    public AudioClip attack2Sound;
+    private AudioSource playerAudio;
 
     private void Start()
     {
+        playerAudio = GetComponent<AudioSource>();
         bow.SetActive(true);
         crosshair.SetActive(true);
         sword.SetActive(false);
@@ -46,5 +50,15 @@ public class WeaponSwitcher : MonoBehaviour
     public void HideKnife()
     {
         knife.SetActive(false);
+    }
+
+    public void AttackSound1()
+    {
+        playerAudio.PlayOneShot(attack1Sound);
+    }
+
+    public void AttackSound2()
+    {
+        playerAudio.PlayOneShot(attack2Sound);
     }
 }
