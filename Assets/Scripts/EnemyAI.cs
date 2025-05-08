@@ -16,7 +16,7 @@ public class MonsterAI : MonoBehaviour
     [SerializeField] private Transform[] waypoints;
     public float viewDistance = 5f;
     public float viewAngle = 55f;
-    private Vector3 target;
+    public Vector3 target;
     public float patrolSpeed = 0.5f;
     public float chaseSpeed = 1.0f;
     public Animator animator;
