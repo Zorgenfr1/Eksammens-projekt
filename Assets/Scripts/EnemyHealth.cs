@@ -34,7 +34,7 @@ public class EnemyHealth : MonoBehaviour
         float oldHealth = currentHealth;
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        guardAni.SetTrigger("CombatLayer.Gooner");
+        guardAni.SetTrigger("Gooner");
         Debug.Log("Changed health by" + amount);
         StartCoroutine(Invincibility());
 
