@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector3 startCameraPosition;
     [SerializeField] float cameraOffsetTime = 1.5f;
     [SerializeField] private LayerMask climbable;
+    [SerializeField] private Collider standingCollider;
+    [SerializeField] private Collider crouchingCollider;
     private LayerMask layerMask;
     private RaycastHit frontWallHit;
     private bool wallFront;
@@ -161,6 +163,9 @@ public class PlayerController : MonoBehaviour
                 goonTime = 1f;
             }
             camera.localPosition = Vector3.Lerp(camera.localPosition, cameraTargetPosition, goonTime);
+
+            crouchingCollider.enabled = true;
+            standingCollider.enabled = false;
         }
         if (!crouched)
         {
@@ -170,6 +175,9 @@ public class PlayerController : MonoBehaviour
                 goonTime = 1f;
             }
             camera.localPosition = Vector3.Lerp(camera.localPosition, cameraTargetPosition, goonTime);
+
+            standingCollider.enabled = true;
+            crouchingCollider.enabled = false;
         }
 
         move.y = VerticalForceCalculation();
