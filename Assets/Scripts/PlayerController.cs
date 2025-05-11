@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                cameraTargetPosition = camera.localPosition - cameraCrouchedOffset;
+                cameraTargetPosition = camera.localPosition;
             }
         }
         if (crouched)

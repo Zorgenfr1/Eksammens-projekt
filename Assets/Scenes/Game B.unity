@@ -3944,6 +3944,14 @@ PrefabInstance:
       propertyPath: crouchingCollider
       value: 
       objectReference: {fileID: 945394066}
+    - target: {fileID: 7691688594781507313, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
+      propertyPath: cameraCrouchedOffset.y
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691688594781507313, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
+      propertyPath: cameraCrouchedOffset.z
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7724906410049856531, guid: ed622524922ff3a4eb32ded78539b657, type: 3}
       propertyPath: crosshair
       value: 
