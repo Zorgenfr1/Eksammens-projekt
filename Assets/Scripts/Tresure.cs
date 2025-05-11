@@ -14,7 +14,7 @@ public class Tresure : MonoBehaviour
             {
                 hasTresure = true;
 
-                tresure.gameObject.SetActive(false);
+                tresure.SetActive(false);
             }
         }
     }
