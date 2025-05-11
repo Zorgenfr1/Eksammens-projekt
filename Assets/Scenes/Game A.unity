@@ -5139,7 +5139,7 @@ GameObject:
   - component: {fileID: 1213717512}
   - component: {fileID: 1213717511}
   - component: {fileID: 1213717510}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tresure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
