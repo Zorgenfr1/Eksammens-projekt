@@ -10,8 +10,11 @@ public class Tresure : MonoBehaviour
     {
         if(Vector3.Distance(tresure.transform.position, transform.position) < 7)
         {
-            if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 3, layerMask) && Input.GetKeyDown(KeyCode.E))
+            Debug.Log("Close to tresure");
+                Debug.DrawLine(transform.position, tresure.transform.position, Color.red);
+            if(Physics.Raycast(transform.position + Vector3.up, transform.forward, 3, layerMask) && Input.GetKeyDown(KeyCode.E))
             {
+                Debug.Log("raycasting to tresure");
                 hasTresure = true;
 
                 tresure.SetActive(false);
