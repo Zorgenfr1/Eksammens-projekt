@@ -35,7 +35,7 @@ public class SwordHitPlayer : MonoBehaviour
         }
     }
 
-   /* private void Update()
+    /*private void Update()
     {
         if (shakeStart)
         {
