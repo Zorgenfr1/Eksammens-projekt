@@ -5,6 +5,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject mainMenu;
+    public int currentScene;
 
     public void Play()
     {

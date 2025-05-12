@@ -8,13 +8,13 @@ public class Tresure : MonoBehaviour
 
     void Update()
     {
-        if(Vector3.Distance(tresure.transform.position, transform.position) < 3)
+        if(Vector3.Distance(tresure.transform.position, transform.position) < 7)
         {
             if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 3, layerMask) && Input.GetKeyDown(KeyCode.E))
             {
                 hasTresure = true;
 
-                tresure.gameObject.SetActive(false);
+                tresure.SetActive(false);
             }
         }
     }

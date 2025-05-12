@@ -419,7 +419,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -3592,6 +3592,10 @@ GameObject:
   - component: {fileID: 5870824150024876403}
   - component: {fileID: 4130439932110652262}
   - component: {fileID: 2892243524841727602}
+  - component: {fileID: 8230375921810440398}
+  - component: {fileID: 349162480459353605}
+  - component: {fileID: 2557372959696883577}
+  - component: {fileID: 267970330219282252}
   m_Layer: 3
   m_Name: Player (1)
   m_TagString: Player
@@ -3638,7 +3642,7 @@ CharacterController:
   m_Height: 7
   m_Radius: 1.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.081
+  m_StepOffset: 0.5
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 3, z: 0}
@@ -3656,20 +3660,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 4097087070647642723}
   animator: {fileID: 6122206461363201923}
-  arms: {fileID: 0}
+  arms: {fileID: 4466122809091181047}
   walkSpeed: 5
   sprintSpeed: 10
   airControl: 1
-  airDrag: 0.998
+  airDrag: 0.99
   sprintTransitSpeed: 5
   turningSpeed: 2
-  gravity: 6
-  baseGravity: 9
+  gravity: 9
+  baseGravity: 15
   jumpForce: 1
   Grounded: 0
-  stamina: 25
+  stamina: 50
   _pause: {fileID: 0}
-  height: 0
+  height: 0.23
   crouched: 0
   isMoving: 0
   cameraCrouchedOffset: {x: 0, y: -5, z: 5}
@@ -3678,7 +3682,7 @@ MonoBehaviour:
   cameraOffsetTime: 1.5
   climbable:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   transitionState: 0
   verticalVelocity: 0
 --- !u!114 &5870824150024876403
@@ -3705,7 +3709,43 @@ MonoBehaviour:
   isLiving: 1
   Died:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DeathScreen, Assembly-CSharp
+        m_MethodName: PlayerDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: PlayerDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DataCollection, Assembly-CSharp
+        m_MethodName: Died
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!136 &4130439932110652262
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3747,6 +3787,86 @@ MonoBehaviour:
   movementThreshold: 0.1
   cameraTransform: {fileID: 4097087070647642723}
   cameraHolder: {fileID: 7029634723685509716}
+--- !u!114 &8230375921810440398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9104139601396068396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb84f974c974ce04fbfc8ae91d00d692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 4370001936762670871}
+  rb: {fileID: 349162480459353605}
+  player: {fileID: 7691688594781507313}
+  WhatIsWall:
+    serializedVersion: 2
+    m_Bits: 512
+  climbSpeed: 2
+  maxClimbTime: 40
+  detectionLength: 1
+  sphereCastRadius: 1
+  maxWallLookAngle: 10
+--- !u!54 &349162480459353605
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9104139601396068396}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &2557372959696883577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9104139601396068396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14909ff997213f04ead6675b28df3610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tresure: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  hasTresure: 0
+--- !u!114 &267970330219282252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9104139601396068396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1385dd20e69ad9f4cb3e0a1506e9e040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arms: {fileID: 4466122809091181047}
 --- !u!1 &9112628948470427641
 GameObject:
   m_ObjectHideFlags: 0

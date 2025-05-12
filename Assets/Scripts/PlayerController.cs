@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                cameraTargetPosition = camera.localPosition - cameraCrouchedOffset;
+                cameraTargetPosition = camera.localPosition;
             }
         }
         if (crouched)
@@ -171,8 +171,6 @@ public class PlayerController : MonoBehaviour
             }
             camera.localPosition = Vector3.Lerp(camera.localPosition, cameraTargetPosition, goonTime);
         }
-
-        //robin goon ahh spil
 
         move.y = VerticalForceCalculation();
 
