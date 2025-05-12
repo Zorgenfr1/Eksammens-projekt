@@ -35,7 +35,6 @@ public class EnemyHealth : MonoBehaviour
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         guardAni.SetTrigger("Gooner");
-        Debug.Log("Changed health by" + amount);
         StartCoroutine(Invincibility());
 
 
@@ -43,10 +42,8 @@ public class EnemyHealth : MonoBehaviour
 
     IEnumerator Invincibility()
     {
-        Debug.Log("invincible");
         isInvincible = true;
         yield return new WaitForSeconds(iFrameTime);
-        Debug.Log("no longer invincible");
         isInvincible = false;
 
     }

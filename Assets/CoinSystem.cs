@@ -13,14 +13,12 @@ public class CoinSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(transform.position);
         Collider[] enemyColliders = Physics.OverlapSphere(transform.position, coinDetectionRange);
         foreach (Collider collider in enemyColliders)
         {
 
             if (collider.CompareTag("Enemy"))
             {
-                Debug.Log("Coin is in Guard's radius");
                 EnemyAI enemy = collider.GetComponent<EnemyAI>();
                 enemy.target = transform.position;
                 distanceToEnemy = enemy.transform.position - transform.position;

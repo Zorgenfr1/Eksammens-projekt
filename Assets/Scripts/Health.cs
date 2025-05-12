@@ -35,7 +35,6 @@ public class Health : MonoBehaviour
         float oldHealth = currentHealth;
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        Debug.Log("Changed health by" + amount);
         StartCoroutine(Invincibility());
 
         timeSinceDamage = 0.20f;
@@ -43,10 +42,8 @@ public class Health : MonoBehaviour
 
     IEnumerator Invincibility()
     {
-        Debug.Log("invincible");
         isInvincible = true;
         yield return new WaitForSeconds(iFrameTime);
-        Debug.Log("no longer invincible");
         isInvincible = false;
 
     }

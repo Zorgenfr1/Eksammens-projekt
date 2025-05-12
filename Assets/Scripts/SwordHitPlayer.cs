@@ -41,7 +41,6 @@ public class SwordHitPlayer : MonoBehaviour
         {
             shakeStart = false;
             StartCoroutine(Shaking());
-            Debug.Log("Camera shaking");
         }
         
     }

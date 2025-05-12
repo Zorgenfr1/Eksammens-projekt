@@ -12,7 +12,6 @@ public class ZoneDistanceTrigger : MonoBehaviour
 
             if (distanceFromCenter > triggerDistance)
             {
-                //Debug.Log("Spilleren har forladt midten af mappet. Ulven jager!");
                 wolfAI.StartHowl();
             }
             else if (distanceFromCenter <= triggerDistance) 

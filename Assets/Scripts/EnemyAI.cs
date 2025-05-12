@@ -62,7 +62,6 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerView = GameObject.FindGameObjectWithTag("Player").transform;
-        //Debug.Log("found " + playerView.name);
         currentState = EnemyState.Patrol;
         if (waypoints.Length > 0)
         {
@@ -154,7 +153,6 @@ public class EnemyAI : MonoBehaviour
         animator.SetBool("IsInCombat", true);
         target = lastKnownPlayerPosition;
         agent.speed = chaseSpeed;
-        Debug.Log("Combat state");
         RaycastHit hit;
         if (!Physics.Raycast(head.position, player.transform.position - transform.position, out hit, viewDistance, PlayerLayer) && playerSeen)
         {
@@ -172,7 +170,6 @@ public class EnemyAI : MonoBehaviour
         animator.SetTrigger("Attacking");
         animator.runtimeAnimatorController = lightAttack.AOC;
         animator.Play("CombatLayer.Combat", 0, 0);
-        Debug.Log("Attacking");
         /*if (hasPlayedSoundEffect == false)
         {
             PlayAudio(lightAttack.hitSound, ref hasPlayedSoundEffect);
@@ -190,7 +187,6 @@ public class EnemyAI : MonoBehaviour
         {
             if (hit.collider.tag == "Player" && DotProduct >= Mathf.Cos(viewAngle * Mathf.Deg2Rad))
             {
-                Debug.Log("Seeing Player");
                 playerSeen = true;
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(player.position - transform.position), 5f);
                 if (!drawSword)
@@ -239,7 +235,6 @@ public class EnemyAI : MonoBehaviour
             if (agent.remainingDistance < 0.5f)
             {
                 StartCoroutine(lookingAround()); ;
-                Debug.Log("Coroutine looking around");
             }
         }
     }
@@ -283,7 +278,6 @@ public class EnemyAI : MonoBehaviour
         hasPlayedInvestigateSound = true;
         target = playerHiddenLocation;
         agent.speed = patrolSpeed;
-        Debug.Log("Investigating");
         if (agent.remainingDistance < 0.5f)
         {
             if (drawSword && !sheatheSword)

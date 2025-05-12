@@ -22,7 +22,6 @@ public class HeadBobSystem : MonoBehaviour
         controller = GetComponent<CharacterController>();
         if (cameraTransform == null)
         {
-            Debug.LogError("Camera Transform not assigned.");
             enabled = false;
             return;
         }

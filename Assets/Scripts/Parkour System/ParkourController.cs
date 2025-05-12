@@ -22,7 +22,6 @@ public class ParkourController : MonoBehaviour
             if (hitData.forwardHitFound && !inAction)
             {
                 StartCoroutine(DoParkourAction());
-                Debug.Log("ObstacleFound " + hitData.forwardHit.transform.name);
             }
         }
 

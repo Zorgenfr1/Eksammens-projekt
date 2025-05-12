@@ -19,14 +19,12 @@ public class soundEffectManager : MonoBehaviour
     {
         equipSword.SetActive(true);
         unEquipSword.SetActive(false);
-        Debug.Log("Equipping Sword");
     }
 
     void UnEquipSword()
     {
         equipSword.SetActive(false);
         unEquipSword.SetActive(true);
-        Debug.Log("Unequippng Sword");
     }
 }
 

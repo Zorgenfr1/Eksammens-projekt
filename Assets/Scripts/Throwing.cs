@@ -43,7 +43,6 @@ public class Throwing : MonoBehaviour
         {
             trueThrowForce = Mathf.Lerp(throwForceMin, throwForceMax, chargeTime);
             chargeTime += Time.deltaTime * lerpSpeed;
-            Debug.Log("Charging");
         }
         else
         {

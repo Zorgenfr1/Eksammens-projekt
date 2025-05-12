@@ -1472,6 +1472,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightAttack: {fileID: 11400000, guid: 2403b6a3de5ecd542bddad54275c8b83, type: 2}
   mainCamera: {fileID: 0}
+  shakeStart: 0
+  shakeDuration: 0.2
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3606374223645044515
 GameObject:
   m_ObjectHideFlags: 0
@@ -3109,6 +3117,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightAttack: {fileID: 11400000, guid: 83ce41103df290b4c8a285403d1ac01a, type: 2}
   mainCamera: {fileID: 0}
+  shakeStart: 0
+  shakeDuration: 0.2
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!54 &8091082661343712017
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3592,10 +3608,10 @@ GameObject:
   - component: {fileID: 5870824150024876403}
   - component: {fileID: 4130439932110652262}
   - component: {fileID: 2892243524841727602}
-  - component: {fileID: 8230375921810440398}
   - component: {fileID: 349162480459353605}
   - component: {fileID: 2557372959696883577}
   - component: {fileID: 267970330219282252}
+  - component: {fileID: 3699293720308459846}
   m_Layer: 3
   m_Name: Player (1)
   m_TagString: Player
@@ -3787,29 +3803,6 @@ MonoBehaviour:
   movementThreshold: 0.1
   cameraTransform: {fileID: 4097087070647642723}
   cameraHolder: {fileID: 7029634723685509716}
---- !u!114 &8230375921810440398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9104139601396068396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb84f974c974ce04fbfc8ae91d00d692, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orientation: {fileID: 4370001936762670871}
-  rb: {fileID: 349162480459353605}
-  player: {fileID: 7691688594781507313}
-  WhatIsWall:
-    serializedVersion: 2
-    m_Bits: 512
-  climbSpeed: 2
-  maxClimbTime: 40
-  detectionLength: 1
-  sphereCastRadius: 1
-  maxWallLookAngle: 10
 --- !u!54 &349162480459353605
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3867,6 +3860,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arms: {fileID: 4466122809091181047}
+--- !u!114 &3699293720308459846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9104139601396068396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bc61842d8934df48ba282e864021a6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 4097087070647642723}
+  attackPoint: {fileID: 1454256699438221502}
+  objectToThrow: {fileID: 1191796479833536344, guid: 8af341f359525fb4993515ae3737e3e3, type: 3}
+  totalThrows: 100000
+  throwCooldown: 1
+  throwKey: 103
+  AimKey: 104
+  throwForceMin: 5
+  throwForceMax: 10
+  trueThrowForce: 0
+  chargeTime: 0
+  lerpSpeed: 0
+  throwUpwardForce: 0
 --- !u!1 &9112628948470427641
 GameObject:
   m_ObjectHideFlags: 0

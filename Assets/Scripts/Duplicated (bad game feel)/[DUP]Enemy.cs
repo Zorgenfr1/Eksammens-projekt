@@ -62,7 +62,6 @@ public class EnemyDUP : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerView = GameObject.FindGameObjectWithTag("Player").transform;
-        //Debug.Log("found " + playerView.name);
         currentState = EnemyState.Patrol;
         if (waypoints.Length > 0)
         {
@@ -278,7 +277,6 @@ public class EnemyDUP : MonoBehaviour
         hasPlayedInvestigateSound = true;
         target = playerHiddenLocation;
         agent.speed = patrolSpeed;
-        Debug.Log("Investigating");
         if (agent.remainingDistance < 0.5f)
         {
             if (drawSword && !sheatheSword)

@@ -35,7 +35,6 @@ public class CombatManager : MonoBehaviour
 
     public void Attack()
     {
-        Debug.Log("Player attacking " + currentAttackData.damage);
         audio.PlayOneShot(currentAttackData.hitSound);
 
 

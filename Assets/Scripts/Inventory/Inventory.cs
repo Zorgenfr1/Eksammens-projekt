@@ -15,7 +15,6 @@ public class Inventory : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("More than one instance of Inventory found!");
             return;
         }
         instance = this;
@@ -38,7 +37,6 @@ public class Inventory : MonoBehaviour
         {
             if (items.Count >= space)
             {
-                Debug.Log("Not enough room.");
                 return false;
             }
 
@@ -53,7 +51,6 @@ public class Inventory : MonoBehaviour
                     {
                         invetoryItem.amount += 1;
                         itemAlreadyInInventory |= true;
-                        Debug.Log(item.amount);
                     }
                 }
                 if (!itemAlreadyInInventory)

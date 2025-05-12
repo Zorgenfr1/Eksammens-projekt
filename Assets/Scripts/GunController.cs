@@ -41,7 +41,6 @@ public class GunController : MonoBehaviour
     {
         _arrowsBack = arrowCapacity;
         _canShoot = true;
-        //Debug.Log("Started Bow");
 
     }
 
@@ -53,13 +52,11 @@ public class GunController : MonoBehaviour
 
         if (Input.GetMouseButton(0) && _canShoot && _aimTime >= requiredAimTime)
         {
-            //Debug.Log("kumulala Sawesta");
             //animator.SetTrigger("Shoot");
             _canShoot =false;
             _arrowsBack--;
             //animator.SetTrigger("Idle");
             StartCoroutine(Shoot());
-            //Debug.Log("Tung Tung Tung");
         }
     }
 
@@ -103,8 +100,6 @@ public class GunController : MonoBehaviour
         //DetermineRecoil();
         GameObject arrow = Instantiate(arrowPrefab, shootingPoint.position, shootingPoint.rotation * Quaternion.Euler(0, -90, 0));
         arrow.GetComponent<Rigidbody>().AddForce(shootingPoint.forward * 30f, ForceMode.Impulse);
-        //Debug.DrawRay(shootingPoint.position, shootingPoint.forward * 5, Color.red, 7f);
-        //Debug.Log("Shoot fired");
         yield return new WaitForSeconds(fireRate);
         _canShoot = true;
     }
