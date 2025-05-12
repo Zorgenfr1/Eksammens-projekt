@@ -3883,7 +3883,7 @@ MonoBehaviour:
   throwForceMax: 10
   trueThrowForce: 0
   chargeTime: 0
-  lerpSpeed: 0
+  lerpSpeed: 1
   throwUpwardForce: 0
 --- !u!1 &9112628948470427641
 GameObject:
