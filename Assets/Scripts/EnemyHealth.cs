@@ -34,10 +34,6 @@ public class EnemyHealth : MonoBehaviour
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         guardAni.SetTrigger("Gooner");
-<<<<<<< Updated upstream
-=======
-        //Debug.Log("Changed health by" + amount);
->>>>>>> Stashed changes
         StartCoroutine(Invincibility());
 
 

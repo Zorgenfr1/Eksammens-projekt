@@ -9,6 +9,7 @@ public class EnemyDUP : MonoBehaviour
 {
     public NavMeshAgent agent;
     private Transform player;
+    private Transform playerView;
     private Vector3 lastKnownPlayerPosition;
     private Vector3 lastKnownPlayerRotation;
     private int currentPatrolIndex = 0;
@@ -56,6 +57,7 @@ public class EnemyDUP : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerView = GameObject.FindGameObjectWithTag("Player").transform;
         currentState = EnemyState.Patrol;
         if (waypoints.Length > 0)
         {
