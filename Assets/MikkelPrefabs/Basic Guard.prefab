@@ -10853,7 +10853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4cda0b5c48076644a419b251c20b7a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightAttack: {fileID: 0}
+  lightAttack: {fileID: 11400000, guid: 8a6d10ca09f22424db4d8eb4dfcfd8ff, type: 2}
 --- !u!54 &3531858868445526559
 Rigidbody:
   m_ObjectHideFlags: 0

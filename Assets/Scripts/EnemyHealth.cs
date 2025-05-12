@@ -8,7 +8,6 @@ public class EnemyHealth : MonoBehaviour
 
 
     public delegate void DeathHandler(object source);
-    public event DeathHandler OnDeath;
 
     public float maxHealth = 100f;
     public bool takingD = false;

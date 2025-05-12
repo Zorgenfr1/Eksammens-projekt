@@ -29,12 +29,8 @@ public class EnemyDUP : MonoBehaviour
 
     public AudioClip detectionAudio;
     AudioSource audio;
-    private bool hasPlayedDetectionSound = false;
     public AudioClip loseSightAudio;
-    private bool hasPlayedLoseSightSound = false;
     public AudioClip investigateAudio;
-    private bool hasPlayedInvestigateSound = false;
-    private bool hasPlayedSoundEffect = false;
 
     [Header("Attacks")]
     public Attacks lightAttack;
@@ -117,7 +113,6 @@ public class EnemyDUP : MonoBehaviour
 
     void Chase()
     {
-        hasPlayedLoseSightSound = false;
         agent.speed = chaseSpeed;
         target = lastKnownPlayerPosition;
         RaycastHit hit;
@@ -205,10 +200,6 @@ public class EnemyDUP : MonoBehaviour
             }
 
         }
-        else
-        {
-            hasPlayedDetectionSound = false;
-        }
     }
     void SetDestination(Vector3 target)
     {
@@ -257,24 +248,8 @@ public class EnemyDUP : MonoBehaviour
 
     }
 
-    /*public void PlayAudio(AudioClip clip, ref bool hasPlayed)
-    {
-        audio.PlayOneShot(clip);
-        hasPlayed = true;
-        StartCoroutine(resetSoundEffectAudio());
-    }*/
-
-    IEnumerator resetSoundEffectAudio()
-    {
-        yield return new WaitForSeconds(1);
-        hasPlayedSoundEffect = false;
-        yield break;
-    }
-
-
     void Investigate()
     {
-        hasPlayedInvestigateSound = true;
         target = playerHiddenLocation;
         agent.speed = patrolSpeed;
         if (agent.remainingDistance < 0.5f)

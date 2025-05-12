@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool crouched = false;
     [SerializeField] private bool isMoving;
     [SerializeField] Vector3 cameraCrouchedOffset = new Vector3(0, -5f, 5f);
-    [SerializeField] bool changeCameraCrouch = false;
     [SerializeField] Vector3 startCameraPosition;
     [SerializeField] float cameraOffsetTime = 1.5f;
     [SerializeField] private LayerMask climbable;

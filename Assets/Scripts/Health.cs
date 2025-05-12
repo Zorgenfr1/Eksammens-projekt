@@ -7,16 +7,12 @@ public class Health : MonoBehaviour
 
 
     public delegate void DeathHandler(object source);
-    public event DeathHandler OnDeath;
 
     public float maxHealth = 100f;
     public bool takingD = false;
     public Slider healthBar;
     [SerializeField] float currentHealth;
     [SerializeField] private GameObject damageIndication;
-
-    [SerializeField] float testHealAmount = 10f;
-    [SerializeField] float testDamageAmount = -10f;
     public bool isInvincible = false;
     public float iFrameTime;
     public bool isLiving = true;

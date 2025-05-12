@@ -34,7 +34,6 @@ public class EnemyAI : MonoBehaviour
     private bool hasPlayedLoseSightSound = false;
     public AudioClip investigateAudio;
     private bool hasPlayedInvestigateSound = false;
-    private bool hasPlayedSoundEffect = false;
 
     [Header("Attacks")]
     public Attacks lightAttack;
@@ -150,7 +149,6 @@ public class EnemyAI : MonoBehaviour
 
     void Combat()
     {
-        animator.SetBool("IsInCombat", true);
         target = lastKnownPlayerPosition;
         agent.speed = chaseSpeed;
         RaycastHit hit;
@@ -209,7 +207,6 @@ public class EnemyAI : MonoBehaviour
         {
             hasPlayedDetectionSound = false;
         }
-        Debug.DrawLine(head.position, player.position);
     }
     void SetDestination(Vector3 target)
     {
@@ -262,14 +259,6 @@ public class EnemyAI : MonoBehaviour
     {
         audio.PlayOneShot(clip);
         hasPlayed = true;
-        StartCoroutine(resetSoundEffectAudio());
-    }
-
-    IEnumerator resetSoundEffectAudio()
-    {
-        yield return new WaitForSeconds(1);
-        hasPlayedSoundEffect = false;
-        yield break;
     }
 
 
