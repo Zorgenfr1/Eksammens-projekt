@@ -33,6 +33,7 @@ public class DeathScreen : MonoBehaviour
 
     public void MainMenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadSceneAsync(0);
     }
 }
